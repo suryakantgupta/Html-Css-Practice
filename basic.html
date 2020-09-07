@@ -9,6 +9,18 @@
             p{color:black;font-size: larger;}
         </style>
 
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
     function firstFunction(){
         document.getElementById('first').innerHTML = 'Multiply the number by 2 then click OK <button type="button" onclick=" secondFunction() ">OK</button>'
@@ -25,6 +37,20 @@
 </script>
     </head>
     <body style="background-color: bisque;">
+        <nav class="navbar navbar-dark bg-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-link">
+                    <a class="nav-link" href="#feeback">Feedback</a>
+                </li>
+            </ul>
+        </nav>
+
+        <section id="home">
+
+            <div class="container-fluid">
         <img src="./images/htmlimage.png" alt="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" width="200px">
         <h1>HTML content from wikipedia</h1>
         <ul>
@@ -60,7 +86,12 @@
                 <td >October 28, 2014</td>
             </tr>
         </table>
+        </div>
 
+        <div class="container-fluid">
+            <h1>Introduction to HTML</h1>
+            <video src="./videos/HTML5Intro.mp4" controls width="40%"></video>
+        </div>
         
 
         <h1>Mini Game</h1>
@@ -76,6 +107,30 @@
         <p id="second"></p>
         <p id="third"></p>
         <p id="forth"></p>
+
+
+        
+    </section id="feedback">
+    <form class="container-fluid">
+        <div class="form-group">
+        <label for="lname">First Name</label><br>
+        <input type="text" name="fname" id="fname"><br>
+        <label for="lname">Last name</label><br>
+        <input type="text" name="lname" id="lname"><br>
+        <label for="number">Mobile Number</label><br>
+        <input type="number" name="number" id="number"><br>
+        <label for="email">Email</label><br>
+        <input type="email" name="email" id="email"><br>
+        <label for="Comments">Comments</label><br>
+        <textarea name="comments" id="comments" cols="30" rows="10"></textarea><br>
+        <button type="submit">Submit</button>
+    </div>
+    </form>
+
+
+    <section>
+
+    </section>
 
     </body>
 </html>
