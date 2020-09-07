@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Practice Page</title>
+        <link rel="stylesheet" href="basic.css">
+        <style>
+            h1{color: brown;}
+            p{color:black;font-size: larger;}
+        </style>
+
+<script>
+    function firstFunction(){
+        document.getElementById('first').innerHTML = 'Multiply the number by 2 then click OK <button type="button" onclick=" secondFunction() ">OK</button>'
+    }
+    function secondFunction(){
+        document.getElementById('second').innerHTML = 'Multiply the number by 5 then click OK <button type="button" onclick=" thirdFunction() ">OK</button>'
+    }
+    function thirdFunction(){
+        document.getElementById('third').innerHTML = 'Divide the number by your number then click OK <button type="button" onclick=" forthFunction() ">OK</button>'
+    }
+    function forthFunction(){
+        document.getElementById('forth').innerHTML = 'Subtract the number by 7 and you will the the final answer 3'
+    }
+</script>
+    </head>
+    <body style="background-color: bisque;">
+        <img src="./images/htmlimage.png" alt="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" width="200px">
+        <h1>HTML content from wikipedia</h1>
+        <ul>
+            <li>
+                <p><strong>Hypertext Markup Language (HTML)</strong>is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.</p>
+            </li>
+            <li>
+                <p>Web browsers receive HTML documents from a web server or from local storage and render the documents into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.</p>
+            </li>
+            <li>
+                <p><abbr title="Hypertext Markup Language">HTML</abbr> elements are the building blocks of HTML pages. With HTML constructs, images and other objects such as interactive forms may be embedded into the rendered page. HTML provides a means to create structured documents by denoting structural semantics for text such as headings, paragraphs, lists, links, quotes and other items. HTML elements are delineated by tags, written using angle brackets. Tags directly introduce content into the page. Other tags surround and provide information about document text and may include other tags as sub-elements. Browsers do not display the HTML tags, but use them to interpret the content of the page</p>
+            </li>
+            <li>
+                <p><abbr title="Hypertext Markup Language">HTML</abbr> can embed programs written in a scripting language such as JavaScript, which affects the behavior and content of web pages. Inclusion of CSS defines the look and layout of content. The World Wide Web Consortium (W3C), former maintainer of the HTML and current maintainer of the CSS standards, has encouraged the use of CSS over explicit presentational HTML since 1997</p>
+            </li>
+        </ul>
+
+        <p><a href="https://en.wikipedia.org/wiki/HTML" target="_blank">Wikipedia link for the content of this page</a></p>
+        
+        <h1>All HTML version in table format</h1>
+        <caption>HTML version information</caption>
+        <table>
+            <tr>
+                <th>HTML 2</th>
+                <th>HTML 3</th>
+                <th>HTML 4</th>
+                <th>HTML 5</th>
+            </tr>
+            <tr>
+                <td >November 24, 1995</td>
+                <td >January 14, 1997</td>
+                <td >December 18, 1997</td>
+                <td >October 28, 2014</td>
+            </tr>
+        </table>
+
+        
+
+        <h1>Mini Game</h1>
+        <form>
+            <label for="number">Enter any number between 1 and 10</label>
+            <input type="number" name="number" id="num">
+            <button type="button" onclick=" firstFunction() " > Submit </button>
+        </form>
+        
+        
+        
+        <p id="first"></p>
+        <p id="second"></p>
+        <p id="third"></p>
+        <p id="forth"></p>
+
+    </body>
+</html>
