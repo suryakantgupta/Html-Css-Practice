@@ -23,7 +23,13 @@
 
 <script>
     function firstFunction(){
-        document.getElementById('first').innerHTML = 'Multiply the number by 2 then click OK <button type="button" onclick=" secondFunction() ">OK</button>'
+        var x,text;
+        x=document.getElementById('num').value;
+        if(isNaN(x) || x<1 || x>10){
+            document.getElementById('first').innerHTML = "Input not Valid"
+        }else{
+            document.getElementById('first').innerHTML = 'Multiply the number by 2 then click OK <button type="button" onclick=" secondFunction() ">OK</button>'
+        }
     }
     function secondFunction(){
         document.getElementById('second').innerHTML = 'Multiply the number by 5 then click OK <button type="button" onclick=" thirdFunction() ">OK</button>'
