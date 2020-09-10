@@ -29,16 +29,20 @@
             document.getElementById('first').innerHTML = "Input not Valid"
         }else{
             document.getElementById('first').innerHTML = 'Multiply the number by 2 then click OK <button type="button" onclick=" secondFunction() ">OK</button>'
+            document.getElementById('progbar').style.width = "25%";
         }
     }
     function secondFunction(){
         document.getElementById('second').innerHTML = 'Multiply the number by 5 then click OK <button type="button" onclick=" thirdFunction() ">OK</button>'
+        document.getElementById('progbar').style.width = "50%";
     }
     function thirdFunction(){
         document.getElementById('third').innerHTML = 'Divide the number by your number then click OK <button type="button" onclick=" forthFunction() ">OK</button>'
+        document.getElementById('progbar').style.width = "75%";
     }
     function forthFunction(){
         document.getElementById('forth').innerHTML = 'Subtract the number by 7 and you will the the final answer 3'
+        document.getElementById('progbar').style.width = "100%";
     }
 </script>
     </head>
@@ -81,20 +85,51 @@
         
         <h1>All HTML version in table format</h1>
         <caption>HTML version information</caption>
-        <table>
+
+        <div class="row">
+            <div class="col-sm-5">
+        <div class="container">
+        <table class="table table-bordered table-border">
+            <thead>
             <tr>
                 <th>HTML 2</th>
                 <th>HTML 3</th>
                 <th>HTML 4</th>
                 <th>HTML 5</th>
             </tr>
+        </thead>
+        <tbody>
             <tr>
                 <td >November 24, 1995</td>
                 <td >January 14, 1997</td>
                 <td >December 18, 1997</td>
                 <td >October 28, 2014</td>
             </tr>
+        </tbody>
         </table>
+    </div>
+</div>
+</div>
+        </div>
+
+        <div class="container-fluid">
+            <h1>Text File Using AJAX</h1>
+            <button id="fetchbtn" type="button" class="btn btn-primary">Click Here</button>
+            <script>
+                let fetchBtn = document.getElementById('fetchbtn')
+                fetchBtn.addEventListener('click', actionOnButton) 
+
+                function actionOnButton(){
+                    let xhr = new XMLHttpRequest()
+                    xhr.open('GET','example.txt',true)
+                    xhr.onload = ()=>{
+                        console.log(this.responseText)
+                         //document.getElementById('datafromajax').innerHTML = this.responseText
+                    }
+                    xhr.send(null)
+                }
+            </script>
+            <p id="datafromajax"></p>
         </div>
 
         <div class="container-fluid">
@@ -104,7 +139,11 @@
         
 
         <h1>Mini Game</h1>
-        <form>
+        <div class="progress">
+            <div id="progbar" class="progress-bar" style="width: 0%;">
+            </div>
+        </div>
+        <form style="margin: 0.5cm;">
             <label for="number">Enter any number between 1 and 10</label>
             <input type="number" name="number" id="num">
             <button type="button" onclick=" firstFunction() " > Submit </button>
@@ -140,15 +179,15 @@
     <form class="container-fluid">
         <div class="form-group">
         <label for="lname">First Name</label><br>
-        <input type="text" name="fname" id="fname"><br>
+        <input class="form-control" style="width: 30%;" type="text" name="fname" id="fname"><br>
         <label for="lname">Last name</label><br>
-        <input type="text" name="lname" id="lname"><br>
+        <input class="form-control" style="width: 30%;" type="text" name="lname" id="lname"><br>
         <label for="number">Mobile Number</label><br>
-        <input type="number" name="number" id="number"><br>
+        <input class="form-control" style="width: 30%;" type="number" name="number" id="number"><br>
         <label for="email">Email</label><br>
-        <input type="email" name="email" id="email"><br>
+        <input class="form-control" style="width: 30%;" type="email" name="email" id="email"><br>
         <label for="Comments">Comments</label><br>
-        <textarea name="comments" id="comments" cols="30" rows="10"></textarea><br>
+        <textarea class="form-control" style="width: 30%;" name="comments" id="comments" cols="30" rows="10"></textarea><br>
         <button type="button" onclick="dateFunc()">Submit</button>
     </div>
     </form>
@@ -160,10 +199,56 @@
         <h1>Fun Animation</h1>
         <div id="mydiv">
             <p>
-                Rotating Block
+                Hover here
             </p>
         </div>
+
+        <h1>Slide Show</h1>
+        <div id="crs" class="carousel slide" data-ride="carousel">
+
+            <ul class="carousel-indicators">
+                <li data-target="#crs" data-slide-to="0" class="active">
+                </li>
+                <li data-target="#crs" data-slide-to="1"></li>
+                <li data-target="#crs" data-slide-to="2"></li>
+                <li data-target="#crs" data-slide-to="3"></li>
+                
+            </ul>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./images/html1.png" width="800" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/html2.png" width="800" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/html3.jpg" width="800" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/html4.png" width="800" height="500">
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#crs" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#crs" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+
+        </div>
+
+
+
+
+
     </section>
+
+
+
+
+
 
     </body>
 </html>

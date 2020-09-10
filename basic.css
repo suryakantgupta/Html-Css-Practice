@@ -25,7 +25,17 @@ p.smalloverflow{
     overflow: scroll;
 }
 
-table{
+table.table-bordered{
+    border:1px solid black;
+    margin-top:20px;
+  }
+table.table-bordered > thead > tr > th{
+    border:1px solid black;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid black;
+}
+/* table{
     border-collapse: collapse;
     border: 1px solid black;
     width: 50%;
@@ -36,7 +46,7 @@ th{
 }
 td{
     border: 1px solid black;
-}
+} */
 
 #mydiv{
     width: 300px;
