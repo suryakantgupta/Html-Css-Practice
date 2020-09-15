@@ -1,0 +1,12 @@
+[
+    {
+        "name":"Surya",
+        "age":20,
+        "location":"ghatkopar"
+    },
+    {
+        "name":"Suryakant",
+        "age":22,
+        "location":"chembur"
+    }
+]

@@ -21,6 +21,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<link rel="icon" href="./images/htmlimage.ico">
 <script>
     function firstFunction(){
         var x,text;
@@ -122,9 +123,9 @@
                 function actionOnButton(){
                     let xhr = new XMLHttpRequest()
                     xhr.open('GET','example.txt',true)
-                    xhr.onload = ()=>{
-                        console.log(this.responseText)
-                         //document.getElementById('datafromajax').innerHTML = this.responseText
+                    xhr.onload = function(){
+                        //console.log(this.responseText)
+                         document.getElementById('datafromajax').innerHTML = this.responseText
                     }
                     xhr.send(null)
                 }
@@ -180,7 +181,7 @@
         <div class="form-group">
         <label for="lname">First Name</label><br>
         <input class="form-control" style="width: 30%;" type="text" name="fname" id="fname"><br>
-        <label for="lname">Last name</label><br>
+        <label for="lname">Last name</label><br> 
         <input class="form-control" style="width: 30%;" type="text" name="lname" id="lname"><br>
         <label for="number">Mobile Number</label><br>
         <input class="form-control" style="width: 30%;" type="number" name="number" id="number"><br>
@@ -239,8 +240,21 @@
 
         </div>
 
+<h1>Users of website</h1>
+<div>
+    <script>
+        $.getJSON('./users.json',(myObj)=>{
+            //console.log(myObj)
 
-
+            function nextFnc(){
+            document.getElementById("jsoninfo").innerHTML= `User is ${myObj[1].name} his age is ${myObj[1].age} and stays at ${myObj[1].location}`
+        }
+            document.getElementById("jsoninfo").innerHTML= `User is ${myObj[0].name} his age is ${myObj[0].age} and stays at ${myObj[0].location} <button id="nextbtn" type="button" class="btn btn-primary">Next</button>`
+            document.getElementById('nextbtn').addEventListener('click',nextFnc)
+        })
+    </script>
+    <p id="jsoninfo"></p>
+</div>
 
 
     </section>
