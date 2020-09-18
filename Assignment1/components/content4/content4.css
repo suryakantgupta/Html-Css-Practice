@@ -1,0 +1,26 @@
+.container {
+    border-bottom: 3px solid #111;
+    height: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .circle {
+    display: inline-block;
+    background: #fff;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #111;
+    border-radius: 2.5rem;
+    box-shadow: 0 0 0 0.5rem #fff;
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      height: 2.5rem;
+    }
+    .circle {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
