@@ -1,0 +1,25 @@
+#heightandcolor{
+    width: 100%;
+    height: 100px;
+    background-color: lightgray;
+}
+#font{
+    color: honeydew;
+    font-family: Georgia, serif;
+    font-size: 3.5vh;
+}
+#download{
+    background-color: gray;
+    height: 50px;
+    width: 170px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+    border: 2px solid white;
+}
+
+@media (max-width:800px){
+#heightandcolor{
+    height: 200px;
+    width: 100%;
+}
+}

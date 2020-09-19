@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vital partners</title>
 
-    <link rel="stylesheet" href="./src/css/index.css">
+    <link rel="stylesheet" href="./src/css/header.css">
+    <link rel="stylesheet" href="./src/css/grayBar.css">
+    <link rel="stylesheet" href="./src/css/contactUs.css">
 
     <script src="https://kit.fontawesome.com/972af9918a.js" crossorigin="anonymous"></script>
 
@@ -23,11 +25,168 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
+
+
 </head>
 
 <body>
 
-    <iframe id="0" onload="iframeLoaded(id)" src="./components/header/header.html" width="100%" height="100%" scrolling="no"></iframe>
+    <!-- Navbar
+
+@description : Margin of 16% is given to navbar from externel css,
+NavBar will Collapse on medium size sreen and there the burger menu
+will be displyed
+
+ -->
+    <nav class="navbar navbar-expand-md navbar-light">
+
+        <!-- Main Logo -->
+        <span class="navbar-brand"><img src="./assests/images/logo.png"></span>
+
+        <!-- Call number and search box area  -->
+        <div class="container">
+            <div class="row">
+                <div class="col"><span class="d-flex flex-row-reverse callus">Call
+                        us Today! (02)90178413 </span></div>
+                <div class="col">
+                    <form>
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+
+                <div class="w-100"></div>
+
+                <div class="col">
+
+                    <!-- Burger Menu Button -->
+                    <button class="navbar-toggler" data-target="#collapse_target" data-toggle="collapse"><span
+                            class="navbar-toggler-icon"></span></button>
+
+                    <!-- Navbar Menu Links -->
+                    <div class="collapse navbar-collapse" id="collapse_target">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#"><b style="color: limegreen;"> Home </b><span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><b> Dating Blog</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><b>Who we help</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><b>Why vitals</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><b>Review</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><b>Contact us</b></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Gray Bar section
+    
+    @description: Here font is responsive via (vh) .
+    A download button is configured in this section
+    
+    -->
+
+    <div class="container-fluid" id="heightandcolor">
+        <div class="text-center py-2">
+            <img src="./assests/images/icon5.png">
+            <span id="font">
+                Loren Ipsum is simply dummy text of the printing ind
+            </span>
+
+            <!-- Download Now Button -->
+            <button id="download" type="button" class="btn">Download Now</button>
+
+        </div>
+    </div>
+
+
+
+    <div id="contactus">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <div id="playposition">
+                <div class="square">
+                    <div class="center">
+                    <div id="big">
+                        <i class="fas fa-play fa-2x" style="color:white;"></i>
+                    </div>
+                    <div id="small">
+                        <i class="fas fa-play fa-1x" style="color:white;"></i>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-6">
+                <div id="col2position">
+                Loren ipsum dolor sit posuer long dolar sit amet it has not survived on?
+                <div>
+                    <button id="contactbtn" type="button" class="btn" style="background-color: lightgreen;">Contact Us Now!</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <h1 style="padding: 80px 0px 0px 190px;">About Us</h1>
+                <h3 style="padding: 20px 0px 0px 190px;">It is long established fact that readers will be distracted
+                </h3>
+                <p style="padding: 20px 0px 0px 190px;"><strong>The point of using Lorem Ipsum is </strong>that it has
+                    more or less normal button of letters,
+                    as opposed to using 'Content here, content here', making look like readable English</p>
+                <p style="padding: 0px 0px 0px 190px;"><strong>There are many variation of passage of</strong> Lorem
+                    Ipsum available , but the majority have
+                    suffered alteration in some form</p>
+    
+                <ul style="list-style-image: url(./assests/images/arrow1.png);padding: 20px 0px 0px 215px;">
+                    <li>2000 years old, Richard McClint</li>
+                    <li>Discovered the undoubtable source</li>
+                    <li>Lorem Ipsum dolor sit amet</li>
+                </ul>
+    
+            </div>
+            <div class="col-6" style="padding-top: 160px;">
+                <img class="img-thumbnail" src="./assests/images/our_team_zoe.jpg" style="width: 40%;">
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <iframe id="0" onload="iframeLoaded(id)" src="./components/header/header.html" width="100%" height="100%" scrolling="no"></iframe>
 
     <iframe id="1" onload="iframeLoaded(id)" src="./components/content1/content1.html" width="100%" height="100%"
         scrolling="no"></iframe>
@@ -58,7 +217,7 @@
 
     <iframe id="9" onload="iframeLoaded(id)" src="./components/footer/footer.html" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
 
-<!-- Script to give height to iFrame -->
+ Script to give height to iFrame
     <script type="text/javascript">
         function iframeLoaded(id) {
             var iFrameID = document.getElementById(id);
@@ -68,7 +227,7 @@
                 iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight;
             }
         }
-    </script>
+    </script> -->
 </body>
 
 </html>
