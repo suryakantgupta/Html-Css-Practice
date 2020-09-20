@@ -1,0 +1,56 @@
+#about{
+    padding-top: 12%;
+}
+#heading{
+padding-top: 6%;
+}
+#para1{
+    padding-top: 4%;
+}
+#padding25{
+    padding-bottom: 10%;
+    padding-left: 25%;
+    font-size: 20px;
+}
+#list{
+    padding-left: 5%;
+}
+#contactaboutus{
+
+}
+#aimage{
+    padding-top: 40%;
+    height: 800px;
+    width: 800px;
+}
+.contain{
+    display: flex;
+}
+#acontacticon{
+    height: 15px;
+}
+@media (max-width:900px){
+    h1{
+        font-size: 18px !important;
+    }
+    h3{
+        font-size: 15px !important;
+    }
+#aimage{
+    padding: 0%;
+    height: 150px;
+    width: 150px;
+
+}
+#aboutimage{
+min-width: 100%;
+min-height: 100%;
+}
+#padding25{
+    padding-left:5%;
+    font-size: 14px;
+}
+.contain{
+    flex-direction: column-reverse;
+}
+}
