@@ -1,0 +1,42 @@
+.footsection{
+    background-color: dimgray;
+}
+.footcontain{
+    margin-left: 15%;
+    margin-right: 15%;
+    display: flex;
+}
+#shortcutfont{
+    margin-left: 20%;
+    text-align: center;
+}
+#appointmentbtn{
+    margin-left: 10%;
+}
+#footcontactus{
+    padding-left: 3%;
+    padding-top: 3%;
+    padding-right: 4%;
+}
+#footrecentpost{
+    padding-top: 3%;
+    padding-left: 5%;
+    padding-right: 2%;
+}
+#footrecenttweet{
+    padding-top: 3%;
+    padding-left: 6%;
+}
+@media (max-width:800px){
+    .footcontain{
+        flex-direction: column;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    #shortcutfont{
+        padding-top: 20px;
+    }
+    #footbtn{
+        padding: 20px;
+    }
+}

@@ -22,5 +22,15 @@ a:hover{
 @media (max-width:1000px){
 .navbar{
     margin: 0;
+
+}
+#header{
+    padding: 0;
+}
+#navbrand{
+    margin: 0;
+}
+#search{
+    padding: 0%;
 }
 }

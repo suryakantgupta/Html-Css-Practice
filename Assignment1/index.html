@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="./src/css/contactUs.css">
     <link rel="stylesheet" href="./src/css/aboutus.css">
     <link rel="stylesheet" href="./src/css/cardsection.css">
+    <link rel="stylesheet" href="./src/css/blog.css">
+    <link rel="stylesheet" href="./src/css/footer.css">
 
-    <!-- <script src="https://kit.fontawesome.com/972af9918a.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/972af9918a.js" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -40,25 +42,25 @@ NavBar will Collapse on medium size sreen and there the burger menu
 will be displyed
 
  -->
-    <nav class="navbar navbar-expand-md navbar-light">
+    <nav id="header" class="navbar navbar-expand-md navbar-light">
 
         <!-- Main Logo -->
-        <span class="navbar-brand"><img src="./assests/images/logo.png"></span>
+        <span id="navbrand" class="navbar-brand"><img src="./assests/images/logo.png"></span>
 
         <!-- Call number and search box area  -->
         <div class="container">
-            <div class="row">
+            <div class="row" style="width: 100%;">
                 <div class="col"><span class="d-flex flex-row-reverse callus">Call
                         us Today! (02)90178413 </span></div>
-                <div class="col">
-                    <form>
+                <div class="col" id="search">
+                    <form >
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     </form>
                 </div>
 
                 <div class="w-100"></div>
 
-                <div class="col">
+                <div class="col" id="search">
 
                     <!-- Burger Menu Button -->
                     <button class="navbar-toggler" data-target="#collapse_target" data-toggle="collapse"><span
@@ -235,7 +237,8 @@ Image Section
                             lroots in a piece of classical Latin literature from 45 BC, making it over 2000 years
                             old
                             number .Is this Richard McClintock?</p>
-                        <button id="getstartbtn" class="btn">Get Started <img src="./assests/images/small_triangle.png"></button>
+                        <button id="getstartbtn" class="btn">Get Started <img
+                                src="./assests/images/small_triangle.png"></button>
                     </div>
                 </div>
             </div>
@@ -252,7 +255,8 @@ Image Section
                             lroots in a piece of classical Latin literature from 45 BC, making it over 2000 years
                             old
                             number .Is this Richard McClintock?</p>
-                        <button id="getstartbtn" class="btn">Get Started <img src="./assests/images/small_triangle.png"></button>
+                        <button id="getstartbtn" class="btn">Get Started <img
+                                src="./assests/images/small_triangle.png"></button>
                     </div>
                 </div>
             </div>
@@ -291,19 +295,184 @@ Image Section
                 </div>
                 <div>
                     <div class="text-center">
-                       <p style="font-size: 20px;"> Lorem ipsum is simply a dummy text of the printing and testing and typesetting industry Lorem ipsum
-                        has been the industry Standard dummy text year since the 1500s when an unknown printer took a
-                        gallery of type and scrambled it to make a type specimen book it has survuved not only
-                    </p>
-                    <div>
-                        <h3>
-                            -MT. Chatswood
-                        </h3>
-                    </div>
+                        <p style="font-size: 20px;"> Lorem ipsum is simply a dummy text of the printing and testing and
+                            typesetting industry Lorem ipsum
+                            has been the industry Standard dummy text year since the 1500s when an unknown printer took
+                            a
+                            gallery of type and scrambled it to make a type specimen book it has survuved not only
+                        </p>
+                        <div>
+                            <h3>
+                                -MT. Chatswood
+                            </h3>
+                        </div>
                     </div>
                 </div>
             </div>
-    
+
+        </div>
+    </div>
+
+
+
+
+
+    <div id="blogsection">
+        <div class="blogcontain" style="justify-content: center;padding-bottom: 4%;">
+            <h1>Our Latest Blog Post</h1>
+        </div>
+        <div class="blogcontain" style="justify-content: space-around;">
+            <div>
+                <div class="card" style="width: 20rem;">
+                    <img src="./assests/images/user1.png" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">What is lorem ipsum</h5>
+                        <p class="card-text">Lorem Ipsum is simply dummy text of the end typesetting Lorem Ipsum has
+                            been the industry standard dummy text ever since the 1500s when an unknown printer took a
+                            gallery of type and scrambled </p>
+                        <p class="card-text">it to make a type specimen book It hassurvived not nly five centuries but
+                            also the leap into we electronic typesetting ,remaining essentially unchanged</p>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card" style="width: 20rem;">
+                    <img src="./assests/images/user2.png" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">What is lorem ipsum</h5>
+                        <p class="card-text">Lorem Ipsum is simply dummy text of the end typesetting Lorem Ipsum has
+                            been the industry standard dummy text ever since the 1500s when an unknown printer took a
+                            gallery of type and scrambled </p>
+                        <p class="card-text">it to make a type specimen book It hassurvived not nly five centuries but
+                            also the leap into we electronic typesetting ,remaining essentially unchanged</p>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card" style="width: 20rem;">
+                    <img src="./assests/images/user3.png" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">What is lorem ipsum</h5>
+                        <p class="card-text">Lorem Ipsum is simply dummy text of the end typesetting Lorem Ipsum has
+                            been the industry standard dummy text ever since the 1500s when an unknown printer took a
+                            gallery of type and scrambled </p>
+                        <p class="card-text">it to make a type specimen book It hassurvived not nly five centuries but
+                            also the leap into we electronic typesetting ,remaining essentially unchanged</p>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid" id="heightandcolor">
+        <div class="text-center py-2">
+            <img src="./assests/images/icon5.png">
+            <span id="font">
+                Loren Ipsum is simply dummy text of the printing ind
+            </span>
+
+            <!-- Download Now Button -->
+            <button id="download" type="button" class="btn">Download Now</button>
+
+        </div>
+    </div>
+
+
+
+    <div class="footsection">
+        <div class="footcontain" style="padding-top: 5%;">
+            <div style="justify-content: start;">
+                <img src="./assests/images/foot_logo.png">
+            </div>
+            <div id="shortcutfont">
+                <h3>
+                    Shortcut your search tp happiness right now live your life without regrets and take action
+                    today!
+                </h3>
+            </div>
+        </div>
+        <div class="footcontain">
+            <div>
+                <h1>Call us Today! (02)9017
+                    8413</h1>
+            </div>
+            <div id="appointmentbtn">
+                <span id="footbtn">
+                    <button type="button" class="btn btn-success">Book an appointment</button>
+                </span>
+                <span id="footbtn">
+                    <button type="button" class="btn btn-success">Contact a consultant</button>
+                </span>
+            </div>
+        </div>
+        <div class="footcontain">
+            <div id="footcontactus">
+                <h3>Contact Info</h3>
+
+                <ul style="list-style-type: none;padding: 0;">
+                    <li>
+                        <strong>4/220 George Saint Sydney NSW 2000</strong>
+                    </li>
+                    <li>
+                        Phone: (02)9017 8413
+                    </li>
+                    <li>
+                        Email: info@syd.vitalpartners.com.au
+                    </li>
+                    <li>
+                        <strong>Canberra City Act 2600</strong>
+                    </li>
+                    <li>
+                        Phone: (02)9017 8426
+                    </li>
+                    <li>
+                        Email: can@syd.vitalpartners.com.au
+                    </li>
+                </ul>
+
+            </div>
+            <div id="footrecentpost">
+                <h3>Recent Post</h3>
+
+                <ul style="list-style-image: url(./assests/images/small_triangle.png);padding: 0;">
+                    <li>
+                        How to recover after a bad date
+                    </li>
+                    <li>
+                        Review | Vital Partners Review
+                    </li>
+                    <li>
+                        Review | Vital Partners Review
+                    </li>
+                    <li>
+                        Review | Vital Partners Drake and Julie
+                    </li>
+                    <li>
+                        7 Rules for a Happy Relationship | Vital partners dating sydney
+                    </li>
+                </ul>
+
+            </div>
+            <div id="footrecenttweet">
+                <h3>Recent Tweets</h3>
+
+                <ul style="list-style-image: url(./assests/images/icon9.png);padding: 0;">
+                    <li>
+                        Are you being vulnarable to find love via offine dating agency Sydney Canberra Vital
+                        Partners
+                    </li>
+                    <li>
+                        Ending up a relationtship read why you should not break up by text -offline dation
+                        agency Sydney Canberra Vital Partners
+                    </li>
+                </ul>
+
+            </div>
         </div>
     </div>
 
@@ -312,8 +481,53 @@ Image Section
 
 
 
+    <div style="background-color:black;">
+        <div class="container">
 
+            <!-- Grid row-->
+            <div class="row py-4 d-flex align-items-center">
 
+                <!-- Grid column -->
+                <div class="col text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0" style="color: grey;">VitalPartners.com.au</h6>
+                </div>
+                <!-- Grid column -->
+                <div class="col" style="color: grey;">
+                    Contact | Terms of use | Privacy Policy | Disclaimer
+                </div>
+                <!-- Grid column -->
+                
+                <div class="col text-center text-md-right" style="color: gray;">
+                    <span >FOLLOW US</span>
+                    <!-- Facebook -->
+                    <a class="fb-ic" style="color: gray;">
+                        <i class="fab fa-facebook-f white-text mr-4"> </i>
+                    </a>
+                    <!-- Twitter -->
+                    <a class="tw-ic" style="color: gray;">
+                        <i class="fab fa-twitter white-text mr-4"> </i>
+                    </a>
+                    <!-- Google +-->
+                    <a class="gplus-ic" style="color: gray;">
+                        <i class="fab fa-google-plus-g white-text mr-4"> </i>
+                    </a>
+                    <!--Linkedin -->
+                    <a class="li-ic" style="color: gray;">
+                        <i class="fab fa-linkedin-in white-text mr-4"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a class="ins-ic" style="color: gray;">
+                        <i class="fab fa-instagram white-text"> </i>
+                    </a>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+
+        </div>
+    </div>
 
 
     <!-- <iframe id="0" onload="iframeLoaded(id)" src="./components/header/header.html" width="100%" height="100%" scrolling="no"></iframe>
