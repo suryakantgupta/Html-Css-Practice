@@ -2,10 +2,17 @@
 <html lang="en">
 
 <head>
+
+    <!-- Meta data 
+    
+    @description: Gere there is info of charset and viewport-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page Title -->
     <title>Vital partners</title>
 
+    <!-- External CSS -->
     <link rel="stylesheet" href="./src/css/header.css">
     <link rel="stylesheet" href="./src/css/grayBar.css">
     <link rel="stylesheet" href="./src/css/contactUs.css">
@@ -14,20 +21,19 @@
     <link rel="stylesheet" href="./src/css/blog.css">
     <link rel="stylesheet" href="./src/css/footer.css">
 
-    <script src="https://kit.fontawesome.com/972af9918a.js" crossorigin="anonymous"></script>
 
+
+
+    <!-- FontAwesomr for icons -->
+    <script src="https://kit.fontawesome.com/972af9918a.js" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 
 
 
@@ -42,58 +48,59 @@ NavBar will Collapse on medium size sreen and there the burger menu
 will be displyed
 
  -->
-    <nav id="header" class="navbar navbar-expand-md navbar-light">
-
-        <!-- Main Logo -->
-        <span id="navbrand" class="navbar-brand"><img src="./assests/images/logo.png"></span>
-
-        <!-- Call number and search box area  -->
-        <div class="container">
-            <div class="row" style="width: 100%;">
-                <div class="col"><span class="d-flex flex-row-reverse callus">Call
-                        us Today! (02)90178413 </span></div>
-                <div class="col" id="search">
-                    <form >
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    </form>
+    <div id="header">
+        <nav class="navbar navbar-expand-md navbar-light">
+            <div class="headercontain" id="headerresponse">
+                <div>
+                    <!-- Main logo -->
+                    <span id="navbrand" class="navbar-brand"><img width="100%" src="./assests/images/logo.png"></span>
                 </div>
+                <div class="headercontain" style="flex-direction: column;margin-top: 4%;">
+                    <div>
+                        <!-- Search Box -->
+                        <form style="justify-content: flex-end;" class="form-inline callus"><span
+                                style="padding-right: 3%;">Call us Today!
+                                (02)90178413</span><input style="border-radius: 10px;" class="form-control"
+                                type="search"><img id="searchiconn" class="image-fluid" style="position: absolute;" src="./assests/images/top_search.png"></form>
+                    </div>
+                    <div>
+                        <!-- Burger Menu -->
+                        <button class="navbar-toggler" data-target="#collapse_target" data-toggle="collapse"><span
+                                class="navbar-toggler-icon"></span></button>
 
-                <div class="w-100"></div>
+                        <div class="collapse navbar-collapse" id="collapse_target">
 
-                <div class="col" id="search">
-
-                    <!-- Burger Menu Button -->
-                    <button class="navbar-toggler" data-target="#collapse_target" data-toggle="collapse"><span
-                            class="navbar-toggler-icon"></span></button>
-
-                    <!-- Navbar Menu Links -->
-                    <div class="collapse navbar-collapse" id="collapse_target">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#"><b style="color: limegreen;"> Home </b><span
-                                        class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><b> Dating Blog</b></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><b>Who we help</b></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><b>Why vitals</b></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><b>Review</b></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><b>Contact us</b></a>
-                            </li>
-                        </ul>
+                            <!-- Main Menu -->
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#"><b style="color: #95c730;"> Home </b><span
+                                            class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><b> Dating Blog</b></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><b>Who we help</b></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><b>Why vitals</b></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><b>Review</b></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><b>Contact us</b></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </nav>
+
+        </nav>
+    </div>
+    </div>
+
+
 
 
 
@@ -107,6 +114,7 @@ will be displyed
     <div class="container-fluid" id="heightandcolor">
         <div class="text-center py-2">
             <img src="./assests/images/icon5.png">
+            <!-- Description -->
             <span id="font">
                 Loren Ipsum is simply dummy text of the printing ind
             </span>
@@ -137,6 +145,8 @@ Contact us Section
                             <!-- White play BUtton from font awesome -->
                             <div class="center">
                                 <div id="big">
+
+                                    <!-- Play Button -->
                                     <i class="fas fa-play fa-2x" style="color:white;"></i>
                                 </div>
                                 <div id="small">
@@ -151,9 +161,8 @@ Contact us Section
                         Loren ipsum dolor sit posuer long dolar sit amet it has not survived on?
                         <div>
                             <!-- Contact Us now Button -->
-                            <button id="contactbtn" type="button" class="btn"
-                                style="background-color: lightgreen;">Contact Us Now! <img id="contacticon"
-                                    src="./assests/images/icon1.png"></button>
+                            <button id="contactbtn" type="button" class="btn" style="background-color: #95c730;">Contact
+                                Us Now! <img id="contacticon" src="./assests/images/icon1.png"></button>
                         </div>
                     </div>
                 </div>
@@ -168,27 +177,32 @@ Contact us Section
     and its properties are used to make this page responsive
  -->
     <div class="contain">
-        <div>
+        <div style="font-family:Arial, Helvetica, sans-serif;color: grey;">
             <!-- Common padding of 25% is given for big screen and 5% for amall screen -->
             <div id="padding25">
                 <h1 id="about">About Us</h1>
                 <h3 id="heading">It is long established fact that readers will be distracted
                 </h3>
-                <p id="para1"><strong>The point of using Lorem Ipsum is </strong>that it has
+                <!-- First Para -->
+
+                <p id="para1"><strong style="color: black;">The point of using Lorem Ipsum is </strong>that it has
                     more or less normal button of letters,
                     as opposed to using 'Content here, content here', making look like readable English</p>
-                <p id="para2"><strong>There are many variation of passage of</strong> Lorem
+                <!-- Second Para -->
+
+                <p id="para2"><strong style="color: black;">There are many variation of passage of</strong> Lorem
                     Ipsum available , but the majority have
                     suffered alteration in some form</p>
 
-                <ul id="list" style="list-style-image: url(./assests/images/arrow1.png);">
+                <!-- List -->
+                <ul id="list" style="list-style-image: url(./assests/images/arrow1.png);color: black;">
                     <li>2000 years old, Richard McClint</li>
                     <li>Discovered the undoubtable source</li>
                     <li>Lorem Ipsum dolor sit amet</li>
                 </ul>
                 <p> remaining essentially unchanged. It was popularised in the 1960s with the release Letreset
                     sheets containing</p>
-                <button id="contactaboutus" type="button" class="btn" style="background-color: lightgreen;">Contact
+                <button id="contactaboutus" type="button" class="btn" style="background-color: #95c730;">Contact
                     Us Now!<img id="acontacticon" src="./assests/images/icon1.png"></button>
             </div>
         </div>
@@ -209,23 +223,28 @@ Image Section
 
 
 
-    <!-- Car section
-@description: 
+    <!-- Card section
+@description: 2 Cards are included in this section
 
 -->
 
     <div id="cardsection">
         <div class="cardcontain">
             <div id="carddescriptionfont">
+                <!-- Description -->
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem ipsum has been the
                 industry
                 standard ever since 1500s when an unknown printer took a gallery of type and scrambled it to make a type
                 specimen book
             </div>
         </div>
+
+        <!-- Cards -->
         <div class="cardcontain" style="justify-content: center;">
             <div style="margin-right: 1%;">
                 <div class="card" id="cardbody">
+
+                    <!-- Card Icon -->
                     <img style="padding: 10px 100px 10px 100px;" src="./assests/images/icon2.png" class="card-img-top">
                     <div class="card-body" style="padding-bottom: 28px;">
                         <h5 class="card-title">Where dose it come</h5>
@@ -244,6 +263,7 @@ Image Section
             </div>
             <div style="margin-left: 1%;">
                 <div class="card" id="cardbody">
+                    <!-- Card Icon -->
                     <img style="padding: 10px 100px 10px 100px;" src="./assests/images/icon3.png" class="card-img-top">
                     <div class="card-body" style="padding-bottom: 28px;">
                         <h5 class="card-title">Where dose it come</h5>
@@ -263,7 +283,12 @@ Image Section
         </div>
     </div>
 
+    <!-- 
 
+Carausel Section
+
+@description:Three images are includeed in the carausel section 
+ -->
 
 
     <div style="background-image: url(./assests/images/inner_page_banner/who_we_help.jpg);" class="container-fluid">
@@ -273,17 +298,61 @@ Image Section
         <div class="row">
             <div class="col-12">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner text-center">
+                    <div class="carousel-inner text-center" style="padding-right: 10%;padding-left: 10%;font-family: Georgia, 'Times New Roman', Times, serif;">
                         <div class="carousel-item active">
+                            <!-- Caraousel  Image -->
                             <img src="./assests/images/our_team_zoe.jpg" class="rounded-circle">
+                            <p style="font-size: 20px;"> Lorem ipsum is simply a dummy text of the printing and testing
+                                and
+                                typesetting industry Lorem ipsum
+                                has been the industry Standard dummy text year since the 1500s when an unknown printer
+                                took
+                                a
+                                gallery of type and scrambled it to make a type specimen book it has survuved not only
+                            </p>
+                            <div>
+                                <h3>
+                                    -MT. Chatswood
+                                </h3>
+                            </div>
                         </div>
                         <div class="carousel-item">
+                            <!-- Carausel Image -->
                             <img src="./assests/images/our_team_laura.jpg" class="rounded-circle">
+                            <p style="font-size: 20px;"> Lorem ipsum is simply a dummy text of the printing and testing
+                                and
+                                typesetting industry Lorem ipsum
+                                has been the industry Standard dummy text year since the 1500s when an unknown printer
+                                took
+                                a
+                                gallery of type and scrambled it to make a type specimen book it has survuved not only
+                            </p>
+                            <div>
+                                <h3>
+                                    -MT. Chatswood
+                                </h3>
+                            </div>
                         </div>
                         <div class="carousel-item">
+                            <!-- Carausel Image -->
                             <img src="./assests/images/our_team_racel.jpg" class="rounded-circle">
+                            <p style="font-size: 20px;"> Lorem ipsum is simply a dummy text of the printing and testing
+                                and
+                                typesetting industry Lorem ipsum
+                                has been the industry Standard dummy text year since the 1500s when an unknown printer
+                                took
+                                a
+                                gallery of type and scrambled it to make a type specimen book it has survuved not only
+                            </p>
+                            <div>
+                                <h3>
+                                    -MT. Chatswood
+                                </h3>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Navigation Arrows -->
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -294,19 +363,6 @@ Image Section
                     </a>
                 </div>
                 <div>
-                    <div class="text-center">
-                        <p style="font-size: 20px;"> Lorem ipsum is simply a dummy text of the printing and testing and
-                            typesetting industry Lorem ipsum
-                            has been the industry Standard dummy text year since the 1500s when an unknown printer took
-                            a
-                            gallery of type and scrambled it to make a type specimen book it has survuved not only
-                        </p>
-                        <div>
-                            <h3>
-                                -MT. Chatswood
-                            </h3>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -314,14 +370,16 @@ Image Section
     </div>
 
 
+    <!-- Blog Section -->
 
 
-
-    <div id="blogsection">
+    <div id="blogsection" style="font-family: Georgia, 'Times New Roman', Times, serif;">
         <div class="blogcontain" style="justify-content: center;padding-bottom: 4%;">
             <h1>Our Latest Blog Post</h1>
         </div>
         <div class="blogcontain" style="justify-content: space-around;">
+
+            <!-- Cards Section -->
             <div>
                 <div class="card" style="width: 20rem;">
                     <img src="./assests/images/user1.png" class="card-img-top">
@@ -332,7 +390,7 @@ Image Section
                             gallery of type and scrambled </p>
                         <p class="card-text">it to make a type specimen book It hassurvived not nly five centuries but
                             also the leap into we electronic typesetting ,remaining essentially unchanged</p>
-                        <a href="#" class="btn btn-primary">Get Started</a>
+                        <a href="#" class="btn" style="background-color: #95c730;color: white;">Read More</a>
                     </div>
                 </div>
             </div>
@@ -346,7 +404,7 @@ Image Section
                             gallery of type and scrambled </p>
                         <p class="card-text">it to make a type specimen book It hassurvived not nly five centuries but
                             also the leap into we electronic typesetting ,remaining essentially unchanged</p>
-                        <a href="#" class="btn btn-primary">Get Started</a>
+                        <a href="#" class="btn" style="background-color: #95c730;color: white;">Read More</a>
                     </div>
                 </div>
             </div>
@@ -360,14 +418,14 @@ Image Section
                             gallery of type and scrambled </p>
                         <p class="card-text">it to make a type specimen book It hassurvived not nly five centuries but
                             also the leap into we electronic typesetting ,remaining essentially unchanged</p>
-                        <a href="#" class="btn btn-primary">Get Started</a>
+                        <a href="#" class="btn" style="background-color: #95c730;color: white;">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
+    <!-- Gray Bar -->
 
     <div class="container-fluid" id="heightandcolor">
         <div class="text-center py-2">
@@ -382,31 +440,32 @@ Image Section
         </div>
     </div>
 
-
+    <!-- Footer Section -->
 
     <div class="footsection">
         <div class="footcontain" style="padding-top: 5%;">
             <div style="justify-content: start;">
+                <!-- Main LOGO -->
                 <img src="./assests/images/foot_logo.png">
             </div>
             <div id="shortcutfont">
-                <h3>
-                    Shortcut your search tp happiness right now live your life without regrets and take action
+                <h3 style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                    Shortcut your search to happiness right now live your life without regrets and take action
                     today!
                 </h3>
             </div>
         </div>
         <div class="footcontain">
             <div>
-                <h1>Call us Today! (02)9017
+                <h1 style="font-family: cursive;">Call us Today! (02)9017
                     8413</h1>
             </div>
             <div id="appointmentbtn">
                 <span id="footbtn">
-                    <button type="button" class="btn btn-success">Book an appointment</button>
+                    <button type="button" style="background-color: #95c730;" class="btn">Book an appointment <img src="./assests/images/icon7.png"></button>
                 </span>
                 <span id="footbtn">
-                    <button type="button" class="btn btn-success">Contact a consultant</button>
+                    <button type="button" class="btn" style="background-color: #95c730;">Contact a consultant <img src="./assests/images/icon6.png"></button>
                 </span>
             </div>
         </div>
@@ -484,47 +543,33 @@ Image Section
     <div style="background-color:black;">
         <div class="container">
 
-            <!-- Grid row-->
+
             <div class="row py-4 d-flex align-items-center">
 
-                <!-- Grid column -->
+
                 <div class="col text-center text-md-left mb-4 mb-md-0">
                     <h6 class="mb-0" style="color: grey;">VitalPartners.com.au</h6>
                 </div>
-                <!-- Grid column -->
+
                 <div class="col" style="color: grey;">
                     Contact | Terms of use | Privacy Policy | Disclaimer
                 </div>
-                <!-- Grid column -->
-                
-                <div class="col text-center text-md-right" style="color: gray;">
-                    <span >FOLLOW US</span>
-                    <!-- Facebook -->
-                    <a class="fb-ic" style="color: gray;">
-                        <i class="fab fa-facebook-f white-text mr-4"> </i>
-                    </a>
-                    <!-- Twitter -->
-                    <a class="tw-ic" style="color: gray;">
-                        <i class="fab fa-twitter white-text mr-4"> </i>
-                    </a>
-                    <!-- Google +-->
-                    <a class="gplus-ic" style="color: gray;">
-                        <i class="fab fa-google-plus-g white-text mr-4"> </i>
-                    </a>
-                    <!--Linkedin -->
-                    <a class="li-ic" style="color: gray;">
-                        <i class="fab fa-linkedin-in white-text mr-4"> </i>
-                    </a>
-                    <!--Instagram-->
-                    <a class="ins-ic" style="color: gray;">
-                        <i class="fab fa-instagram white-text"> </i>
-                    </a>
 
+
+                <div class="col text-center text-md-right" style="color: gray;">
+                    <span>FOLLOW US</span>
+                    <!-- Icon -->
+                    <img src="./assests/images/icon10.png">
+                    <img src="./assests/images/icon9.png">
+                    <img src="./assests/images/icon11.png">
+                    <img src="./assests/images/icon12.png">
+                    <img src="./assests/images/icon13.png">
+                    <img src="./assests/images/icon14.png">
+                    
                 </div>
-                <!-- Grid column -->
+
 
             </div>
-            <!-- Grid row-->
 
         </div>
     </div>

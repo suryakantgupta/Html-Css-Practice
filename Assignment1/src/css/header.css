@@ -1,3 +1,15 @@
+#header{
+    margin-left: 0%;
+    margin-right: 0%;
+}
+.headercontain{
+    display: flex;
+}
+#menu{
+    flex-direction: column;
+}
+
+
 .callus{
     font-size: 1.5em;
     font-family: Brush Script MT, Brush Script Std, cursive;
@@ -13,10 +25,10 @@
     color: gray;
 }
 .sr-only{
-    color: limegreen !important;
+    color: #95c730 !important;
 }
 a:hover{
-    color: limegreen !important;
+    color: #95c730 !important;
 }
 
 @media (max-width:1000px){
@@ -28,9 +40,18 @@ a:hover{
     padding: 0;
 }
 #navbrand{
+    width: 90%;
     margin: 0;
 }
 #search{
     padding: 0%;
+}
+#headerresponse{
+    width: 90%;
+    flex-direction: column;
+}
+#searchiconn{
+    padding-top: 20px;
+    padding-right: 10px;
 }
 }
