@@ -1,3 +1,6 @@
+/* Big screen View */
+
+
 #contactus{
     padding: 0;
     background-image: url('../../assests/images/hbg2.png');
@@ -36,6 +39,9 @@
 #small{
     display: none;
 }
+
+
+/* Media queries for mobile view */
 @media (max-width:800px){
     #contactus{
         height: 300px;

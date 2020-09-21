@@ -1,3 +1,7 @@
+/* 
+    Big Screen View
+*/
+
 #about{
     padding-top: 12%;
     color: black;
@@ -30,6 +34,13 @@ padding-top: 6%;
 #acontacticon{
     height: 15px;
 }
+
+/* 
+    Media Queries for mobile view
+*/
+
+
+
 @media (max-width:900px){
     h1{
         font-size: 18px !important;

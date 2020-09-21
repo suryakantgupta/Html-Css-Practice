@@ -61,7 +61,8 @@ will be displyed
                         <form style="justify-content: flex-end;" class="form-inline callus"><span
                                 style="padding-right: 3%;">Call us Today!
                                 (02)90178413</span><input style="border-radius: 10px;" class="form-control"
-                                type="search"><img id="searchiconn" class="image-fluid" style="position: absolute;" src="./assests/images/top_search.png"></form>
+                                type="search"><img id="searchiconn" class="image-fluid" style="position: absolute;"
+                                src="./assests/images/top_search.png"></form>
                     </div>
                     <div>
                         <!-- Burger Menu -->
@@ -111,19 +112,23 @@ will be displyed
     
     -->
 
-    <div class="container-fluid" id="heightandcolor">
+
+    <iframe id="2" onload="iframeLoaded(id)" src="./components/graybar/graybar.html" frameborder="0" width="100%"
+        height="100%" scrolling="no"></iframe>
+
+
+
+    <!-- <div class="container-fluid" id="heightandcolor">
         <div class="text-center py-2">
             <img src="./assests/images/icon5.png">
-            <!-- Description -->
+
             <span id="font">
                 Loren Ipsum is simply dummy text of the printing ind
             </span>
-
-            <!-- Download Now Button -->
             <button id="download" type="button" class="btn">Download Now</button>
 
         </div>
-    </div>
+    </div> -->
 
 
     <!-- 
@@ -298,7 +303,8 @@ Carausel Section
         <div class="row">
             <div class="col-12">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner text-center" style="padding-right: 10%;padding-left: 10%;font-family: Georgia, 'Times New Roman', Times, serif;">
+                    <div class="carousel-inner text-center"
+                        style="padding-right: 10%;padding-left: 10%;font-family: Georgia, 'Times New Roman', Times, serif;">
                         <div class="carousel-item active">
                             <!-- Caraousel  Image -->
                             <img src="./assests/images/our_team_zoe.jpg" class="rounded-circle">
@@ -427,18 +433,23 @@ Carausel Section
 
     <!-- Gray Bar -->
 
-    <div class="container-fluid" id="heightandcolor">
+
+
+    <iframe id="3" onload="iframeLoaded(id)" src="./components/graybar/graybar.html" frameborder="0" width="100%"
+        height="100%" scrolling="no"></iframe>
+
+
+
+    <!-- <div class="container-fluid" id="heightandcolor">
         <div class="text-center py-2">
             <img src="./assests/images/icon5.png">
             <span id="font">
                 Loren Ipsum is simply dummy text of the printing ind
             </span>
-
-            <!-- Download Now Button -->
             <button id="download" type="button" class="btn">Download Now</button>
 
         </div>
-    </div>
+    </div> -->
 
     <!-- Footer Section -->
 
@@ -462,10 +473,12 @@ Carausel Section
             </div>
             <div id="appointmentbtn">
                 <span id="footbtn">
-                    <button type="button" style="background-color: #95c730;" class="btn">Book an appointment <img src="./assests/images/icon7.png"></button>
+                    <button type="button" style="background-color: #95c730;" class="btn">Book an appointment <img
+                            src="./assests/images/icon7.png"></button>
                 </span>
                 <span id="footbtn">
-                    <button type="button" class="btn" style="background-color: #95c730;">Contact a consultant <img src="./assests/images/icon6.png"></button>
+                    <button type="button" class="btn" style="background-color: #95c730;">Contact a consultant <img
+                            src="./assests/images/icon6.png"></button>
                 </span>
             </div>
         </div>
@@ -565,7 +578,7 @@ Carausel Section
                     <img src="./assests/images/icon12.png">
                     <img src="./assests/images/icon13.png">
                     <img src="./assests/images/icon14.png">
-                    
+
                 </div>
 
 
@@ -575,38 +588,11 @@ Carausel Section
     </div>
 
 
-    <!-- <iframe id="0" onload="iframeLoaded(id)" src="./components/header/header.html" width="100%" height="100%" scrolling="no"></iframe>
-
-    <iframe id="1" onload="iframeLoaded(id)" src="./components/content1/content1.html" width="100%" height="100%"
-        scrolling="no"></iframe>
-
+    <!--
     <iframe id="2" onload="iframeLoaded(id)" src="./components/content2/content2.html" frameborder="0" width="100%" height="100%"
         scrolling="no"></iframe>
 
-
-    <iframe id="3" onload="iframeLoaded(id)" src="./components/content3/content3.html" frameborder="0" width="100%" height="100%"
-        scrolling="no"></iframe>
-
-    <iframe id="4" onload="iframeLoaded(id)" src="./components/content4/content4.html" frameborder="0" width="100%" height="100%"
-        scrolling="no"></iframe>
-
-    <iframe id="5" onload="iframeLoaded(id)" src="./components/content5/content5.html" frameborder="0" width="100%" height="100%"
-        scrolling="no"></iframe>
-
-    <iframe id="6" onload="iframeLoaded(id)" src="./components/content6/content6.html" frameborder="0" width="100%" height="100%"
-        scrolling="no"></iframe>
-
-
-    <iframe id="7" onload="iframeLoaded(id)" src="./components/content7/content7.html" frameborder="0" width="100%" height="100%"
-        scrolling="no"></iframe>
-
-    <iframe id="8" onload="iframeLoaded(id)" src="./components/content1/content1.html" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
-
-
-
-    <iframe id="9" onload="iframeLoaded(id)" src="./components/footer/footer.html" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
-
- Script to give height to iFrame
+ Script to give height to iFrame -->
     <script type="text/javascript">
         function iframeLoaded(id) {
             var iFrameID = document.getElementById(id);
@@ -616,7 +602,7 @@ Carausel Section
                 iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight;
             }
         }
-    </script> -->
+    </script>
 </body>
 
 </html>

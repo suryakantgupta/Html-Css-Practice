@@ -1,3 +1,6 @@
+
+/* Big screen view */
+
 #header{
     margin-left: 0%;
     margin-right: 0%;
@@ -30,6 +33,8 @@
 a:hover{
     color: #95c730 !important;
 }
+
+/* Media queries for mobile view */
 
 @media (max-width:1000px){
 .navbar{

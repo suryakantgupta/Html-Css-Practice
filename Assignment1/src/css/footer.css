@@ -1,3 +1,5 @@
+/* Big Screen view */
+
 .footsection{
     background-color: dimgray;
 }
@@ -27,6 +29,9 @@
     padding-top: 3%;
     padding-left: 6%;
 }
+
+
+/* Media Queries for mobile view */
 @media (max-width:800px){
     .footcontain{
         flex-direction: column;

@@ -1,3 +1,6 @@
+
+/* Big Screen View */
+
 #heightandcolor{
     width: 100%;
     height: 100px;
@@ -17,6 +20,8 @@
     color: white;
     border: 2px solid white;
 }
+
+/* Media queries for mobile view */
 
 @media (max-width:800px){
 #heightandcolor{
