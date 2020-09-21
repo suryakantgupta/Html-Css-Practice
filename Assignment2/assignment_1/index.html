@@ -27,6 +27,8 @@
 <link href="css/jquery.bxslider.css" rel="stylesheet" />
 <!-- Responsive -->
 <link href="css/responsive.css" rel="stylesheet" />
+<!-- Form Validation -->
+<script src="./js/formValidation.js"></script>
 
 
 
@@ -124,37 +126,37 @@
 					<li class="fileds">
 						<div class="name_fileds">
 							<label>First Name</label>
-							<input name="firstname" type="text" /> 
+							<input id="fname" onblur="bluralphaFunction(id)" name="firstname" type="text"/> 
 						</div>
 						<div class="name_fileds">
 							<label>Last Name</label>
-							<input name="lastname" type="text" /> 
+							<input id="lname" onblur="bluralphaFunction(id)" name="lastname" type="text" /> 
 						</div>
 					</li>
 					<li class="fileds">
 						<div class="phone_fileds">
 							<label>Phone No</label>
-							<input name="phone" type="text" /> 
+							<input id="phonenumber" onblur="blurmobnumFunction(id)" name="phone" type="number" /> 
 						</div>
 						<div class="phone_fileds">
 							<label>Office No</label>
-							<input name="office" type="text" /> 
+							<input id="officenumber" onblur="blurofficenumFunction(id)" name="office" type="number" /> 
 						</div>
 					</li>					
 					<li class="fileds">
 						<div class="email_fileds">
 							<label>Email</label>
-							<input name="email" type="text" /> 
+							<input name="email" type="text" id="emailfield" onblur="bluremailFunction(id)"/> 
 						</div>
 						<div class="pass_fileds">
 							<label>Password</label>
-							<input name="password" type="text" /> 
-						</div>
+							<input name="password" type="text" id="pass" onblur="blurpassFunction()"/> 
+						</div> 
 					</li>
 					<li class="fileds">
 						<div class="pass_fileds">
 							<label>Confirm Password</label>
-							<input name="password" type="text" /> 
+							<input name="password" type="text" id="confirmpass" onblur="blurconfirmpassFunction()" /> 
 						</div>
 							<div class="dob_fileds selectbox">
 								<label>My birthdate is</label>
@@ -215,7 +217,7 @@
 									</li>
 
 									<li>
-										<select name="year" class="select year">
+										<select id="year" onfocus="getYearList()" name="year" class="select year">
 											<option value="volvo">Year</option>
 										</select>
 									</li>
