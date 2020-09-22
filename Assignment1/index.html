@@ -141,7 +141,7 @@ Contact us Section
  -->
     <div id="contactus">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row" id="playrow">
                 <div class="col-6">
                     <div id="playposition">
 
@@ -160,7 +160,7 @@ Contact us Section
                     </div>
                 </div>
                 <div class="col-6">
-                    <div id="col2position" style="text-align: center;">
+                    <div id="col2position" style="text-align: center;color: #373637;">
                         Loren ipsum dolor sit posuer long dolar sit amet it has not survived on?
                         <div>
                             <!-- Contact Us now Button -->
@@ -184,27 +184,27 @@ Contact us Section
         <div style="font-family:Arial, Helvetica, sans-serif;color: grey;">
             <!-- Common padding of 25% is given for big screen and 5% for amall screen -->
             <div id="padding25">
-                <h1 id="about">About Us</h1>
-                <h3 id="heading">It is long established fact that readers will be distracted
+                <h1 id="about" style="color: #353535;">About Us</h1>
+                <h3 id="heading" style="color: #727272;">It is long established fact that readers will be distracted
                 </h3>
                 <!-- First Para -->
 
-                <p id="para1"><strong style="color: black;">The point of using Lorem Ipsum is </strong>that it has
+                <p id="para1" style="color:#727272"><strong style="color:#4b4b4b;">The point of using Lorem Ipsum is </strong>that it has
                     more or less normal button of letters,
                     as opposed to using 'Content here, content here', making look like readable English</p>
                 <!-- Second Para -->
 
-                <p id="para2"><strong style="color: black;">There are many variation of passage of</strong> Lorem
+                <p id="para2" style="color:#727272"><strong style="color:#4b4b4b;">There are many variation of passage of</strong> Lorem
                     Ipsum available , but the majority have
                     suffered alteration in some form</p>
 
                 <!-- List -->
-                <ul id="list" style="list-style-image: url(./assests/images/arrow1.png);color: black;">
+                <ul id="list" style="list-style-image: url(./assests/images/arrow1.png);color:#4b4b4b;">
                     <li>2000 years old, Richard McClint</li>
                     <li>Discovered the undoubtable source</li>
                     <li>Lorem Ipsum dolor sit amet</li>
                 </ul>
-                <p> remaining essentially unchanged. It was popularised in the 1960s with the release Letreset
+                <p style="color:#727272"> remaining essentially unchanged. It was popularised in the 1960s with the release Letreset
                     sheets containing</p>
                 <div>
                     <button id="contactaboutus" type="button" class="btn" style="background-color: #95c730;">Contact
@@ -225,7 +225,7 @@ Image Section
 @description: This image section is made responsive with
     the image-fluid of bootstrap
  -->
-    <img class="img-fluid" src="./assests/images/hbg4.png" width="100%" >
+    <img class="img-fluid" src="./assests/images/hbg4.png" id="imagesection" width="100%" >
 
 
 
@@ -244,14 +244,14 @@ Image Section
                 specimen book
             </div>
         </div>
-
+  
         <!-- Cards -->
-        <div class="cardcontain" style="justify-content: center;">
-            <div style="margin-right: 1%;">
+        <div class="cardcontain">
+            <div> 
                 <div class="card" id="cardbody">
 
                     <!-- Card Icon -->
-                    <img style="padding: 30px 150px 0 150px" src="./assests/images/icon2.png" class="card-img-top">
+                    <img id="manageicon" src="./assests/images/icon2.png" class="card-img-top">
                     <div class="card-body" style="padding-bottom: 28px;">
                         <h5 class="card-title" style="color: #444444;">Where dose it come</h5>
                         <p class="card-text" style="color: #606261;">It has survived not only five centuries , but also the help into
@@ -262,15 +262,15 @@ Image Section
                             lroots in a piece of classical Latin literature from 45 BC, making it over 2000 years
                             old
                             number .Is this Richard McClintock?</p>
-                        <button id="getstartbtn" class="btn">Get Started <img
-                                src="./assests/images/small_triangle.png" style="padding-bottom: 5px;"></button>
+                        <button id="getstartbtn" class="btn"style="background-color: #bfe240;">Get Started <img
+                                src="./assests/images/small_triangle.png" style="padding-bottom: 5px;height: 15px;"></button>
                     </div>
                 </div>
             </div>
-            <div style="margin-left: 1%;">
+            <div>
                 <div class="card" id="cardbody">
                     <!-- Card Icon -->
-                    <img style="padding: 30px 150px 0 150px" src="./assests/images/icon3.png" class="card-img-top">
+                    <img id="manageicon" src="./assests/images/icon3.png" class="card-img-top">
                     <div class="card-body" style="padding-bottom: 28px;">
                         <h5 class="card-title" style="color: #444444;">Where dose it come</h5>
                         <p class="card-text" style="color: #606261;">It has survived not only five centuries , but also the help into
@@ -281,8 +281,8 @@ Image Section
                             lroots in a piece of classical Latin literature from 45 BC, making it over 2000 years
                             old
                             number .Is this Richard McClintock?</p>
-                        <button id="getstartbtn" class="btn">Get Started <img
-                                src="./assests/images/small_triangle.png" style="padding-bottom: 5px;"></button>
+                        <button id="getstartbtn" class="btn" style="background-color: #bfe240;">Get Started <img
+                                src="./assests/images/small_triangle.png" style="padding-bottom: 5px;height: 15px;"></button>
                     </div>
                 </div>
             </div>
@@ -298,8 +298,8 @@ Carausel Section
 
 
     <div style="background-image: url(./assests/images/inner_page_banner/who_we_help.jpg);" class="container-fluid">
-        <div class="text-center pt-5" style="padding-bottom: 4%;font-family: 'Times New Roman', Times, serif;">
-            <h1 wi>What our Client Say</h1>
+        <div class="text-center pt-4" style="padding-bottom: 4%;font-family: 'Times New Roman', Times, serif;">
+            <h1 id="clientsay">What our Client Say</h1>
         </div>
         <div class="row">
             <div class="col-12">
@@ -308,8 +308,8 @@ Carausel Section
                         style="padding-right: 20%;padding-left: 20%;font-family: Georgia, 'Times New Roman', Times, serif;">
                         <div class="carousel-item active">
                             <!-- Caraousel  Image -->
-                            <img src="./assests/images/our_team_zoe.jpg" class="rounded-circle">
-                            <p style="font-size: 22px;"> Lorem ipsum is simply a dummy text of the printing and testing
+                            <img src="./assests/images/our_team_zoe.jpg" class="rounded-circle rc">
+                            <p id="carauselpara"> Lorem ipsum is simply a dummy text of the printing and testing
                                 and
                                 typesetting industry Lorem ipsum
                                 has been the industry Standard dummy text year since the 1500s when an unknown printer
@@ -325,8 +325,8 @@ Carausel Section
                         </div>
                         <div class="carousel-item">
                             <!-- Carausel Image -->
-                            <img src="./assests/images/our_team_laura.jpg" class="rounded-circle">
-                            <p style="font-size: 22px;"> Lorem ipsum is simply a dummy text of the printing and testing
+                            <img src="./assests/images/our_team_laura.jpg" class="rounded-circle rc">
+                            <p id="carauselpara"> Lorem ipsum is simply a dummy text of the printing and testing
                                 and
                                 typesetting industry Lorem ipsum
                                 has been the industry Standard dummy text year since the 1500s when an unknown printer
@@ -342,8 +342,8 @@ Carausel Section
                         </div>
                         <div class="carousel-item">
                             <!-- Carausel Image -->
-                            <img src="./assests/images/our_team_racel.jpg" class="rounded-circle">
-                            <p style="font-size: 22px;"> Lorem ipsum is simply a dummy text of the printing and testing
+                            <img src="./assests/images/our_team_racel.jpg" class="rounded-circle rc">
+                            <p id="carauselpara"> Lorem ipsum is simply a dummy text of the printing and testing
                                 and
                                 typesetting industry Lorem ipsum
                                 has been the industry Standard dummy text year since the 1500s when an unknown printer

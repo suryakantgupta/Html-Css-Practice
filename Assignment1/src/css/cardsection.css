@@ -2,13 +2,15 @@
 /* Big Screen View */
 
 #cardsection{
-        padding-bottom: 10%;
+        padding-bottom: 6%;
+
 }
 .cardcontain{
     margin-left: 20%;
     margin-right: 20%;
     display: flex;
     text-align: center;
+    justify-content: center;
 }
 /* Card description styles */
 #carddescriptionfont{
@@ -16,26 +18,58 @@
     font-family: 'Times New Roman', Times, serif;
     color: black;
 }
+/* Carausel */
+#clientsay{
+    font-size: 65px;
+}
+#carauselpara{
+    font-size: 22px;
+}
+
+#manageicon{
+    padding: 30px 150px 0 150px;
+}
+@media (max-width:800px){
+    #clientsay{
+        font-size: 1000px;
+    }
+    #carauselpara{
+        font-size: 18px;
+    }
+    .rc{
+        height: 150px;
+    }
+}
+
+
+
+
 
 /* Read more button customization */
 
 #cardbody{
     width: 400px;
+    margin: 10px;
 }
 
 /* Media quries for mobile view */
+
 @media (max-width:800px){
     .cardcontain{
         flex-direction: column;
         margin: 0;
     }
     #cardbody{
-        width: 200px
+          width: 100%;
+          margin: 0;
     }
     #getstartbtn{
         width: 100px;
     }
     #carddescriptionfont{
         font-size: 1rem;
+    }
+    #imagesection{
+        height: 250px;
     }   
 }

@@ -26,7 +26,7 @@ padding-top: 6%;
     width: 230px
 }
 #aimage{
-    padding-top: 40%;
+    padding-top: 20%;
     height: 800px;
     width: 800px;
 }
@@ -62,8 +62,8 @@ padding-top: 6%;
     width: 150px;
 }
 #aboutimage{
-min-width: 100%;
-min-height: 100%;
+width: 330px;
+height: 180px;
 }
 #padding25{
     margin-left: 10%;
@@ -76,5 +76,12 @@ min-height: 100%;
 }
 #list{
     padding-left: 28px;
+}
+#contactaboutus{
+    color: white;
+    height: 40px;
+    width: 200px;
+    margin-left: 38px;
+    margin-bottom: 10px;
 }
 }

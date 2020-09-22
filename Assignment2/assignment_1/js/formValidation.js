@@ -118,7 +118,7 @@ function getAge(){
         case 'july':month=7;break;
         case 'aug':month=8;break;
         case 'sep':month=9;break;
-        case 'oct':month=10;break;
+        case 'oct':month=10;break; 
         case 'nov':month=11;break;
         case 'dec':month=12;break;
     }
