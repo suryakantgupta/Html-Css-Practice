@@ -9,7 +9,21 @@
     margin-right: 10%;
     display: flex;
 }
-
+#getstartbtn{
+    background-color: #95c730;
+    width: 200px;
+}
+#cardh1:hover >h5{
+color: #95c730;;
+}
+#readm1:hover{
+    background-color: white !important;
+    color: #95c730;
+    border: #95c730 solid 2px;
+}
+#blogpost{
+    text-align: center;
+}
 
 /* Media Queries for Mobile View */
 
@@ -17,5 +31,7 @@
 @media (max-width:800px){
     .blogcontain{
         flex-direction: column;
+        margin-left: 3%;
+        margin-right: 3%;
     }
 }
