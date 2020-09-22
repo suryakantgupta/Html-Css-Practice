@@ -39,7 +39,9 @@
 #small{
     display: none;
 }
-
+#playbtn{
+    height: 30px;
+}
 
 /* Media queries for mobile view */
 @media (max-width:800px){
@@ -56,13 +58,6 @@
     .center{
         height: 40px;
     }
-    .fa-2x{
-        height: 8px;
-        width: 5px;
-    }
-    #big{
-        display: none;
-    }
     #small{
         display: unset;
     }
@@ -75,5 +70,8 @@
     #contacticon{
         height: 40%;
         
+    }
+    #playbtn{
+        height: 15px;
     }
 }

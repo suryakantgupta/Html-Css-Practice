@@ -11,7 +11,10 @@
 #menu{
     flex-direction: column;
 }
-
+#searchiconn{
+    position: absolute;
+    padding-right: 5px;
+}
 
 .callus{
     font-size: 1.5em;
@@ -56,7 +59,7 @@ a:hover{
     flex-direction: column;
 }
 #searchiconn{
-    padding-top: 20px;
+    padding-top: 30px;
     padding-right: 10px;
 }
 }
