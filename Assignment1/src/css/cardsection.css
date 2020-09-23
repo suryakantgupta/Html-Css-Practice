@@ -2,7 +2,9 @@
 /* Big Screen View */
 
 #cardsection{
-        padding-bottom: 6%;
+        padding-bottom: 0%;
+        background-image: url(../../assests/images/hbg2.png);
+        background-repeat: no-repeat;
 
 }
 .cardcontain{
@@ -20,7 +22,7 @@
 }
 /* Carausel */
 #clientsay{
-    font-size: 65px;
+    font-size:65px;
 }
 #carauselpara{
     font-size: 22px;
@@ -31,7 +33,7 @@
 }
 @media (max-width:800px){
     #clientsay{
-        font-size: 1000px;
+        font-size: 35px;
     }
     #carauselpara{
         font-size: 18px;
@@ -39,6 +41,7 @@
     .rc{
         height: 150px;
     }
+
 }
 
 
@@ -55,6 +58,9 @@
 /* Media quries for mobile view */
 
 @media (max-width:800px){
+    #cardsection{
+        background-image: none;
+    }
     .cardcontain{
         flex-direction: column;
         margin: 0;

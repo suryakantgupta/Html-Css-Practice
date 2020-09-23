@@ -13,6 +13,8 @@
 #footbtn{
     background-color: #95c730;
     color: #ebf7c6;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
     height: 60px;
     width: 250px;
 }

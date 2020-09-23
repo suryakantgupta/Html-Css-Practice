@@ -131,6 +131,7 @@ function getAge(){
     document.getElementById('age').placeholder = (totalMonths/12).toFixed(1)
 }
 
+//This function checks if radio button is seleted or not
 function radioFunction(){
     if (document.getElementById('residence1').checked || document.getElementById('residence1'))
   {
@@ -140,6 +141,7 @@ function radioFunction(){
   }
 }
 
+// This function checks if atleast 1 check box is selected
 function checkboxFunction(){
     if (document.getElementById('checkbox_sample18').checked || document.getElementById('checkbox_sample19').checked || document.getElementById('checkbox_sample20').checked) 
   {
@@ -149,7 +151,7 @@ function checkboxFunction(){
   }
 }
 
-
+//This function checks if textarea is filled or empty
 function textArea(){
 	var content = document.getElementById("txtarea").value;
     if(content.length>0){
