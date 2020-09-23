@@ -1,98 +1,119 @@
 
 // This function verifies if the input is alphabet or not 
-function bluralphaFunction(id) {
+$(document).ready(function(){    
+$('#fname').blur(function(){
     let letter = /^[A-Za-z]+$/;
-    let str = document.getElementById(id).value
+    let str = $('#fname').val()
     if(str.length == 0){
-        document.getElementById(id).style.border = '2px solid red'
+        $('#fname').css('border','2px solid red') 
         alert("Input cannot be Empty")
     }else{
     if (str.match(letter)) {
-        document.getElementById(id).style.border = '2px solid green'
+        $('#fname').css('border','2px solid green')
     } else {
-        document.getElementById(id).style.border = '2px solid red'
+        $('#fname').css('border','2px solid red')
         alert("Please use only Alphabets")
     }
 }
+})
+
+$('#lname').blur(function(){
+    let letter = /^[A-Za-z]+$/;
+    let str = $('#lname').val()
+    if(str.length == 0){
+        $('#lname').css('border','2px solid red') 
+        alert("Input cannot be Empty")
+    }else{
+    if (str.match(letter)) {
+        $('#lname').css('border','2px solid green')
+    } else {
+        $('#lname').css('border','2px solid red')
+        alert("Please use only Alphabets")
+    }
 }
+})
 
 // This function verifies if the input is number or not and length between 8 to 12 and text should be alphanumeric
-function blurmobnumFunction(id) {
+$('#phonenumber').blur(function(){
     let letter = /^[0-9]+$/;
-    let str = document.getElementById(id).value
+    let str = $('#phonenumber').val()
+    if(str[0]==7 || str[0]==8 || str[0]==9){
     if(str.length < 10 || str.length>10){
-        document.getElementById(id).style.border = '2px solid red'
+        $('#phonenumber').css('border','2px solid red')
         alert("Mobile nuber has to be of 10 digits")
     }else{
     if (str.match(letter)) {
-        document.getElementById(id).style.border = '2px solid green'
+        $('#phonenumber').css('border','2px solid green')
     } else {
-        document.getElementById(id).style.border = '2px solid red'
+        $('#phonenumber').css('border','2px solid red')
         alert("Please enter only numbers")
     }
 }
-}
+    }else{
+        $('#phonenumber').css('border','2px solid red')
+        alert("please enter a valid number")
+    }
+})
 
 //This function verifies if the input is number
-function blurofficenumFunction(id) {
+$('#officenumber').blur(function(){
     let letter = /^[0-9]+$/;
-    let str = document.getElementById(id).value
+    let str = $('#officenumber').val()
     if (str.match(letter)) {
-        document.getElementById(id).style.border = '2px solid green'
+        $('#officenumber').css('border','2px solid green')
     } else {
-        document.getElementById(id).style.border = '2px solid red'
+        $('#officenumber').css('border','2px solid red')
         alert("Please enter only numbers")
     }
-}
+})
 
 //This function verifies the format of email
-function bluremailFunction(id){
+$('#emailfield').blur(function(){
 let pattern=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-let str=document.getElementById(id).value
+let str=$('#emailfield').val()
 if(pattern.test(str)){
-    document.getElementById(id).style.border = '2px solid green'
+    $('#emailfield').css('border','2px solid green')
 }else{
-    document.getElementById(id).style.border = '2px solid red'
+    $('#emailfield').css('border','2px solid red')
     alert("Please enter a valid mail")
 }
-}
+})
 
 //Password Validation function 
-function blurpassFunction() {
-    let a = document.getElementById('pass').value
+$('#pass').blur(function(){
+    let a = $('#pass').val()
     if(a.length<8 || a.length>12){
-        document.getElementById('pass').style.border = '2px solid red'
-        document.getElementById('passwordpara').innerHTML = "Password should be between 8-12 characters and only contain alphanumeric characters"
+        $('#pass').css('border','2px solid red')
+        $('#passwordpara').text("Password should be between 8-12 characters and only contain alphanumeric characters")
         // alert("Password should be between 8-12 characters")
     }else{
         let alphanumeric = "^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$";
         if(a.match(alphanumeric)){
-            document.getElementById('pass').style.border = '2px solid green'
-            document.getElementById('passwordpara').innerHTML = ""
+            $('#pass').css('border','2px solid green')
+            $('#passwordpara').remove()
         }else{
-            document.getElementById('passwordpara').innerHTML = "Password should be between 8-12 characters and only contain alphanumeric characters"
+            $('#passwordpara').text("Password should be between 8-12 characters and only contain alphanumeric characters")
         }
     }
-}
+})
 
 //This function confirms that password is same entered in both area
-function blurconfirmpassFunction() {
-    let a = document.getElementById('pass').value
-    let b = document.getElementById('confirmpass').value
+$('#confirmpass').blur(function(){
+    let a = $('#pass').val()
+    let b = $('#confirmpass').val()
     if (a == b) {
-        document.getElementById('pass').style.border = '2px solid green'
-        document.getElementById('confirmpass').style.border = '2px solid green'
+        $('#pass').css('border','2px solid green')
+        $('#confirmpass').css('border','2px solid green')
     } else {
-        document.getElementById('pass').style.border = '2px solid red'
-        document.getElementById('confirmpass').style.border = '2px solid red'
+        $('#pass').css('border','2px solid red')
+        $('#confirmpass').css('border','2px solid red')
         alert("Password doesn't match")
     }
-
-}
+})
 
 //This function gets the list of year
-function getYearList(){
+$('#year').focus(function(){
     let start = 1980;
     let end = new Date().getFullYear();
     let option;
@@ -101,13 +122,13 @@ function getYearList(){
     }
     //console.log(option)
     document.getElementById('year').innerHTML = option;
-}
+})
 
 //This function gets the age of the user
-function getAge(){
-    let day = document.getElementById('day').value;
-    let temp = document.getElementById('month').value;
-    let year = document.getElementById('year').value;
+$('#year').blur(function getAge(){
+    let day = $('#day').val();
+    let temp = $('#month').val();
+    let year = $('#year').val();
     switch(temp){
         case 'jan':month=1;break;
         case 'feb':month=2;break;
@@ -129,35 +150,35 @@ function getAge(){
     
     let totalMonths = (currentmonth-month) +(12*(currentyear-year));
     document.getElementById('age').placeholder = (totalMonths/12).toFixed(1)
-}
+})
 
 //This function checks if radio button is seleted or not
-function radioFunction(){
+$('.radio').click(function(){
     if (document.getElementById('residence1').checked || document.getElementById('residence1'))
   {
-    document.getElementById('radiorequired').innerHTML = ""
+    $('#radiorequired').empty()
   }else{
-    document.getElementById('radiorequired').innerHTML = "This field is required"
+    $('#radiorequired').text("This field is required")
   }
-}
-
+})
 // This function checks if atleast 1 check box is selected
-function checkboxFunction(){
+$('.checkbox').click(function(){
     if (document.getElementById('checkbox_sample18').checked || document.getElementById('checkbox_sample19').checked || document.getElementById('checkbox_sample20').checked) 
   {
-    document.getElementById('checkboxrequired').innerHTML = ""
+    $('#checkboxrequired').empty()
   }else{
-    document.getElementById('checkboxrequired').innerHTML = "This field is required (Atleast 1)"
+    $('#checkboxrequired').text("This field is required  (Atleast 1)")
   }
-}
+})
 
 //This function checks if textarea is filled or empty
-function textArea(){
-	var content = document.getElementById("txtarea").value;
+$('#txtarea').on('input',function(){
+	var content = $("#txtarea").val();
     if(content.length>0){
-        document.getElementById('textboxrequired').innerHTML = "";
+        $('#textboxrequired').empty()
     }else{
-        document.getElementById('textboxrequired').innerHTML = "This field is required";
+        $('#textboxrequired').text("This field is required  (Atleast 1)")
     }
+})
 
-}
+})

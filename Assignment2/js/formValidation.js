@@ -20,6 +20,7 @@ function bluralphaFunction(id) {
 function blurmobnumFunction(id) {
     let letter = /^[0-9]+$/;
     let str = document.getElementById(id).value
+    if(str[0]==7 || str[0]==8 || str[0]==9){
     if(str.length < 10 || str.length>10){
         document.getElementById(id).style.border = '2px solid red'
         alert("Mobile nuber has to be of 10 digits")
@@ -31,6 +32,11 @@ function blurmobnumFunction(id) {
         alert("Please enter only numbers")
     }
 }
+    }
+    else{
+        document.getElementById(id).style.border = '2px solid red'
+        alert("please enter a valid number")
+    }
 }
 
 //This function verifies if the input is number
