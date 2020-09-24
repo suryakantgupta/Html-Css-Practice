@@ -19,8 +19,8 @@
 <link href="css/high-resolution.css" rel="stylesheet" type="text/css" media="all">-->
 
 	<!-- jQuery library (served from Google) -->
-	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- bxSlider Javascript file -->
 	<script src="js/jquery.bxslider.min.js"></script>
 	<script src="js/script.js" type="text/javascript"></script>
@@ -30,7 +30,7 @@
 	<!-- Responsive -->
 	<link href="css/responsive.css" rel="stylesheet" />
 	<!-- Form Validation -->
-	
+
 
 
 
@@ -138,157 +138,163 @@
 						otherwise you may be disappointed with your matches and they with you.</div>
 
 					<div class="form_container_block">
-						<ul>
-							<li class="fileds">
-								<div class="name_fileds">
-									<label>First Name</label>
-									<input id="fname" name="firstname" type="text" />
-								</div>
-								<div class="name_fileds">
-									<label>Last Name</label>
-									<input id="lname" name="lastname" type="text" />
-								</div>
-							</li>
-							<li class="fileds">
-								<div class="phone_fileds">
-									<label>Phone No</label>
-									<input id="phonenumber" name="phone"
-										type="text" maxlength="10" />
-								</div>
-								<div class="phone_fileds">
-									<label>Office No</label>
-									<input id="officenumber" name="office"
-										type="text" />
-								</div>
-							</li>
-							<li class="fileds">
-								<div class="email_fileds">
-									<label>Email</label>
-									<input name="email" type="text" id="emailfield"/>
-								</div>
-								<div class="pass_fileds">
-									<label>Password</label>
-									<input name="password" type="text" id="pass"/>
-									<p id="passwordpara" style="color: red;"></p>
-								</div>
-							</li>
-							<li class="fileds">
-								<div class="pass_fileds">
-									<label>Confirm Password</label>
-									<input name="password" type="text" id="confirmpass"/>
-								</div>
-								<div class="dob_fileds selectbox">
-									<label>My birthdate is</label>
+						<form id="formsubmit">
+							<ul>
+								<li class="fileds">
+									<div class="name_fileds">
+										<label>First Name</label>
+										<input id="fname" name="firstname" type="text" />
+										<pre id="fnamealert" style="color: red;"> </pre>
+									</div>
+									<div class="name_fileds">
+										<label>Last Name</label>
+										<input id="lname" name="lastname" type="text" />
+										<pre id="lnamealert" style="color: red;"> </pre>
+									</div>
+								</li>
+								<li class="fileds">
+									<div class="phone_fileds">
+										<label>Phone No</label>
+										<input id="phonenumber" name="phone" type="text" maxlength="10" />
+										<pre id="pnumalert" style="color: red;"> </pre>
+									</div>
+									<div class="phone_fileds">
+										<label>Office No</label>
+										<input id="officenumber" name="office" type="text" />
+										<pre id="onumalert" style="color: red;"> </pre>
+									</div>
+								</li>
+								<li class="fileds">
+									<div class="email_fileds">
+										<label>Email</label>
+										<input name="email" type="text" id="emailfield" />
+										<pre id="emailalert" style="color: red;"> </pre>
+									</div>
+									<div class="pass_fileds">
+										<label>Password</label>
+										<input name="password" type="text" id="pass" />
+										<pre id="passwordalert" style="color: red;"> </pre>
+									</div>
+								</li>
+								<li class="fileds">
+									<div class="pass_fileds">
+										<label>Confirm Password</label>
+										<input name="password" type="text" id="confirmpass" disabled />
+										<pre id="conpassalert" style="color: red;"> </pre>
+									</div>
+									<div class="dob_fileds selectbox">
+										<label>My birthdate is</label>
 
-									<ul>
-										<li>
-											<select id="month" name="month" class="select month">
-												<option value="jan">Jan</option>
-												<option value="feb">Feb</option>
-												<option value="march">March</option>
-												<option value="april">April</option>
-												<option value="may">May</option>
-												<option value="june">June</option>
-												<option value="july">July</option>
-												<option value="aug">Aug</option>
-												<option value="sep">Sep</option>
-												<option value="oct">Oct</option>
-												<option value="nov">Nov</option>
-												<option value="dec">Dec</option>
-											</select>
-										</li>
-										<li>
-											<select id="day" name="day" class="select day">
-												<option value="1">01</option>
-												<option value="2">02</option>
-												<option value="3">03</option>
-												<option value="4">04</option>
-												<option value="5">05</option>
-												<option value="6">06</option>
-												<option value="7">07</option>
-												<option value="8">08</option>
-												<option value="9">09</option>
-												<option value="10">10</option>
+										<ul>
+											<li>
+												<select id="month" name="month" class="select month">
+													<option value="jan">Jan</option>
+													<option value="feb">Feb</option>
+													<option value="march">March</option>
+													<option value="april">April</option>
+													<option value="may">May</option>
+													<option value="june">June</option>
+													<option value="july">July</option>
+													<option value="aug">Aug</option>
+													<option value="sep">Sep</option>
+													<option value="oct">Oct</option>
+													<option value="nov">Nov</option>
+													<option value="dec">Dec</option>
+												</select>
+											</li>
+											<li>
+												<select id="day" name="day" class="select day">
+													<option value="1">01</option>
+													<option value="2">02</option>
+													<option value="3">03</option>
+													<option value="4">04</option>
+													<option value="5">05</option>
+													<option value="6">06</option>
+													<option value="7">07</option>
+													<option value="8">08</option>
+													<option value="9">09</option>
+													<option value="10">10</option>
 
-												<option value="11">11</option>
-												<option value="12">12</option>
-												<option value="13">13</option>
-												<option value="14">14</option>
-												<option value="15">15</option>
-												<option value="16">16</option>
-												<option value="17">17</option>
-												<option value="18">18</option>
-												<option value="19">19</option>
-												<option value="20">20</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+													<option value="19">19</option>
+													<option value="20">20</option>
 
-												<option value="21">21</option>
-												<option value="22">22</option>
-												<option value="23">23</option>
-												<option value="24">24</option>
-												<option value="25">25</option>
-												<option value="26">26</option>
-												<option value="27">27</option>
-												<option value="28">28</option>
-												<option value="29">29</option>
-												<option value="30">30</option>
-												<option value="31">31</option>
-											</select>
-										</li>
+													<option value="21">21</option>
+													<option value="22">22</option>
+													<option value="23">23</option>
+													<option value="24">24</option>
+													<option value="25">25</option>
+													<option value="26">26</option>
+													<option value="27">27</option>
+													<option value="28">28</option>
+													<option value="29">29</option>
+													<option value="30">30</option>
+													<option value="31">31</option>
+												</select>
+											</li>
 
-										<li>
-											<select id="year" name="year"
-												class="select year">
-												<option value="volvo">Year</option>
-											</select>
-										</li>
-									</ul>
+											<li>
+												<select id="year" name="year" class="select year">
+													<option value="volvo">Year</option>
+												</select>
+											</li>
+										</ul>
+
+										<pre id="yearalert" style="color: red;"> </pre>
+									</div>
+								</li>
+								<li class="fileds">
+									<div class="age_fileds">
+										<label>Age</label>
+										<input id="age" name="age" type="text" placeholder="" disabled />
+									</div>
+									<div class="gender_fileds">
+										<label id="labelgender">Gender</label>
+										<ul>
+											<li><input type="radio" class="radio" id="residence1" name="radio" /><label
+													class="radio-label" for="residence1">Male</label></li>
+											<li><input type="radio" class="radio" id="residence2" name="radio" /><label
+													class="radio-label" for="residence2">Female</label></li>
+													<!-- <p id="radiorequired" style="color: red;">This field is required</p> -->
+										</ul>
+									</div>
+								</li>
+								<li>
+									<div class="interest_fileds">
+										<label id="labelint">Interest</label>
+										<ul id="checklist">
+											<li><input type="checkbox" class="checkbox" id="checkbox_sample18" /> <label
+													class="css-label" for="checkbox_sample18">Biking</label></li>
+											<li><input type="checkbox" class="checkbox" id="checkbox_sample19" /> <label
+													class="css-label" for="checkbox_sample19">Reading</label></li>
+											<li><input type="checkbox" class="checkbox" id="checkbox_sample20" /> <label
+													class="css-label" for="checkbox_sample20">Playing</label></li>
+													<!-- <p id="checkboxrequired" style="color: red;">This field is required (Atleast1)</p> -->
+										</ul>
+
+									</div>
+									<div class="about_you_fileds">
+										<label id="labelabout">About you</label>
+										<textarea id="txtarea"></textarea>
+										<!-- <p id="textboxrequired" style="color: red;">This field is required</p> -->
+									</div>
+								</li>
+							</ul>
+							<div class="next_btn_block">
+								<div class="next_btn">
+
+									<button type="submit">Proceed to Step 2 <span><img src="images/small_triangle.png"
+												alt="small_triangle"> </span></button>
 								</div>
-							</li>
-							<li class="fileds">
-								<div class="age_fileds">
-									<label>Age</label>
-									<input id="age" name="age" type="text" placeholder="" disabled />
-								</div>
-								<div class="gender_fileds">
-									<label>Gender</label>
-									<ul>
-										<p id="radiorequired" style="color: red;">This field is required</p>
-										<li><input type="radio" class="radio" id="residence1" name="radio"/><label
-												class="radio-label" for="residence1">Male</label></li>
-										<li><input type="radio" class="radio" id="residence2" name="radio"/><label
-												class="radio-label" for="residence2">Female</label></li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<div class="interest_fileds">
-									<label>Interest</label>
-									<ul id="checklist">
-										<p id="checkboxrequired" style="color: red;">This field is required (Atleast 1)</p>
-										<li><input type="checkbox" class="checkbox"
-												id="checkbox_sample18"/> <label class="css-label"
-												for="checkbox_sample18">Biking</label></li>
-										<li><input type="checkbox" class="checkbox" id="checkbox_sample19"/> <label
-												class="css-label" for="checkbox_sample19">Reading</label></li>
-										<li><input type="checkbox" class="checkbox" id="checkbox_sample20"/> <label
-												class="css-label" for="checkbox_sample20" >Playing</label></li>
-									</ul>
-									
-								</div>
-								<div class="about_you_fileds">
-									<label>About you</label>
-									<p id="textboxrequired" style="color: red;">This field is required</p>
-									<textarea id="txtarea"></textarea>
-								</div>
-							</li>
-						</ul>
-						<div class="next_btn_block">
-							<div class="next_btn">
-								
-								<a id="submitbtn">Proceed to Step 2 <span><img
-											src="images/small_triangle.png" alt="small_triangle"> </span></a>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
