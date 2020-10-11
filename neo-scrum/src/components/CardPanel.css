@@ -1,0 +1,20 @@
+#cardcontain{
+    margin-top: 8%;
+}
+
+input[type='text']{
+    border: 0;
+    border-bottom: 1px solid black;
+}
+
+input[type='email']{
+    border: 0;
+    border-bottom: 1px solid black;
+}
+.form-group{
+    padding: 5%;
+}
+
+.card-body>h5{
+    text-align: center;
+}
