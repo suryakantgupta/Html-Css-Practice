@@ -12,10 +12,12 @@ function App() {
   return (
     <Router>
     <div className="App">
+      <Switch>
+      <Route path="/" exact component={LoginPanel}/>
     <Route path="/registration" component={CardPanel}/>
-    <Route path="/login" component={LoginPanel}/>
     <Route path="/dashboard" component={Dashboard} />
-    <Route path="addfeedback" component={AddFeedback} />
+    <Route path="/addfeedback" component={AddFeedback} />
+    </Switch>
     </div>
     </Router>
   );

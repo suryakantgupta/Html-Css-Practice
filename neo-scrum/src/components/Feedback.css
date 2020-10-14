@@ -1,0 +1,15 @@
+.feedcard{
+    border-color: black;
+    width: 20rem;
+    height: 400px;
+}
+
+.feedcardtitle{
+    background-color: orange;
+    padding: 5%;
+    text-align: left !important;
+}
+
+.feedcardsubtitle{
+    margin-left: 22%;
+}
