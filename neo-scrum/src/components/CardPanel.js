@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import './CardPanel.css'
-import Axios from 'axios'
+import axios from 'axios'
 
 
 class CardPanel extends Component {
@@ -22,6 +22,8 @@ class CardPanel extends Component {
 
     constructor(props) {
         super(props)
+
+        this.resMessage = React.createRef()
         this.state = {
             user_name: '',
             user_email: '',
@@ -85,15 +87,14 @@ class CardPanel extends Component {
         e.preventDefault()
         if (this.bluremailFunction()) {
             console.log(this.state)
-            //  Axios.post('http://180.149.241.208:3000/registration',this.state).then((response)=>{
+            // axios.post('http://180.149.241.208:3001/registration',this.state).then((response)=>{
             //      console.log(response)
+            //      this.resMessage.current.innerHTML = "success"
             //  }).catch((err)=>{
             //      console.log(err)
             //  })   
         }
     }
-
-
 
     /**
      * @description This renders the card of the registration on the page
@@ -114,12 +115,13 @@ class CardPanel extends Component {
                                 <input className='form-control inputformat' name="user_email" type='email' placeholder='Email *' value={this.state.empEmail} onChange={this.handleRegistration} required />
                             </div>
                             <div className='form-group'>
-                                <input name="profile_image" type='file' accept='.jpeg , .jpg , .png' onChange={this.handleRegistration} required />
+                                <input name="profile_image" type='file' accept='.jpeg , .jpg , .png' onChange={this.handleRegistration}/>
                             </div>
                             <div className='form-group'>
                                 <button className="btn" type='submit' style={{ backgroundColor: '#252d7d', color: 'white' }}>Submit</button>
                             </div>
                         </form>
+                        <p ref={this.resMessage}></p>
                     </div>
                 </div>
             </div>
