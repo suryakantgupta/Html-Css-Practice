@@ -1,13 +1,28 @@
 import React from 'react'
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 import ficon from '../images/facebook-icon.png'
 import gicon from '../images/google-icon.png'
+import clsx from 'clsx';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import FilledInput from '@material-ui/core/FilledInput';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import TextFieldsIcon from '@material-ui/icons/TextFields';
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
 import CallIcon from '@material-ui/icons/Call';
 
 
+
 function RegBody() {
+
     return (
         <div className='container' style={{ marginBottom: '10%' }}>
             <div className='d-flex justify-content-center mt-5 mb-4' style={{ borderBottom: '1px solid lightgray' }}>
@@ -23,17 +38,23 @@ function RegBody() {
 
                 <div className="card" style={{ width: '55rem' }}>
                     <div className="card-body">
-                        <label id='logintoNeo' className="card-title">Register to NeoSTORE</label>
-                        <form>
+                        <label className="card-title regToNeo">Register to NeoSTORE</label>
 
-                            <div className='form-group input-group'>
 
-                                <input className='login-control' placeholder='First Name' id='loginEmail' />
 
-                                <div className='input-group-append'>
-                                    <span className='input-group-text' style={{ backgroundColor: 'white', borderLeft: 0 }}><TextFieldsIcon /></span>
-                                </div>
-                            </div>
+
+
+
+
+                        <form >
+
+                            <TextField
+                                required
+                                id="outlined-required"
+                                label="First Name"
+                                variant="outlined"
+                            />
+
 
                             <div className='form-group input-group'>
 
@@ -53,12 +74,28 @@ function RegBody() {
                                 </div>
                             </div>
 
-                            <div className='input-group form-group'>
-                                <input className='login-control' placeholder=' Password' id='loginEmail' />
-                                <div className='input-group-append'>
-                                    <span className='input-group-text' style={{ backgroundColor: 'white', borderLeft: 0 }}><VisibilityIcon /></span>
-                                </div>
-                            </div>
+                            {/* <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handleChange('password')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    labelWidth={70}
+                                />
+                            </FormControl> */}
 
                             <div className='form-group input-group'>
 
