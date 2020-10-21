@@ -9,6 +9,7 @@ function Header() {
     return (
         <div className='container-fluid p-0'>
             <nav className="navbar navbar-expand-md p-0">
+<div className='container-fluid p-0'>
                 <div className='row w-100'>
                     <div className="col-md-3">
                         <a className="ml-3" href='#'><label className='neo'>Neo</label><label className='store'>STORE</label></a>
@@ -44,6 +45,7 @@ function Header() {
                             </Dropdown>
                         </div>
                     </div>
+                </div>
                 </div>
             </nav>
         </div>

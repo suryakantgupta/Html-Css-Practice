@@ -90,3 +90,95 @@
 main{
     height: 300px;
 }
+
+
+
+
+/*Login Body */
+
+    /* classes */
+
+.fbtn{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #3b5998;
+    color: white;
+    margin-top: 4%;
+    margin-right: 9%;
+    margin-left: 8%;
+}
+
+.gbtn{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #db4437;
+    color: white;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    margin-right: 9%;
+    margin-left: 8%;
+}
+
+.tbtn{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #00acee;
+    color: white;
+    margin-bottom: 2%;
+    margin-right: 9%;
+    margin-left: 8%;
+}
+
+    /* Id */
+
+#socialloginbtn{
+    border-right: 2px solid black;
+    margin-bottom: 3%;
+}
+
+#regborder{
+    border-right: 1px solid black;
+}
+
+#regbtn{
+    color: black;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#loginEmail{
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    height: 3rem;
+    width: 90%;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#loginbtn{
+    background-color: #f44336;
+    color: white;
+}
+#logintoNeo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.8rem;
+}
+
+.loginCard{
+    width: 100%;
+height: 85%;
+}
+
+@media (max-width:400px){
+    .loginCard{
+      height: 100%;
+    }
+
+    #loginEmail{
+        width:80%
+    }
+
+    #socialloginbtn{
+        border:0;
+    }
+    #regborder{
+        border:0;
+    }
+  }
