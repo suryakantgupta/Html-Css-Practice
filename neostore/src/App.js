@@ -4,7 +4,6 @@ import './App.css';
 import Dashboard from './module/Dashboard';
 import User from './module/User';
 import RegBody from './components/RegBody';
-import './components/floatlabel.css'
 
 
 function App() {
