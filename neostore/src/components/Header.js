@@ -10,9 +10,9 @@ function Header() {
         <div className='container-fluid p-0'>
             <nav className="navbar navbar-expand-md p-0">
 <div className='container-fluid p-0'>
-                <div className='row w-100'>
-                    <div className="col-md-3">
-                        <a className="ml-3" href='#'><label className='neo'>Neo</label><label className='store'>STORE</label></a>
+                <div className='row w-100 m-0'>
+                    <div className="col-md-3 d-flex justify-content-center justify-content-sm-start">
+                        <a className="ml-1" href='#'><label className='neo'>Neo</label><label className='store'>STORE</label></a>
                     </div>
                     <div className="col-md-4 d-flex align-items-center">
                         <ul className="navbar-nav d-flex justify-content-around align-items-center w-100">
@@ -37,7 +37,7 @@ function Header() {
                         </div>
                         <div className="m-1 cartsection">
                             <Dropdown >
-                                <Dropdown.Toggle id="dropdown-basic"><AccountBoxSharpIcon style={{ fill: 'black' }} /><ExpandMoreSharpIcon style={{ fill: 'black' }} /></Dropdown.Toggle>
+                                <Dropdown.Toggle id="dropdown-basic"><AccountBoxSharpIcon style={{ fill: 'black',border:0 }} /><ExpandMoreSharpIcon style={{ fill: 'black',border:0 }} /></Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
                                     <Dropdown.Item href="#/action-2">Register</Dropdown.Item>
