@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import './CardPanel.css'
 import { event } from 'jquery'
-import Axios from 'axios'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import Alert from '@material-ui/lab/Alert';
+
 
 class LoginPanel extends Component {
 
@@ -22,6 +25,7 @@ with the type as string
 
     constructor(props) {
         super()
+        
         this.state = {
             user_email: '',
             user_pass: ''
@@ -82,17 +86,17 @@ with the type as string
     submitHandler = (e) => {
         e.preventDefault()
         if (this.bluremailFunction()) {
-            // console.log(this.state)
-            // Axios.post('',this.state).then((response)=>{
-            //     console.log(response)
-            // }).catch((err)=>{
-            //     console.log(err)
-            // })
-            localStorage.setItem("token", "testtoken")
+            console.log(this.state)
+            axios.post('http://180.149.241.208:3047/login',this.state).then((response)=>{
+                console.log(response.message)
+                localStorage.setItem("token", response.token)
+            }).catch((err)=>{
+                console.log(err)
+            })
+
             console.log(localStorage.token)
         }
     }
-
 
     /**
      * @description This renders the card of Login on the page
@@ -100,7 +104,7 @@ with the type as string
 
     render() {
         return (
-            <div id='cardcontain'>
+            <div id='cardcontain' className='text-center'>
                 <h1 style={{ color: 'black' }}>Neo<span style={{ color: 'red' }}>Scrum</span></h1>
                 <div className="card shadow" style={{ width: '22rem' }}>
                     <div className="card-body">
@@ -113,9 +117,14 @@ with the type as string
                                 <input className='form-control inputformat' name="user_pass" type='text' placeholder='Password *' onChange={this.handleLogin} required />
                             </div>
                             <div className='form-group'>
-                                <button className="btn" type='submit' style={{ backgroundColor: '#252d7d', color: 'white' }}>Login</button>
+                                <button className="btn" type='submit' style={{ backgroundColor: '#252d7d', color: 'white' }} onClick={this.clickHandler}>Login</button>
                             </div>
                         </form>
+                        <div className='text-left'>
+                            <Link to='/registration'>
+                        <a href='#'>Register Now</a>
+                        </Link>
+                        </div>
                     </div>
                 </div>
             </div>
