@@ -1,54 +1,231 @@
-import React from 'react'
+import { AppBar, createMuiTheme, Grid, Icon, ThemeProvider, Toolbar, Typography, Input, Paper, makeStyles, Button, Badge, IconButton, withStyles, Menu, MenuItem, Link } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Dropdown } from 'react-bootstrap'
-import AccountBoxSharpIcon from '@material-ui/icons/AccountBoxSharp';
-import ExpandMoreSharpIcon from '@material-ui/icons/ExpandMoreSharp';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import React from 'react'
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+
+
+
+/**
+ * @description This sets the background of the navbar by creating
+ *  a new theme for primary color of the Appbar
+ */
+const navbarTheme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#000000'
+        }
+    }
+})
+
+
+/**
+ * @description This section overides the style of the components
+ *  provided by material ui 
+ * 
+ * @param theme is passed as paramter to identify the type of
+ *  screen and make the component responsive
+ */
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        alignItems: 'center',
+        height: '3rem',
+        width: '20rem'
+    },
+    btnBgColor: {
+        height: '3rem',
+        width: '6rem',
+        textTransform: 'none'
+    },
+    logoGrid: {
+        justifyContent: 'center'
+    },
+    searchGrid: {
+        justifyContent: 'flex-end'
+    },
+    searchBar: {
+        justifyContent: 'center'
+    },
+    [theme.breakpoints.up('md')]: {
+        logoGrid: {
+            justifyContent: 'flex-start'
+        },
+        searchBar: {
+            justifyContent: 'flex-end'
+        }
+    }
+}))
+
+
+/**
+ * @description This section is made to design the dropdown menu on the AppBar
+ * 
+ */
+
+
+const StyledMenu = withStyles({
+    paper: {
+        border: '1px solid #d3d4d5',
+    },
+})((props) => (
+    <Menu
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+        }}
+        transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+        }}
+        {...props}
+    />
+));
+
+
 
 function Header() {
+
+    const classes = useStyles(); //Creates the instance of the styles to be used in the material component
+
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+
+    //It handles the dropdown menu response
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     return (
-        <div className='container-fluid p-0'>
-            <nav className="navbar navbar-expand-md p-0">
-<div className='container-fluid p-0'>
-                <div className='row w-100 m-0'>
-                    <div className="col-md-3 d-flex justify-content-center justify-content-sm-start">
-                        <a className="ml-1" href='#'><label className='neo'>Neo</label><label className='store'>STORE</label></a>
-                    </div>
-                    <div className="col-md-4 d-flex align-items-center">
-                        <ul className="navbar-nav d-flex justify-content-around align-items-center w-100">
-                            <li className="nav-item active">
-                                <a className='nav-link' href="#"><label className="navlink">Home</label></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className='nav-link' href="#"><label className="navlink">Products</label></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className='nav-link' href="#"><label className="navlink">Order</label></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="col-md-4 offset-md-1 d-flex justify-content-end align-items-center flex-md-row flex-column">
-                        <div className="flex-fill cartsection m-1" id="topSearch" >
-                            <SearchIcon id="searchicon" />
-                            <input className="form-control" id='topSearchInput' placeholder="Search.." />
-                        </div>
-                        <div className="m-1 cartsection">
-                            <button className="btn bgCart"><ShoppingCartIcon /> Cart</button>
-                        </div>
-                        <div className="m-1 cartsection">
-                            <Dropdown >
-                                <Dropdown.Toggle id="dropdown-basic"><AccountBoxSharpIcon style={{ fill: 'black',border:0 }} /><ExpandMoreSharpIcon style={{ fill: 'black',border:0 }} /></Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Register</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </nav>
-        </div>
+        // <Grid container>
+            <ThemeProvider theme={navbarTheme}>
+                <AppBar color="primary" position='static' style={{margin:0}}>
+                    <Grid container>
+                        <Grid item xs={12} lg={3} >
+                            <Grid container className={classes.logoGrid}>
+                                <Toolbar>
+                                    <ThemeProvider theme={() => createMuiTheme({
+                                        palette: {
+                                            secondary: {
+                                                main: '#ff0000'
+                                            }
+                                        },
+                                        typography: {
+                                            h4: {
+                                                fontFamily: 'Arial',
+                                                fontSize: '2.4rem'
+                                            }
+                                        }
+                                    })}>
+
+                                        <Typography display='inline' variant='h4'>Neo</Typography>
+                                        <Typography display='inline' style={{ fontWeight: 'bold' }} color='secondary' variant='h4'>STORE</Typography>
+
+                                    </ThemeProvider>
+                                </Toolbar>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} lg={4}>
+                            <Grid container justify='space-evenly'>
+                                <Grid item>
+                                    <Toolbar>
+                                        <Typography variant='h6' >Home</Typography>
+                                    </Toolbar>
+                                </Grid>
+                                <Grid item>
+                                    <Toolbar>
+                                        <Typography variant='h6'>Products</Typography>
+                                    </Toolbar>
+                                </Grid>
+                                <Grid item>
+                                    <Toolbar>
+                                        <Typography variant='h6'>Order</Typography>
+                                    </Toolbar>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} lg={5}>
+                            <Grid container className={classes.searchGrid}>
+                                {/* <Toolbar> */}
+                                <Grid item xs={12} lg={8}>
+                                    <Grid container className={classes.searchBar}>
+                                        <Toolbar disableGutters>
+                                            <Paper component='form' classes={{ root: classes.root }}>
+                                                <SearchIcon style={{ color: 'black' }} fontSize='large' />
+                                                <Input type='search' fullWidth
+                                                    placeholder='Search..'
+                                                    disableUnderline
+                                                >
+                                                </Input>
+                                            </Paper>
+                                        </Toolbar>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={6} lg={2}>
+                                    <Grid container justify='flex-end'>
+                                        <Toolbar disableGutters>
+                                            <Button
+                                                className={classes.btnBgColor}
+                                                style={{ backgroundColor: 'white', outline: 'none',marginRight:'4px' }}
+
+                                                startIcon={<Badge badgeContent={4} color='secondary'>
+                                                    <ShoppingCartIcon />
+                                                </Badge>}
+                                            >
+                                                Cart
+                                        </Button>
+                                        </Toolbar>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={6} lg={2}>
+                                    <Toolbar disableGutters>
+                                        <Button
+                                            style={{ backgroundColor: 'white', outline: 'none', marginRight: '0.8rem' }}
+                                            className={classes.btnBgColor}
+                                            onClick={handleClick}
+                                        >
+                                            <AccountBoxIcon />
+                                            <ExpandMoreIcon />
+                                        </Button>
+                                        <StyledMenu
+                                            anchorEl={anchorEl}
+                                            keepMounted
+                                            open={Boolean(anchorEl)}
+                                            onClose={handleClose}
+                                        >
+
+                                            <MenuItem>
+                                                <Link href='/login' style={{ textDecoration: 'none' }}>
+                                                    <ListItemText style={{color:'black'}} primary="Login" />
+                                                </Link>
+                                            </MenuItem>
+
+                                            <MenuItem>
+                                                <Link href='/register' style={{ textDecoration: 'none' }}>
+                                                    <ListItemText style={{ color: 'black' }} primary="Register" />
+                                                </Link>
+                                            </MenuItem>
+                                        </StyledMenu>
+                                    </Toolbar>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </AppBar>
+            </ThemeProvider>
+        
     )
 }
 

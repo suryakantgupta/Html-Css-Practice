@@ -7,9 +7,7 @@ function Dashboard() {
     return (
         <div>
             <Header />
-            <main>
-
-            </main>
+            
             <Footer />
         </div>
     )
