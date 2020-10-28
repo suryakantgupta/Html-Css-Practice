@@ -70,7 +70,7 @@ function ForgotPass() {
                         <div className='form-group'>
                             {/* This handles the Employee Email  */}
                             <TextField fullWidth label="Email"
-                                helperText={eror.eeror && 'Not Valid'}
+                                helperText={eror.eeror && 'Mail should be in format abc@gmail.com'}
                                 value={detailes.user_email} onChange={e => setdetailes({ ...detailes, user_email: e.target.value })}
                                 error={eror.eeror}
                                 onBlur={bluremailFunction}
@@ -79,12 +79,17 @@ function ForgotPass() {
                         </div>
                         <div className='form-group'>
                             {/* This handles the Employee profile and accepts only jpg jpeg png */}
-                            <Link to='/login'>
-                            <button className='btn bg-info'>Send Mail</button>
+                            <Link>
+                            <button type='submit' onClick={bluremailFunction} className='btn bg-info'>Send Mail</button>
                             </Link>
                         </div>
                     </form>
                 </div>
+            </div>
+            <div className='text-left'>
+                <Link to='/login'>
+                <a>Go back to Login</a>
+                </Link>
             </div>
         </div>
     )

@@ -120,6 +120,13 @@ class AddFeedback extends Component {
 }
 
 
+/**
+ * @description  This functions handles  the redux part of the login page
+ * it sends and receive data from redux to to props which can be used by props
+ * @param {*} state is passed as parameter it is used to pass the state from 
+ * redux to the function as props
+ * @returns The Data from redux in props
+ */
 
 
 const mapStateToProps = state => {

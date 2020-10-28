@@ -5,7 +5,6 @@ import testImg from '../asset/mark-zuckerberg-bio3.png'
 import {connect} from 'react-redux'
 import { fetchUsers } from './redux'
 import Feedback from './molecules/Feedback.js'
-
 import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
@@ -68,81 +67,81 @@ class Dashboard extends Component {
     render() {
 
 
-        // const myObj = [{
-        //     "user_id": "180",
-        //     "user_name": "Shubham Gupta",
-        //     "user_email": "shubham.gupta@neosofttech.com",
-        //     "feedback": {
-        //         "feedback_data": "Cool",
-        //         "posting_date": "29 Aug 2020"
-        //     }
-        // },
-        // {
-        //     "user_id": "180",
-        //     "user_name": "Shubham Gupta",
-        //     "user_email": "shubham.gupta@neosofttech.com",
-        //     "feedback": {
-        //         "feedback_data": "Cool",
-        //         "posting_date": "29 Aug 2020"
-        //     }
-        // },
-        // {
-        //     "user_id": "180",
-        //     "user_name": "Shubham Gupta",
-        //     "user_email": "shubham.gupta@neosofttech.com",
-        //     "feedback": {
-        //         "feedback_data": "Cool",
-        //         "posting_date": "29 Aug 2020"
-        //     }
-        // },
-        // {
-        //     "user_id": "180",
-        //     "user_name": "Shubham Gupta",
-        //     "user_email": "shubham.gupta@neosofttech.com",
-        //     "feedback": {
-        //         "feedback_data": "Cool",
-        //         "posting_date": "29 Aug 2020"
-        //     }
-        // },
-        // {
-        //     "user_id": "180",
-        //     "user_name": "Shubham Gupta",
-        //     "user_email": "shubham.gupta@neosofttech.com",
-        //     "feedback": {
-        //         "feedback_data": "Cool",
-        //         "posting_date": "29 Aug 2020"
-        //     }
-        // },
-        // {
-        //     "user_id": "180",
-        //     "user_name": "Shubham Gupta",
-        //     "user_email": "shubham.gupta@neosofttech.com",
-        //     "feedback": {
-        //         "feedback_data": "Cool",
-        //         "posting_date": "29 Aug 2020"
-        //     }
-        // },
-        // {
-        //     "user_id": "180",
-        //     "user_name": "Shubham Gupta",
-        //     "user_email": "shubham.gupta@neosofttech.com",
-        //     "feedback": {
-        //         "feedback_data": "Cool",
-        //         "posting_date": "29 Aug 2020"
-        //     }
-        // },
-        // {
-        //     "user_id": "180",
-        //     "user_name": "Shubham Gupta",
-        //     "user_email": "shubham.gupta@neosofttech.com",
-        //     "feedback": {
-        //         "feedback_data": "Cool",
-        //         "posting_date": "29 Aug 2020"
-        //     }
-        // }
-        // ]
+        const myObj = [{
+            "user_id": "180",
+            "user_name": "Shubham Gupta",
+            "user_email": "shubham.gupta@neosofttech.com",
+            "feedback": {
+                "feedback_data": "Cool",
+                "posting_date": "29 Aug 2020"
+            }
+        },
+        {
+            "user_id": "180",
+            "user_name": "Shubham Gupta",
+            "user_email": "shubham.gupta@neosofttech.com",
+            "feedback": {
+                "feedback_data": "Cool",
+                "posting_date": "29 Aug 2020"
+            }
+        },
+        {
+            "user_id": "180",
+            "user_name": "Shubham Gupta",
+            "user_email": "shubham.gupta@neosofttech.com",
+            "feedback": {
+                "feedback_data": "Cool",
+                "posting_date": "29 Aug 2020"
+            }
+        },
+        {
+            "user_id": "180",
+            "user_name": "Shubham Gupta",
+            "user_email": "shubham.gupta@neosofttech.com",
+            "feedback": {
+                "feedback_data": "Cool",
+                "posting_date": "29 Aug 2020"
+            }
+        },
+        {
+            "user_id": "180",
+            "user_name": "Shubham Gupta",
+            "user_email": "shubham.gupta@neosofttech.com",
+            "feedback": {
+                "feedback_data": "Cool",
+                "posting_date": "29 Aug 2020"
+            }
+        },
+        {
+            "user_id": "180",
+            "user_name": "Shubham Gupta",
+            "user_email": "shubham.gupta@neosofttech.com",
+            "feedback": {
+                "feedback_data": "Cool",
+                "posting_date": "29 Aug 2020"
+            }
+        },
+        {
+            "user_id": "180",
+            "user_name": "Shubham Gupta",
+            "user_email": "shubham.gupta@neosofttech.com",
+            "feedback": {
+                "feedback_data": "Cool",
+                "posting_date": "29 Aug 2020"
+            }
+        },
+        {
+            "user_id": "180",
+            "user_name": "Shubham Gupta",
+            "user_email": "shubham.gupta@neosofttech.com",
+            "feedback": {
+                "feedback_data": "Cool",
+                "posting_date": "29 Aug 2020"
+            }
+        }
+        ]
 
-        // const feedbackList = myObj.map(userDetails => (<Feedback userName={userDetails.user_name} feedData={userDetails.feedback.feedback_data} postDate={userDetails.feedback.posting_date} />))
+        const feedbackList = myObj.map(userDetails => (<Feedback userName={userDetails.user_name} feedData={userDetails.feedback.feedback_data} postDate={userDetails.feedback.posting_date} />))
 
 
         return (
@@ -178,10 +177,12 @@ class Dashboard extends Component {
                                 </div>
                             </div>
                         </div>
-
                     </nav>
+
+
+
                     <div id="feedback">
-                        {/* {feedbackList} */}
+                        {feedbackList}
                         {/* <Feedback userName={myObj[0].user_name} feedData={myObj[0].feedback.feedback_data} postDate={myObj[0].feedback.posting_date}/> */}
                     </div>
                     {/* Gives the error message in response */}
@@ -201,6 +202,13 @@ class Dashboard extends Component {
 
 
 
+/**
+ * @description  This functions handles  the redux part of the login page
+ * it sends and receive data from redux to to props which can be used by props
+ * @param {*} state is passed as parameter it is used to pass the state from 
+ * redux to the function as props
+ * @returns The Data from redux in props
+ */
 
 const mapStateToProps = state => {
     return {

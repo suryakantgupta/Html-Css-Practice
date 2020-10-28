@@ -1,11 +1,10 @@
-import { ThemeProvider } from '@material-ui/core'
 import React from 'react'
+import ErrorPage from '../components/ErrorPage'
 import Footer from '../components/Footer'
 import ForgetPass from '../components/ForgetPass'
 import Header from '../components/Header'
 import LoginBody from '../components/LoginBody'
 import RegBody from '../components/RegBody'
-import theme from '../components/theme'
 
 function User(props) {
 
@@ -27,9 +26,10 @@ function User(props) {
     return (
         <div>
             <Header />
+            <ErrorPage />
             {/* {login && <LoginBody />} */}
             {/* {register && <RegBody />} */}
-            <ForgetPass />
+            {/* <ForgetPass /> */}
             <Footer />
         </div>
     )
