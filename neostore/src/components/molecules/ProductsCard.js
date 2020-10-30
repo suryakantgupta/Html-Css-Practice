@@ -6,16 +6,19 @@ import React from 'react'
 import ProductCard from './ProductCard';
 
 
-const useStyles = makeStyles((theme)=>({
-    placeSort:{
-        justifyContent:'flex-end'
+const useStyles = makeStyles((theme) => ({
+    placeSort: {
+        justifyContent: 'flex-end'
     },
-    [theme.breakpoints.down('sm')]:{
-        placeSort:{
-            justifyContent:'center'
+    placeCard: {
+        marginBottom: '3%'
+    },
+    [theme.breakpoints.down('sm')]: {
+        placeSort: {
+            justifyContent: 'center'
         },
-        placeCard:{
-            justifyContent:'center'
+        placeCard: {
+            justifyContent: 'center'
         }
     }
 }))
@@ -32,13 +35,13 @@ function ProductsCard() {
                 <Grid item>
                     <Toolbar>
                         <Typography display='inline'>Sort By:</Typography>
-                        <IconButton style={{outline:'none'}}>
-                            <StarIcon/>
+                        <IconButton style={{ outline: 'none' }}>
+                            <StarIcon />
                         </IconButton>
-                        <IconButton style={{outline:'none'}}>
+                        <IconButton style={{ outline: 'none' }}>
                             <ArrowUpwardIcon />
                         </IconButton>
-                        <IconButton style={{outline:'none'}}>
+                        <IconButton style={{ outline: 'none' }}>
                             <ArrowDownwardIcon />
                         </IconButton>
                     </Toolbar>
@@ -58,6 +61,7 @@ function ProductsCard() {
                     <ProductCard />
                 </Grid>
             </Grid>
+            
         </React.Fragment>
     )
 }
