@@ -7,6 +7,7 @@ import Dashboard from './module/Dashboard';
 import User from './module/User';
 import RegBody from './components/RegBody';
 import MyAccount from './module/MyAccount';
+import ProductModule from './module/ProductModule';
 require('dotenv').config()
 
 
@@ -19,7 +20,10 @@ function App() {
           <Route path="/dashboard" exact render={()=> <Dashboard />} />
           <Route path="/login" exact render={()=> <User body={'login'}/>} />
           <Route path="/register" exact render={()=> <User body={'register'}/>} />
+          <Route path='/forgotpass' exact render={()=><User body={'forgot'}/>} />
           <Route path='/myaccount' exact render={()=> <MyAccount />} />
+          <Route path='/commonproducts' exact render={()=> <ProductModule />} />
+          
         </Switch>
       </div>
     </Router>

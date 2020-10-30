@@ -18,7 +18,7 @@ function User(props) {
         login = true;
     } else if (props.body == 'register') {
         register = true
-    } else if (forgot== 'forgot') {
+    } else if (props.body== 'forgot') {
         forgot = true;
     }
 
@@ -26,10 +26,10 @@ function User(props) {
     return (
         <div>
             <Header />
-            <ErrorPage />
-            {/* {login && <LoginBody />} */}
-            {/* {register && <RegBody />} */}
-            {/* <ForgetPass /> */}
+            {/* <ErrorPage /> */}
+            {login && <LoginBody />}
+            {register && <RegBody />}
+            {forgot && <ForgetPass />}
             <Footer />
         </div>
     )

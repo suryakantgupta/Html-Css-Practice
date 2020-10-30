@@ -91,12 +91,13 @@ function LoginBody() {
                     <button className='btn gbtn shadow'><img className='mr-3' src={gicon} height='60rem' />Login with Google</button>
                     <button className='btn tbtn shadow'><img className='mr-3' src={ticon} height='60rem' />Login with Twitter</button>
                 </div>
-                <div className='col-md-6'>
-                    <div className="card loginCard">
 
-                        <div className="card-body">
-                            <label id='logintoNeo' className="card-title">Login to NeoStore</label>
-                            <form>
+                <div className='col-md-6'>
+                    {/* <div className="card loginCard"> */}
+                        <form className="card loginCard">
+                            <div className="card-body">
+                                <label id='logintoNeo' className="card-title">Login to NeoStore</label>
+
                                 <div className={classes.passColor}>
                                     <TextField
                                         style={{ height: '5rem' }}
@@ -106,7 +107,7 @@ function LoginBody() {
                                         type='email'
                                         fullWidth
                                         error={(validateError.echeckError || validateError.ehelperNotValid)}
-                                        helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Not Valid')}
+                                        helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Example abc@gmail.com')}
                                         value={name.email}
                                         onChange={e => setname({ ...name, email: e.target.value })}
                                         onBlur={blurEmailValidator}
@@ -117,7 +118,8 @@ function LoginBody() {
                                                 </InputAdornment>
                                             )
                                         }}
-                                    />
+                                    required/>
+
                                 </div>
 
                                 <div className={classes.passColor}>
@@ -129,7 +131,7 @@ function LoginBody() {
                                         type={manage.showPassword ? 'text' : 'password'}
                                         fullWidth
                                         error={(validateError.pcheckError || validateError.phelperNotValid)}
-                                        helperText={(validateError.pcheckError && 'You must enter a value') || (validateError.phelperNotValid && 'Not Valid')}
+                                        helperText={(validateError.pcheckError && 'You must enter a value') || (validateError.phelperNotValid && 'Password should be 8-12 AlphaNumeric character')}
                                         value={name.pass}
                                         onInput={(e) => { setname({ ...name, pass: e.target.value }) }}
                                         onBlur={blurPassValidator}
@@ -149,23 +151,27 @@ function LoginBody() {
                                             )
 
                                         }}
+                                        required
                                     />
                                 </div>
 
-                            </form>
-                        </div>
-                        <div className='ml-2 mb-2'>
-                            <button className='btn' id='loginbtn'>Login</button>
-                        </div>
-                    </div>
+
+                            </div>
+                            <div className='ml-2 mb-2'>
+                                <button className='btn' type='submit' id='loginbtn'>Login</button>
+                            </div>
+                        </form>
+                    {/* </div> */}
+
                 </div>
+
             </div>
             <div className='row justify-content-center' style={{ marginBottom: '15%' }}>
                 <div className='col-md-3 d-flex justify-content-start justify-content-md-end' id='regborder'>
-                    <a href='#'><label className='mb-0' id='regbtn'>Register Now</label></a>
+                    <a href='/register'><label className='mb-0' id='regbtn'>Register Now</label></a>
                 </div>
                 <div className='col-md-3'>
-                    <a href='#'><label className='mb-0' id='regbtn'>Forgotten?</label></a>
+                    <a href='/forgotpass'><label className='mb-0' id='regbtn'>Forgotten?</label></a>
                 </div>
             </div>
         </div>
