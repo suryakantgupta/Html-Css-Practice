@@ -1,4 +1,5 @@
 import React from 'react'
+import RecoverPass from '../components/atoms/RecoverPass'
 import ErrorPage from '../components/ErrorPage'
 import Footer from '../components/Footer'
 import ForgetPass from '../components/ForgetPass'
@@ -27,9 +28,10 @@ function User(props) {
         <div>
             <Header />
             {/* <ErrorPage /> */}
-            {login && <LoginBody />}
-            {register && <RegBody />}
-            {forgot && <ForgetPass />}
+            {/* {login && <LoginBody />} */}
+            {/* {register && <RegBody />} */}
+            {/* {forgot && <ForgetPass />} */}
+            <RecoverPass />
             <Footer />
         </div>
     )
