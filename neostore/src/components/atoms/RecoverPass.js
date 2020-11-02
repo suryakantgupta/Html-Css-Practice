@@ -1,4 +1,4 @@
-import { Divider, Grid, TextField, Typography,InputAdornment,IconButton } from '@material-ui/core'
+import { Divider, Grid, TextField, Typography,InputAdornment,IconButton, Container } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -23,16 +23,16 @@ function RecoverPass() {
 
 const blurPassValidator = () => {
     if (rcpass.npass == '') {
-        setError({ phelperNotValid: false, pcheckError: true })
+        setError({...validateError, phelperNotValid: false, pcheckError: true })
     } else {
         if (rcpass.npass.length < 8 || rcpass.npass.length > 12) {
-            setError({ phelperNotValid: true, pcheckError: false })
+            setError({...validateError, phelperNotValid: true, pcheckError: false })
         } else {
             let alphanumeric = "^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$";
             if (rcpass.npass.match(alphanumeric)) {
-                setError({ phelperNotValid: false, pcheckError: false })
+                setError({...validateError, phelperNotValid: false, pcheckError: false })
             } else {
-                setError({ phelperNotValid: true, pcheckError: false })
+                setError({...validateError, phelperNotValid: true, pcheckError: false })
             }
         }
     }
@@ -46,12 +46,12 @@ const blurPassValidator = () => {
 
 const blurConPassValidator = () => {
     if (rcpass.cpass == '') {
-        setError({ chelperNotValid: false, ccheckError: true })
+        setError({...validateError, chelperNotValid: false, ccheckError: true })
     } else {
         if (rcpass.cpass == rcpass.npass) {
-            setError({ chelperNotValid: false, ccheckError: false })
+            setError({...validateError, chelperNotValid: false, ccheckError: false })
         } else {
-            setError({ chelperNotValid: true, ccheckError: false })
+            setError({...validateError, chelperNotValid: true, ccheckError: false })
         }
     }
 }
@@ -81,6 +81,8 @@ const blurConPassValidator = () => {
 
     return (
         <React.Fragment>
+            <Container>
+                <Grid container justify='center' style={{marginTop:'10%',marginBottom:'10%'}}>
             <Card style={{  width: '44rem', backgroundColor: '#f9f9f9', border: 0, borderBottom: '2px solid lightgray' }}>
                 <Card.Body>
                     <Grid container direction='column' spacing={3}>
@@ -98,9 +100,10 @@ const blurConPassValidator = () => {
                                 type='text'
                                 fullWidth
                                 // error={(validateError.fcheckError || validateError.fhelperNotValid)}
+                                helperText=' '
                                 // helperText={(validateError.fcheckError && 'You must enter a value') || (validateError.fhelperNotValid && 'Not Valid') || ''}
-                                value={rcpass.npass}
-                                onChange={e => setrcpass({ ...rcpass, npass: e.target.value })} />
+                                value={rcpass.vcode}
+                                onChange={e => setrcpass({ ...rcpass, vcode: e.target.value })} />
 
                         </Grid>
                         <Grid item>
@@ -111,9 +114,9 @@ const blurConPassValidator = () => {
                                 type={showPassword.p ? 'text' : 'password'}
                                 fullWidth
                                 error={(validateError.pcheckError || validateError.phelperNotValid)}
-                                helperText={(validateError.pcheckError && 'You must enter a value') || (validateError.phelperNotValid && 'Not Valid') || ''}
-                                value={rcpass.cpass}
-                                onChange={e => setrcpass({ ...rcpass, cpass: e.target.value })}
+                                helperText={(validateError.pcheckError && 'You must enter a value') || (validateError.phelperNotValid && 'Password should be 8-12 alphanumeric characters') || ' '}
+                                value={rcpass.npass}
+                                onChange={e => setrcpass({ ...rcpass, npass: e.target.value })}
                                 onBlur={blurPassValidator}
                                 InputProps={{
                                     endAdornment: (
@@ -142,9 +145,9 @@ const blurConPassValidator = () => {
                                 type={showPassword.c ? 'text' : 'password'}
                                 fullWidth
                                 error={(validateError.ccheckError || validateError.chelperNotValid)}
-                                helperText={(validateError.ccheckError && 'You must enter a value') || (validateError.chelperNotValid && 'Not Valid') || ''}
-                                value={rcpass.vcode}
-                                onChange={e => setrcpass({ ...rcpass, vcode: e.target.value })} 
+                                helperText={(validateError.ccheckError && 'You must enter a value') || (validateError.chelperNotValid && 'Password and confirm password does not match') || ' '}
+                                value={rcpass.cpass}
+                                onChange={e => setrcpass({ ...rcpass, cpass: e.target.value })} 
                                 onBlur={blurConPassValidator}
                                 InputProps={{
                                     endAdornment: (
@@ -168,6 +171,8 @@ const blurConPassValidator = () => {
                     </Grid>
                 </Card.Body>
             </Card>
+            </Grid>
+            </Container>
         </React.Fragment>
     )
 }

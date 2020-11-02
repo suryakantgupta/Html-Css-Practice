@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import RecoverPass from '../components/atoms/RecoverPass'
 import ErrorPage from '../components/ErrorPage'
 import Footer from '../components/Footer'
@@ -9,29 +9,31 @@ import RegBody from '../components/RegBody'
 
 function User(props) {
 
+    const [body, setbody] = useState({login:false,register:false,forgot:false,recover:false})
+    
 
-    var login = false
-    var register = false
-    var forgot = false
-
-
+useEffect(() => {
     if (props.body == 'login') {
-        login = true;
+        setbody({login:true})
     } else if (props.body == 'register') {
-        register = true
-    } else if (props.body== 'forgot') {
-        forgot = true;
+        setbody({register:true})
+    } else if (props.body == 'forgot') {
+        setbody({forgot:true})
+    }else if(props.body == 'recover'){
+        setbody({recover:true})
     }
+}, [])
+    
 
 
     return (
         <div>
             <Header />
             {/* <ErrorPage /> */}
-            {/* {login && <LoginBody />} */}
-            {/* {register && <RegBody />} */}
-            {/* {forgot && <ForgetPass />} */}
-            <RecoverPass />
+            {body.login && <LoginBody />}
+            {body.register && <RegBody />}
+            {body.forgot && <ForgetPass />}
+            {body.recover && <RecoverPass />}
             <Footer />
         </div>
     )

@@ -1,19 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { TextField, RadioGroup, InputAdornment, Button, IconButton, FormGroup, FormControlLabel, Radio, useMediaQuery } from '@material-ui/core';
+import React, { useState } from 'react'
+import { TextField, RadioGroup, InputAdornment, IconButton, FormControlLabel, Radio } from '@material-ui/core';
 import {
-    withStyles,
     makeStyles,
 } from '@material-ui/core/styles';
 import ficon from '../images/facebook-icon.png'
 import gicon from '../images/google-icon.png'
 import clsx from 'clsx';
-import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import CallIcon from '@material-ui/icons/Call';
-import { green, blue, red } from '@material-ui/core/colors';
 
 
 
@@ -95,7 +92,7 @@ function RegBody() {
 
 const blurfnameValidator = () => {
         let pattern = /^[A-Za-z]+$/
-        name.firstName == '' ? setError({ fhelperNotValid: false, fcheckError: true }) : name.firstName.match(pattern) ? setError({ fhelperNotValid: false, fcheckError: false }) : setError({ fhelperNotValid: true, fcheckError: false })
+        name.firstName === '' ? setError({ fhelperNotValid: false, fcheckError: true }) : name.firstName.match(pattern) ? setError({ fhelperNotValid: false, fcheckError: false }) : setError({ fhelperNotValid: true, fcheckError: false })
     }
 
 
@@ -107,7 +104,7 @@ const blurfnameValidator = () => {
 
     const blurlnameValidator = () => {
         let pattern = /^[A-Za-z]+$/
-        name.lastName == '' ? setError({ lhelperNotValid: false, lcheckError: true }) : name.firstName.match(pattern) ? setError({ lhelperNotValid: false, lcheckError: false }) : setError({ lhelperNotValid: true, lcheckError: false })
+        name.lastName === '' ? setError({ lhelperNotValid: false, lcheckError: true }) : name.firstName.match(pattern) ? setError({ lhelperNotValid: false, lcheckError: false }) : setError({ lhelperNotValid: true, lcheckError: false })
     }
 
 
@@ -120,7 +117,7 @@ const blurfnameValidator = () => {
 
     const blurEmailValidator = () => {
         let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        name.email == '' ? setError({ ehelperNotValid: false, echeckError: true }) : pattern.test(name.email) ? setError({ ehelperNotValid: false, echeckError: false }) : setError({ ehelperNotValid: true, echeckError: false })
+        name.email === '' ? setError({ ehelperNotValid: false, echeckError: true }) : pattern.test(name.email) ? setError({ ehelperNotValid: false, echeckError: false }) : setError({ ehelperNotValid: true, echeckError: false })
     }
 
 
@@ -132,7 +129,7 @@ const blurfnameValidator = () => {
  */
 
 const blurPassValidator = () => {
-    if (name.pass == '') {
+    if (name.pass === '') {
         setError({ phelperNotValid: false, pcheckError: true })
     } else {
         if (name.pass.length < 8 || name.pass.length > 12) {
@@ -155,10 +152,10 @@ const blurPassValidator = () => {
  */
 
 const blurConPassValidator = () => {
-    if (name.conpass == '') {
+    if (name.conpass === '') {
         setError({ chelperNotValid: false, ccheckError: true })
     } else {
-        if (name.conpass == name.pass) {
+        if (name.conpass === name.pass) {
             setError({ chelperNotValid: false, ccheckError: false })
         } else {
             setError({ chelperNotValid: true, ccheckError: false })
@@ -185,7 +182,7 @@ const blurConPassValidator = () => {
                 }
             }
         }
-        else if (name.mobile == '') {
+        else if (name.mobile === '') {
             setError({ mhelperNotValid: false, mcheckError: true })
         }
         else {
@@ -249,7 +246,7 @@ const blurConPassValidator = () => {
                                     type='text'
                                     fullWidth
                                     error={(validateError.fcheckError || validateError.fhelperNotValid)}
-                                    helperText={(validateError.fcheckError && 'You must enter a value') || (validateError.fhelperNotValid && 'Not Valid') || ''}
+                                    helperText={(validateError.fcheckError && 'You must enter a value') || (validateError.fhelperNotValid && 'It can only accepts alphabets') || ' '}
                                     value={name.firstName}
                                     onChange={e => setname({ ...name, firstName: e.target.value })}
                                     onBlur={blurfnameValidator}
@@ -272,7 +269,7 @@ const blurConPassValidator = () => {
                                     type='text'
                                     fullWidth
                                     error={(validateError.lcheckError || validateError.lhelperNotValid)}
-                                    helperText={(validateError.lcheckError && 'You must enter a value') || (validateError.lhelperNotValid && 'Not Valid')}
+                                    helperText={(validateError.lcheckError && 'You must enter a value') || (validateError.lhelperNotValid && 'It  can only accepts alphabets') || ' '}
                                     value={name.lastName}
                                     onInputCapture={e => setname({ ...name, lastName: e.target.value })}
                                     onBlur={blurlnameValidator}
@@ -295,7 +292,7 @@ const blurConPassValidator = () => {
                                     type='email'
                                     fullWidth
                                     error={(validateError.echeckError || validateError.ehelperNotValid)}
-                                    helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Not Valid')}
+                                    helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'example abc@gmail.com') || ' '}
                                     value={name.email}
                                     onChange={e => setname({ ...name, email: e.target.value })}
                                     onBlur={blurEmailValidator}
@@ -317,7 +314,7 @@ const blurConPassValidator = () => {
                                     type={manage.showPassword ? 'text' : 'password'}
                                     fullWidth
                                     error={(validateError.pcheckError || validateError.phelperNotValid)}
-                                    helperText={(validateError.pcheckError && 'You must enter a value') || (validateError.phelperNotValid && 'Not Valid') || ('8-12 Alphanumeric character')}
+                                    helperText={(validateError.pcheckError && 'You must enter a value') || (validateError.phelperNotValid && 'Password should be 8-12 alphanumeric characters') || ('8-12 Alphanumeric character')}
                                     value={name.pass}
                                     onInput={(e) => { setname({ ...name, pass: e.target.value }) }}
                                     onBlur={blurPassValidator}
@@ -348,7 +345,7 @@ const blurConPassValidator = () => {
                                     type={manage.cshowPassword ? 'text' : 'password'}
                                     fullWidth
                                     error={(validateError.ccheckError || validateError.chelperNotValid)}
-                                    helperText={(validateError.ccheckError && 'You must enter a value') || (validateError.chelperNotValid && 'Not Valid') || ('8-12 Alphanumeric character')}
+                                    helperText={(validateError.ccheckError && 'You must enter a value') || (validateError.chelperNotValid && 'Password and confirm password is not same') || ('8-12 Alphanumeric character')}
                                     value={name.conpass}
                                     onInput={(e) => { setname({ ...name, conpass: e.target.value }) }}
                                     onBlur={blurConPassValidator}

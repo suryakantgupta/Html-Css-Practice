@@ -1,7 +1,6 @@
-import { AppBar, Avatar, Box, Button, ButtonGroup, Divider, Grid, Icon, IconButton, makeStyles, Tab, Tabs, Typography, useMediaQuery, useTheme } from '@material-ui/core'
+import {Avatar, Box, Button, Divider, Grid, Icon, IconButton, makeStyles, Tab, Tabs, Typography, useMediaQuery, useTheme } from '@material-ui/core'
 import React from 'react'
 import SwipeableViews from 'react-swipeable-views';
-import PropTypes from 'prop-types'
 import { Carousel, Image } from 'react-bootstrap'
 import cake from '../../images/cake.jpg'
 import StarRatings from 'react-star-ratings';
