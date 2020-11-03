@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function Authentication() {
+function Authentication(props) {
 
-    if(localStorage.token){
-        initialState=true
+    let initialState
+    if(localStorage.token != undefined && localStorage.token != "undefined"){
+        initialState = true
     }else{
         initialState=false
     }
+
 
     const [isLogedin, setisLogedin] = useState(initialState)
 
 
     return (
         <div>
-            {props.render({isLogedin})}
+            {props.render(isLogedin,setisLogedin)}
         </div>
     )
 }

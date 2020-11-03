@@ -1,14 +1,17 @@
-import { AppBar, createMuiTheme, Grid, Icon, ThemeProvider, Toolbar, Typography, Input, Paper, makeStyles, Button, Badge, IconButton, withStyles, Menu, MenuItem, Link } from '@material-ui/core'
+import { AppBar, createMuiTheme, Grid, Icon, ThemeProvider, Toolbar, Typography, Input, Paper, makeStyles, Button, Badge, IconButton, withStyles, Menu, MenuItem, Link, Snackbar } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import React from 'react'
+import React, { useState } from 'react'
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { Alert } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -92,13 +95,13 @@ const StyledMenu = withStyles({
 
 
 
-function Header() {
+function Header(props) {
 
     const classes = useStyles(); //Creates the instance of the styles to be used in the material component
 
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [open, setopen] = useState(false)
 
     //It handles the dropdown menu response
     const handleClick = (event) => {
@@ -108,124 +111,143 @@ function Header() {
         setAnchorEl(null);
     };
 
+
+    const handleLogout =()=>{
+        localStorage.removeItem('token')
+        setopen(true)
+        window.location.reload()
+    }
+    const history = useHistory()
+    const handleonClose =()=>{
+        setopen(false)
+    }
+
+
     return (
         // <Grid container>
-            <ThemeProvider theme={navbarTheme}>
-                <AppBar color="primary" position='static' style={{margin:0}}>
-                    <Grid container>
-                        <Grid item xs={12} lg={3} >
-                            <Grid container className={classes.logoGrid}>
-                                <Toolbar>
-                                    <ThemeProvider theme={() => createMuiTheme({
-                                        palette: {
-                                            secondary: {
-                                                main: '#ff0000'
-                                            }
-                                        },
-                                        typography: {
-                                            h4: {
-                                                fontFamily: 'Arial',
-                                                fontSize: '2.4rem'
-                                            }
+        <ThemeProvider theme={navbarTheme}>
+            <AppBar color="primary" position='static' style={{ margin: 0 }}>
+                <Grid container>
+                    <Grid item xs={12} lg={3} >
+                        <Grid container className={classes.logoGrid}>
+                            <Toolbar>
+                                <ThemeProvider theme={() => createMuiTheme({
+                                    palette: {
+                                        secondary: {
+                                            main: '#ff0000'
                                         }
-                                    })}>
+                                    },
+                                    typography: {
+                                        h4: {
+                                            fontFamily: 'Arial',
+                                            fontSize: '2.4rem'
+                                        }
+                                    }
+                                })}>
 
-                                        <Typography display='inline' variant='h4'>Neo</Typography>
-                                        <Typography display='inline' style={{ fontWeight: 'bold' }} color='secondary' variant='h4'>STORE</Typography>
+                                    <Typography display='inline' variant='h4'>Neo</Typography>
+                                    <Typography display='inline' style={{ fontWeight: 'bold' }} color='secondary' variant='h4'>STORE</Typography>
 
-                                    </ThemeProvider>
+                                </ThemeProvider>
+                            </Toolbar>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12} lg={4}>
+                        <Grid container justify='space-evenly'>
+                            <Grid item>
+                                <Toolbar>
+                                    <Typography variant='h6' >Home</Typography>
+                                </Toolbar>
+                            </Grid>
+                            <Grid item>
+                                <Toolbar>
+                                    <Typography variant='h6'>Products</Typography>
+                                </Toolbar>
+                            </Grid>
+                            <Grid item>
+                                <Toolbar>
+                                    <Typography variant='h6'>Order</Typography>
                                 </Toolbar>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} lg={4}>
-                            <Grid container justify='space-evenly'>
-                                <Grid item>
-                                    <Toolbar>
-                                        <Typography variant='h6' >Home</Typography>
-                                    </Toolbar>
-                                </Grid>
-                                <Grid item>
-                                    <Toolbar>
-                                        <Typography variant='h6'>Products</Typography>
-                                    </Toolbar>
-                                </Grid>
-                                <Grid item>
-                                    <Toolbar>
-                                        <Typography variant='h6'>Order</Typography>
+                    </Grid>
+                    <Grid item xs={12} lg={5}>
+                        <Grid container className={classes.searchGrid}>
+                            {/* <Toolbar> */}
+                            <Grid item xs={12} lg={8}>
+                                <Grid container className={classes.searchBar}>
+                                    <Toolbar disableGutters>
+                                        <Paper component='form' classes={{ root: classes.root }}>
+                                            <SearchIcon style={{ color: 'black' }} fontSize='large' />
+                                            <Input type='search' fullWidth
+                                                placeholder='Search..'
+                                                disableUnderline
+                                            >
+                                            </Input>
+                                        </Paper>
                                     </Toolbar>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid item xs={12} lg={5}>
-                            <Grid container className={classes.searchGrid}>
-                                {/* <Toolbar> */}
-                                <Grid item xs={12} lg={8}>
-                                    <Grid container className={classes.searchBar}>
-                                        <Toolbar disableGutters>
-                                            <Paper component='form' classes={{ root: classes.root }}>
-                                                <SearchIcon style={{ color: 'black' }} fontSize='large' />
-                                                <Input type='search' fullWidth
-                                                    placeholder='Search..'
-                                                    disableUnderline
-                                                >
-                                                </Input>
-                                            </Paper>
-                                        </Toolbar>
-                                    </Grid>
-                                </Grid>
-                                <Grid item xs={6} lg={2}>
-                                    <Grid container justify='flex-end'>
-                                        <Toolbar disableGutters>
-                                            <Button
-                                                className={classes.btnBgColor}
-                                                style={{ backgroundColor: 'white', outline: 'none',marginRight:'4px' }}
-
-                                                startIcon={<Badge badgeContent={4} color='secondary'>
-                                                    <ShoppingCartIcon />
-                                                </Badge>}
-                                            >
-                                                Cart
-                                        </Button>
-                                        </Toolbar>
-                                    </Grid>
-                                </Grid>
-                                <Grid item xs={6} lg={2}>
+                            <Grid item xs={6} lg={2}>
+                                <Grid container justify='flex-end'>
                                     <Toolbar disableGutters>
                                         <Button
-                                            style={{ backgroundColor: 'white', outline: 'none', marginRight: '0.8rem' }}
                                             className={classes.btnBgColor}
-                                            onClick={handleClick}
+                                            style={{ backgroundColor: 'white', outline: 'none', marginRight: '4px' }}
+
+                                            startIcon={<Badge badgeContent={4} color='secondary'>
+                                                <ShoppingCartIcon />
+                                            </Badge>}
                                         >
-                                            <AccountBoxIcon />
-                                            <ExpandMoreIcon />
+                                            Cart
                                         </Button>
-                                        <StyledMenu
-                                            anchorEl={anchorEl}
-                                            keepMounted
-                                            open={Boolean(anchorEl)}
-                                            onClose={handleClose}
-                                        >
-
-                                            <MenuItem>
-                                                <Link href='/login' style={{ textDecoration: 'none' }}>
-                                                    <ListItemText style={{color:'black'}} primary="Login" />
-                                                </Link>
-                                            </MenuItem>
-
-                                            <MenuItem>
-                                                <Link href='/register' style={{ textDecoration: 'none' }}>
-                                                    <ListItemText style={{ color: 'black' }} primary="Register" />
-                                                </Link>
-                                            </MenuItem>
-                                        </StyledMenu>
                                     </Toolbar>
                                 </Grid>
+                            </Grid>
+                            <Grid item xs={6} lg={2}>
+                                <Toolbar disableGutters>
+                                    <Button
+                                        style={{ backgroundColor: 'white', outline: 'none', marginRight: '0.8rem' }}
+                                        className={classes.btnBgColor}
+                                        onClick={handleClick}
+                                    >
+                                        {props.isLogedin ? <AccountCircleIcon /> : <AccountBoxIcon />}
+                                        <ExpandMoreIcon />
+                                    </Button>
+                                    <StyledMenu
+                                        anchorEl={anchorEl}
+                                        keepMounted
+                                        open={Boolean(anchorEl)}
+                                        onClose={handleClose}
+                                    >
+
+                                        <MenuItem>
+                                            {props.isLogedin ?
+                                                <ListItemText style={{ color: 'black' }} onClick={handleLogout} primary="Logout" /> :
+                                                <Link href='/login' style={{ textDecoration: 'none' }}>
+                                                    <ListItemText style={{ color: 'black' }} primary="Login" />
+                                                </Link>}
+                                        </MenuItem>
+
+                                        <MenuItem>
+                                            <Link href='/register' style={{ textDecoration: 'none' }}>
+                                                <ListItemText style={{ color: 'black' }} primary="Register" />
+                                            </Link>
+                                        </MenuItem>
+                                    </StyledMenu>
+                                </Toolbar>
                             </Grid>
                         </Grid>
                     </Grid>
-                </AppBar>
-            </ThemeProvider>
-        
+                </Grid>
+            </AppBar>
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleonClose} message='You have successfully loged out' >
+                {/* <Alert>
+                    
+                </Alert> */}
+            </Snackbar>
+        </ThemeProvider>
+
     )
 }
 

@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Typography } from '@material-ui/core'
+import { Box, Button, Container, Grid, Typography } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { fetchDashboardCardProducts, fetchDashboardProducts } from '../redux'
 import { Loading } from '../components/Loading'
 import ProductCard from '../components/molecules/ProductCard'
+import Authentication from './Authentication'
 
 
 function Dashboard(props) {
@@ -18,29 +19,36 @@ function Dashboard(props) {
         props.fetchDashboardCardProducts()
     }, [])
 
-    
+
     return (
         <div>
-            <Header />
+            <Authentication
+            render={(isLogedin,setisLogedin)=>(<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
+            />
+            
 
             {props.data.loading ? <Loading /> : <ProductCarousel />}
-            <div style={{ display: 'grid', placeItems: 'center' }}>
+            <div style={{ display: 'grid', placeItems: 'center',marginBottom:'4%' }}>
                 <Typography>Popular Products</Typography>
                 <Button style={{ outline: "none", textTransform: "none" }}>View all</Button>
             </div>
-            <Container>
-            {props.cardData.loading ? <Loading /> : 
-            <Grid container spacing={3}>
-            {props.cardData.products.product_details.map(pd=>
-                
-                    <Grid item>
-                <ProductCard title={pd.DashboardProducts[0].product_name} price={pd.DashboardProducts[0].product_cost} />
-                </Grid>
-                // {console.log(pd.DashboardProducts[0].product_name)}
-            )}
-            </Grid>
-            }
-            </Container>
+            {/* <Container > */}
+            <Box display='flex' style={{marginBottom:'10%'}} justifyContent='center'>
+                {props.cardData.loading ? '' :
+                <div style={{width:'73%'}}>
+                    <Grid container spacing={3}>
+                        {props.cardData.products.product_details.map(pd =>
+
+                            <Grid item>
+                                <ProductCard product={pd.DashboardProducts[0]} />
+                            </Grid>
+                            // {console.log(pd.DashboardProducts[0].product_name)}
+                        )}
+                    </Grid>
+                    </div>
+                }
+                </Box>
+            {/* </Container> */}
             <Footer />
         </div>
     )
@@ -49,14 +57,14 @@ function Dashboard(props) {
 const mapStateToProps = (state) => {
     return {
         data: state.carousel,
-        cardData:state.card
+        cardData: state.card
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDashboardProducts: () => dispatch(fetchDashboardProducts()),
-        fetchDashboardCardProducts :()=>dispatch(fetchDashboardCardProducts())
+        fetchDashboardCardProducts: () => dispatch(fetchDashboardCardProducts())
     }
 }
 

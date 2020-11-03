@@ -20,13 +20,14 @@ function App() {
           <Redirect exact from='/' to='/dashboard' />
           <Provider store={store}>
           <Route path="/dashboard" exact render={()=> <Dashboard />} />
-          </Provider>
+          
           <Route path="/login" exact render={()=> <User body={'login'}/>} />
           <Route path="/register" exact render={()=> <User body={'register'}/>} />
           <Route path='/forgotpass' exact render={()=><User body={'forgot'}/>} />
           <Route path='/recoverpass' exact render={()=><User body={'recover'}/>}/>
           <Route path='/myaccount' exact render={()=> <MyAccount />} />
           <Route path='/commonproducts' exact render={()=> <ProductModule />} />
+          </Provider>
           
         </Switch>
       </div>

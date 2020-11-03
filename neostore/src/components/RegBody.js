@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { TextField, RadioGroup, InputAdornment, IconButton, FormControlLabel, Radio } from '@material-ui/core';
+import React, { useEffect, useState } from 'react'
+import { TextField, RadioGroup, InputAdornment, IconButton, FormControlLabel, Radio, Button } from '@material-ui/core';
 import {
     makeStyles,
 } from '@material-ui/core/styles';
+import {Button as Btn} from 'react-bootstrap'
 import ficon from '../images/facebook-icon.png'
 import gicon from '../images/google-icon.png'
 import clsx from 'clsx';
@@ -11,6 +12,11 @@ import TextFieldsIcon from '@material-ui/icons/TextFields';
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import CallIcon from '@material-ui/icons/Call';
+import { useDispatch, useSelector } from 'react-redux';
+import { postNewRegister } from '../redux';
+import Loading from './Loading';
+import { Redirect, useHistory } from 'react-router-dom'
+import { Modal } from 'react-bootstrap';
 
 
 
@@ -18,7 +24,6 @@ import CallIcon from '@material-ui/icons/Call';
 
 
 function RegBody() {
-
 /**
  * @description It gives the styles to the material ui components used in this file
  * 
@@ -80,8 +85,19 @@ function RegBody() {
     const [name, setname] = useState({ firstName: '', lastName: '', email: '', pass: '', conpass: '', mobile: '', gender:'male'})
     const [validateError, setError] = useState({ fhelperNotValid: false, fcheckError: false, lhelperNotValid: false, lcheckError: false, ehelperNotValid: false, echeckError: false, phelperNotValid: false, pcheckError: false, chelperNotValid: false, ccheckError: false, mhelperNotValid: false, mcheckError: false })
     const [manage, setManage] = useState({ showPassword: false, cshowPassword: false })
+    const [submitCheck,setSubmit] = useState({fcheck:true,lcheck:true,echeck:true,pcheck:true,ccheck:true,mcheck:true})
 
+    const dispatch = useDispatch()
+    const success = useSelector(state => state.user.success)
+    const loading = useSelector(state => state.user.loading)
+    const error = useSelector(state => state.user.error)
+    
 
+    // const isFormValid = ()=>{
+    //    const {fcheck,lcheck,echeck,pcheck,ccheck,mcheck} = submitCheck
+        // return fcheck && lcheck && echeck && pcheck && ccheck && mcheck
+        // return false
+    // }
 
 
 /**
@@ -92,7 +108,18 @@ function RegBody() {
 
 const blurfnameValidator = () => {
         let pattern = /^[A-Za-z]+$/
-        name.firstName === '' ? setError({ fhelperNotValid: false, fcheckError: true }) : name.firstName.match(pattern) ? setError({ fhelperNotValid: false, fcheckError: false }) : setError({ fhelperNotValid: true, fcheckError: false })
+        if(name.firstName == ''){
+            setError({...validateError, fhelperNotValid: false, fcheckError: true })
+            setSubmit({...submitCheck,fcheck:true})
+        }else { 
+            if(name.firstName.match(pattern)){
+            setError({...validateError, fhelperNotValid: false, fcheckError: false })
+            setSubmit({...submitCheck,fcheck:false})
+        }else{
+            setError({...validateError, fhelperNotValid: true, fcheckError: false })
+            setSubmit({...submitCheck,fcheck:true})
+        }
+        }
     }
 
 
@@ -104,9 +131,19 @@ const blurfnameValidator = () => {
 
     const blurlnameValidator = () => {
         let pattern = /^[A-Za-z]+$/
-        name.lastName === '' ? setError({ lhelperNotValid: false, lcheckError: true }) : name.firstName.match(pattern) ? setError({ lhelperNotValid: false, lcheckError: false }) : setError({ lhelperNotValid: true, lcheckError: false })
+        if(name.lastName == ''){
+            setError({...validateError, lhelperNotValid: false, lcheckError: true })
+            setSubmit({...submitCheck,lcheck:true})
+        }else { 
+            if(name.lastName.match(pattern)){
+                setError({...validateError, lhelperNotValid: false, lcheckError: false })
+                setSubmit({...submitCheck,lcheck:false})
+        }else{
+            setError({...validateError, lhelperNotValid: true, lcheckError: false })
+            setSubmit({...submitCheck,lcheck:true})
+        }
+        }
     }
-
 
 /**
  * @description This function validates the email Provided by the user
@@ -117,10 +154,19 @@ const blurfnameValidator = () => {
 
     const blurEmailValidator = () => {
         let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        name.email === '' ? setError({ ehelperNotValid: false, echeckError: true }) : pattern.test(name.email) ? setError({ ehelperNotValid: false, echeckError: false }) : setError({ ehelperNotValid: true, echeckError: false })
+        if(name.email == ''){
+            setError({...validateError, ehelperNotValid: false, echeckError: true })
+            setSubmit({...submitCheck,echeck:true})
+        }else { 
+            if(pattern.test(name.email)){
+                setError({...validateError, ehelperNotValid: false, echeckError: false })
+                setSubmit({...submitCheck,echeck:false})
+        }else{
+            setError({...validateError, ehelperNotValid: true, echeckError: false })
+            setSubmit({...submitCheck,echeck:true})
+        }
+        }
     }
-
-
 
 /**
  * @description This function validates the Password Provided by the user
@@ -130,16 +176,20 @@ const blurfnameValidator = () => {
 
 const blurPassValidator = () => {
     if (name.pass === '') {
-        setError({ phelperNotValid: false, pcheckError: true })
+        setError({...validateError, phelperNotValid: false, pcheckError: true })
+        setSubmit({...submitCheck,pcheck:true})
     } else {
         if (name.pass.length < 8 || name.pass.length > 12) {
-            setError({ phelperNotValid: true, pcheckError: false })
+            setError({...validateError, phelperNotValid: true, pcheckError: false })
+            setSubmit({...submitCheck,pcheck:true})
         } else {
             let alphanumeric = "^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$";
             if (name.pass.match(alphanumeric)) {
-                setError({ phelperNotValid: false, pcheckError: false })
+                setError({...validateError, phelperNotValid: false, pcheckError: false })
+                setSubmit({...submitCheck,pcheck:false})
             } else {
-                setError({ phelperNotValid: true, pcheckError: false })
+                setError({...validateError, phelperNotValid: true, pcheckError: false })
+                setSubmit({...submitCheck,pcheck:true})
             }
         }
     }
@@ -153,12 +203,15 @@ const blurPassValidator = () => {
 
 const blurConPassValidator = () => {
     if (name.conpass === '') {
-        setError({ chelperNotValid: false, ccheckError: true })
+        setError({...validateError, chelperNotValid: false, ccheckError: true })
+        setSubmit({...submitCheck,ccheck:true})
     } else {
         if (name.conpass === name.pass) {
-            setError({ chelperNotValid: false, ccheckError: false })
+            setError({...validateError, chelperNotValid: false, ccheckError: false })
+            setSubmit({...submitCheck,ccheck:false})
         } else {
-            setError({ chelperNotValid: true, ccheckError: false })
+            setError({...validateError, chelperNotValid: true, ccheckError: false })
+            setSubmit({...submitCheck,ccheck:true})
         }
     }
 }
@@ -171,27 +224,86 @@ const blurConPassValidator = () => {
 
     const blurMobileValidator = () => {
         let pattern = /^[0-9]+$/
-        if (name.mobile[0] == 7 || name.mobile[0] == 8 || name.mobile[0] == 9) {
+        if (name.mobile[0] == 6 || name.mobile[0] == 7 || name.mobile[0] == 8 || name.mobile[0] == 9) {
             if (name.mobile.length < 10) {
-                setError({ mhelperNotValid: true, mcheckError: false })
+                setError({...validateError, mhelperNotValid: true, mcheckError: false })
+                setSubmit({...submitCheck,mcheck:true})
             } else {
                 if (name.mobile.match(pattern)) {
-                    setError({ mhelperNotValid: false, mcheckError: false })
+                    setError({...validateError, mhelperNotValid: false, mcheckError: false })
+                    setSubmit({...submitCheck,mcheck:false})
                 } else {
-                    setError({ mhelperNotValid: true, mcheckError: false })
+                    setError({...validateError, mhelperNotValid: true, mcheckError: false })
+                    setSubmit({...submitCheck,mcheck:true})
                 }
             }
         }
         else if (name.mobile === '') {
-            setError({ mhelperNotValid: false, mcheckError: true })
+            setError({...validateError, mhelperNotValid: false, mcheckError: true })
+            setSubmit({...submitCheck,mcheck:true})
         }
         else {
-            setError({ mhelperNotValid: true, mcheckError: false })
+            setError({...validateError, mhelperNotValid: true, mcheckError: false })
+            setSubmit({...submitCheck,mcheck:true})
         }
         console.log(name.mobile.length)
     }
 
-    
+    const handleSubmit = (e)=>{
+        e.preventDefault()
+        dispatch(postNewRegister(name))
+    }
+
+    const history= useHistory()
+    const [show, setShow] = useState(true);
+    const handleClose = () => {
+        history.push('/login')
+         setShow(false)
+    };
+
+    const handleeClose = () => {
+        window.location.reload()
+         setShow(false)
+    };
+
+    if(loading==false && success !=null){
+        return (
+            <React.Fragment>
+            <Modal show={show}>
+                <Modal.Header>
+                    Successfully registered
+                </Modal.Header>
+        <Modal.Body>{success}</Modal.Body>
+        <Modal.Footer>
+          <Btn variant="secondary" onClick={handleClose}>
+            Close
+          </Btn>
+          </Modal.Footer>
+            </Modal>
+            </React.Fragment>
+        )
+    }else if(loading==false && error !=null){
+        return (
+            <React.Fragment>
+            <Modal show={show}>
+                <Modal.Header>
+                    Error Occurred
+                </Modal.Header>
+        <Modal.Body>{error}</Modal.Body>
+        <Modal.Footer>
+          <Btn variant="secondary" onClick={handleeClose}>
+            Close
+          </Btn>
+          </Modal.Footer>
+            </Modal>
+            </React.Fragment>
+        )
+    }
+
+
+
+
+
 
 /**
  * This Section handles the icon chanage of the password and Confirm Password fields
@@ -214,7 +326,10 @@ const blurConPassValidator = () => {
 
 
     return (
-        <div className='container' style={{ marginBottom: '10%' }}>
+        <React.Fragment>
+        {/* {loading ? <Loading /> : */}
+        
+         <div className='container' style={{ marginBottom: '10%' }}>
             <div className='d-flex justify-content-center flex-column flex-sm-row mt-5 mb-4' style={{ borderBottom: '1px solid lightgray' }}>
                 <div className='m-2'>
                     <button className='btn fbtn shadow' style={{ width: '15rem' }} ><img className='' src={ficon} height='60rem' />Login with Facebook</button>
@@ -224,9 +339,11 @@ const blurConPassValidator = () => {
                     <button className='btn gbtn shadow' style={{ width: '15rem' }}><img className='' src={gicon} height='60rem' />Login with Google</button>
                 </div>
             </div>
+
             <div className='row justify-content-center'>
 
                 <div className="card shadow-sm" style={{ width: '55rem', borderBottom: '2px solid lightgray', borderLeft: '1px', borderRight: '1px', borderTop: 0 }}>
+                <form className={classes.root} onSubmit={handleSubmit} >
                     <div className="card-body">
                         <label className="card-title regToNeo">Register to NeoSTORE</label>
 
@@ -236,7 +353,7 @@ const blurConPassValidator = () => {
 
 
 
-                        <form className={classes.root}>
+                        
 
                             <div className={classes.formgroup}>
                                 <TextField
@@ -376,7 +493,7 @@ const blurConPassValidator = () => {
                                     type='text'
                                     fullWidth
                                     error={(validateError.mcheckError || validateError.mhelperNotValid)}
-                                    helperText={(validateError.mcheckError && 'You must enter a value') || (validateError.mhelperNotValid && 'Not Valid') || (`${name.mobile.length}/10`)}
+                                    helperText={(validateError.mcheckError && 'You must enter a value') || (validateError.mhelperNotValid && 'Please enter a valid mobile number') || (`${name.mobile.length}/10`)}
                                     value={name.mobile}
                                     onInput={(e) => { setname({ ...name, mobile: e.target.value }) }}
                                     onBlur={blurMobileValidator}
@@ -415,16 +532,19 @@ const blurConPassValidator = () => {
                                 />
                                 </RadioGroup>
                             </div>
-                        </form>
+                        
                     </div>
                     <div className='ml-2 mb-2'>
-                        <button className='btn' id='loginbtn'>Register</button>
+                        <Button type='submit' variant='contained' id='loginbtn' disabled={submitCheck.fcheck || submitCheck.lcheck || submitCheck.echeck || submitCheck.pcheck || submitCheck.ccheck || submitCheck.mcheck }>Register</Button>
                     </div>
+                    </form>
                 </div>
 
 
             </div>
         </div>
+        {/* } */}
+        </React.Fragment>
     )
 }
 

@@ -4,11 +4,14 @@ import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import { combineReducers } from 'redux'
 import {reducer,cardreducer} from './dashboard/reducer'
+import {userReducer, userloginReducer} from './user/userReducer'
 
 
 const rootReducer = combineReducers({
   carousel: reducer,
-  card: cardreducer
+  card: cardreducer,
+  user: userReducer,
+  login:userloginReducer
 })
 
 

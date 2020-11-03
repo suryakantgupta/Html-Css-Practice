@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ficon from '../images/facebook-icon.png';
 import gicon from '../images/google-icon.png';
 import ticon from '../images/twitter-icon.png';
@@ -15,10 +15,13 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import CallIcon from '@material-ui/icons/Call';
 import { green, blue, red } from '@material-ui/core/colors';
+import { postLogin } from '../redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 
-function LoginBody() {
+function LoginBody(props) {
 
 
     const useStyles = makeStyles({
@@ -49,25 +52,43 @@ function LoginBody() {
     const [name, setname] = useState({ email: '', pass: '' })
     const [validateError, setError] = useState({ ehelperNotValid: false, echeckError: false, phelperNotValid: false, pcheckError: false })
     const [manage, setManage] = useState({ showPassword: false, cshowPassword: false })
+    const [submitCheck, setSubmit] = useState({ echeck: true, pcheck: true })
+
 
     const blurEmailValidator = () => {
         let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        name.email == '' ? setError({ ehelperNotValid: false, echeckError: true }) : pattern.test(name.email) ? setError({ ehelperNotValid: false, echeckError: false }) : setError({ ehelperNotValid: true, echeckError: false })
+        if (name.email == '') {
+            setError({ ...validateError, ehelperNotValid: false, echeckError: true })
+            setSubmit({ ...submitCheck, echeck: true })
+        } else {
+            if (pattern.test(name.email)) {
+                setError({ ...validateError, ehelperNotValid: false, echeckError: false })
+                setSubmit({ ...submitCheck, echeck: false })
+            } else {
+                setError({ ...validateError, ehelperNotValid: true, echeckError: false })
+                setSubmit({ ...submitCheck, echeck: true })
+            }
+        }
     }
+
 
 
     const blurPassValidator = () => {
         if (name.pass == '') {
-            setError({ phelperNotValid: false, pcheckError: true })
+            setError({ ...validateError, phelperNotValid: false, pcheckError: true })
+            setSubmit({ ...submitCheck, pcheck: true })
         } else {
             if (name.pass.length < 8 || name.pass.length > 12) {
-                setError({ phelperNotValid: true, pcheckError: false })
+                setError({ ...validateError, phelperNotValid: true, pcheckError: false })
+                setSubmit({ ...submitCheck, pcheck: true })
             } else {
                 let alphanumeric = "^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$";
                 if (name.pass.match(alphanumeric)) {
-                    setError({ phelperNotValid: false, pcheckError: false })
+                    setError({ ...validateError, phelperNotValid: false, pcheckError: false })
+                    setSubmit({ ...submitCheck, pcheck: false })
                 } else {
-                    setError({ phelperNotValid: true, pcheckError: false })
+                    setError({ ...validateError, phelperNotValid: true, pcheckError: false })
+                    setSubmit({ ...submitCheck, pcheck: true })
                 }
             }
         }
@@ -82,6 +103,34 @@ function LoginBody() {
         event.preventDefault();
     };
 
+    const dispatch = useDispatch()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        dispatch(postLogin(name))
+    }
+
+
+    const history = useHistory()
+
+    const loginsuccess = useSelector(state => state.login.success)
+
+    useEffect(() => {
+        if(loginsuccess.token != undefined && localStorage.token != "undefined"){
+        localStorage.setItem('token', loginsuccess.token)
+        props.setisLogedin(true)
+        }
+    }, [loginsuccess])
+
+    useEffect(() => {
+        if (props.isLogedin) {
+            history.push('/dashboard')
+        }
+    })
+
+
+
+
 
     return (
         <div className='container' >
@@ -94,73 +143,73 @@ function LoginBody() {
 
                 <div className='col-md-6'>
                     {/* <div className="card loginCard"> */}
-                        <form className="card loginCard">
-                            <div className="card-body">
-                                <label id='logintoNeo' className="card-title">Login to NeoStore</label>
+                    <form className="card loginCard" onSubmit={handleSubmit}>
+                        <div className="card-body">
+                            <label id='logintoNeo' className="card-title">Login to NeoStore</label>
 
-                                <div className={classes.passColor}>
-                                    <TextField
-                                        style={{ height: '5rem' }}
-                                        className={(validateError.echeckError || validateError.ehelperNotValid) && classes.errborder}
-                                        label='Email Address'
-                                        variant='outlined'
-                                        type='email'
-                                        fullWidth
-                                        error={(validateError.echeckError || validateError.ehelperNotValid)}
-                                        helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Example abc@gmail.com')}
-                                        value={name.email}
-                                        onChange={e => setname({ ...name, email: e.target.value })}
-                                        onBlur={blurEmailValidator}
-                                        InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment>
-                                                    <EmailIcon />
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                    required/>
-
-                                </div>
-
-                                <div className={classes.passColor}>
-                                    <TextField
-                                        className={clsx(((validateError.pcheckError || validateError.phelperNotValid) && classes.errborder), ((!validateError.pcheckError && !validateError.phelperNotValid) && classes.helperPass))}
-                                        style={{ height: '5rem', color: 'black' }}
-                                        label='Password'
-                                        variant='outlined'
-                                        type={manage.showPassword ? 'text' : 'password'}
-                                        fullWidth
-                                        error={(validateError.pcheckError || validateError.phelperNotValid)}
-                                        helperText={(validateError.pcheckError && 'You must enter a value') || (validateError.phelperNotValid && 'Password should be 8-12 AlphaNumeric character')}
-                                        value={name.pass}
-                                        onInput={(e) => { setname({ ...name, pass: e.target.value }) }}
-                                        onBlur={blurPassValidator}
-                                        InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment>
-                                                    <IconButton
-                                                        onClick={handleClickShowPassword}
-                                                        onMouseDown={handleMouseDownPassword}
-                                                        edge='end'
-                                                    >
-
-                                                        {manage.showPassword ? <VisibilityIcon /> : <VisibilityOff />}
-                                                    </IconButton>
-
-                                                </InputAdornment>
-                                            )
-
-                                        }}
-                                        required
-                                    />
-                                </div>
-
+                            <div className={classes.passColor}>
+                                <TextField
+                                    style={{ height: '5rem' }}
+                                    className={(validateError.echeckError || validateError.ehelperNotValid) && classes.errborder}
+                                    label='Email Address'
+                                    variant='outlined'
+                                    type='email'
+                                    fullWidth
+                                    error={(validateError.echeckError || validateError.ehelperNotValid)}
+                                    helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Example abc@gmail.com')}
+                                    value={name.email}
+                                    onChange={e => setname({ ...name, email: e.target.value })}
+                                    onBlur={blurEmailValidator}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment>
+                                                <EmailIcon />
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                    required />
 
                             </div>
-                            <div className='ml-2 mb-2'>
-                                <button className='btn' type='submit' id='loginbtn'>Login</button>
+
+                            <div className={classes.passColor}>
+                                <TextField
+                                    className={clsx(((validateError.pcheckError || validateError.phelperNotValid) && classes.errborder), ((!validateError.pcheckError && !validateError.phelperNotValid) && classes.helperPass))}
+                                    style={{ height: '5rem', color: 'black' }}
+                                    label='Password'
+                                    variant='outlined'
+                                    type={manage.showPassword ? 'text' : 'password'}
+                                    fullWidth
+                                    error={(validateError.pcheckError || validateError.phelperNotValid)}
+                                    helperText={(validateError.pcheckError && 'You must enter a value') || (validateError.phelperNotValid && 'Password should be 8-12 AlphaNumeric character')}
+                                    value={name.pass}
+                                    onInput={(e) => { setname({ ...name, pass: e.target.value }) }}
+                                    onBlur={blurPassValidator}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment>
+                                                <IconButton
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge='end'
+                                                >
+
+                                                    {manage.showPassword ? <VisibilityIcon /> : <VisibilityOff />}
+                                                </IconButton>
+
+                                            </InputAdornment>
+                                        )
+
+                                    }}
+                                    required
+                                />
                             </div>
-                        </form>
+
+
+                        </div>
+                        <div className='ml-2 mb-2'>
+                            <button className='btn' type='submit' id='loginbtn' disabled={submitCheck.echeck || submitCheck.pcheck}>Login</button>
+                        </div>
+                    </form>
                     {/* </div> */}
 
                 </div>
