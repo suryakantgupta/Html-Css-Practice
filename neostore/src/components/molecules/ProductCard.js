@@ -23,7 +23,7 @@ function ProductCard(props) {
             <Link href='#'>{product_name}</Link>
           </Typography>
           <Card.Text style={{ display: 'flex', justifyContent: "center" }} >
-            <b style={{ fontFamily: 'Arial' }}><Icon ><BiRupee></BiRupee></Icon>{product_cost}</b>
+            <b style={{ fontFamily: 'Arial' }}>{`₹${product_cost}`}</b>
           </Card.Text>
           <Grid container justify='center'>
             <Box width='75%'>

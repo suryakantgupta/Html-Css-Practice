@@ -36,8 +36,8 @@ function User(props) {
         <div>
 
             {/* <ErrorPage /> */}
-            {body.login && loginloading ? <Loading /> :
-                (<React.Fragment>
+            {body.login && (loginloading ? <Loading /> :
+                <React.Fragment>
                     <Header />
                     <Authentication 
                     render={(isLogedin,setisLogedin)=>(<LoginBody isLogedin={isLogedin} setisLogedin={setisLogedin} />)}

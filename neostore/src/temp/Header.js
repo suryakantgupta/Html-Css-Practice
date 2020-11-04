@@ -12,7 +12,7 @@ function Header() {
                 <div className='container-fluid p-0'>
                     <div className='row w-100 m-0'>
                         <div className="col-md-3 d-flex justify-content-center justify-content-sm-start">
-                            <a className="ml-1" href='#'><label className='neo'>Neo</label><label className='store'>STORE</label></a>
+                            <a className="ml-1" href='/dashboard'><label className='neo'>Neo</label><label className='store'>STORE</label></a>
                         </div>
                         <div className="col-md-4 d-flex align-items-center">
                             <ul className="navbar-nav d-flex justify-content-around align-items-center w-100">

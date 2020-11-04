@@ -1,4 +1,4 @@
-import { AppBar, createMuiTheme, Grid, Icon, ThemeProvider, Toolbar, Typography, Input, Paper, makeStyles, Button, Badge, IconButton, withStyles, Menu, MenuItem, Link, Snackbar } from '@material-ui/core'
+import { AppBar, createMuiTheme, Grid, Icon, ThemeProvider, Toolbar, Typography, Input, Paper, makeStyles, Button, Badge, IconButton, withStyles, Menu, MenuItem, Snackbar ,Link, } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -144,10 +144,10 @@ function Header(props) {
                                         }
                                     }
                                 })}>
-
-                                    <Typography display='inline' variant='h4'>Neo</Typography>
+<Link href='/dashboard' color='inherit' style={{textDecoration:'none',textTransform:'none'}}>
+                                    <Typography display='inline' style={{color:"white"}} variant='h4'>Neo</Typography>
                                     <Typography display='inline' style={{ fontWeight: 'bold' }} color='secondary' variant='h4'>STORE</Typography>
-
+                                    </Link>
                                 </ThemeProvider>
                             </Toolbar>
                         </Grid>
@@ -156,17 +156,21 @@ function Header(props) {
                         <Grid container justify='space-evenly'>
                             <Grid item>
                                 <Toolbar>
-                                    <Typography variant='h6' >Home</Typography>
+                                    <Link href='/dashboard' style={{textDecoration:'none'}}>
+                                    <Typography variant='h6' style={{color:"white"}} >Home</Typography>
+                                    </Link>
                                 </Toolbar>
                             </Grid>
                             <Grid item>
                                 <Toolbar>
-                                    <Typography variant='h6'>Products</Typography>
+                                <Link href='/commonproducts' style={{textDecoration:'none'}}>
+                                    <Typography variant='h6' style={{color:"white"}}>Products</Typography>
+                                    </Link>
                                 </Toolbar>
                             </Grid>
                             <Grid item>
                                 <Toolbar>
-                                    <Typography variant='h6'>Order</Typography>
+                                    <Typography variant='h6' style={{color:"Swhite"}}>Order</Typography>
                                 </Toolbar>
                             </Grid>
                         </Grid>

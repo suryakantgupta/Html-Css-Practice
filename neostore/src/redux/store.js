@@ -5,13 +5,17 @@ import thunk from 'redux-thunk'
 import { combineReducers } from 'redux'
 import {reducer,cardreducer} from './dashboard/reducer'
 import {userReducer, userloginReducer} from './user/userReducer'
+import { productReducer,categoryReducer,colorReducer } from './products/productsReducer'
 
 
 const rootReducer = combineReducers({
   carousel: reducer,
   card: cardreducer,
   user: userReducer,
-  login:userloginReducer
+  login:userloginReducer,
+  product:productReducer,
+  category:categoryReducer,
+  color:colorReducer
 })
 
 
