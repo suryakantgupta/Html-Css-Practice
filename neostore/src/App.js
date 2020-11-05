@@ -9,6 +9,7 @@ import MyAccount from './module/MyAccount';
 import ProductModule from './module/ProductModule';
 import { Provider } from 'react-redux';
 import store from './redux/store'
+import ProductDetail from './components/molecules/ProductDetail';
 require('dotenv').config()
 
 
@@ -27,6 +28,8 @@ function App() {
           <Route path='/recoverpass' exact render={()=><User body={'recover'}/>}/>
           <Route path='/myaccount' exact render={()=> <MyAccount />} />
           <Route path='/commonproducts' exact render={()=> <ProductModule />} />
+          <Route path='/productdetail/:id'exact render={()=> <ProductDetail />} />
+          
           </Provider>
           
         </Switch>

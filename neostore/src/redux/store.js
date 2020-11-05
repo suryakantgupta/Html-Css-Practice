@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 import { combineReducers } from 'redux'
 import {reducer,cardreducer} from './dashboard/reducer'
 import {userReducer, userloginReducer} from './user/userReducer'
-import { productReducer,categoryReducer,colorReducer } from './products/productsReducer'
+import { productReducer,categoryReducer,colorReducer,byidReducer,cardCategoryReducer } from './products/productsReducer'
 
 
 const rootReducer = combineReducers({
@@ -15,7 +15,9 @@ const rootReducer = combineReducers({
   login:userloginReducer,
   product:productReducer,
   category:categoryReducer,
-  color:colorReducer
+  color:colorReducer,
+  byid:byidReducer,
+  cardCategory:cardCategoryReducer
 })
 
 

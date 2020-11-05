@@ -7,12 +7,23 @@ import {
     FETCH_CATEGORY_SUCCESS,
     FETCH_COLOR_REQUEST,
     FETCH_COLOR_SUCCESS,
-    FETCH_COLOR_FAILURE
+    FETCH_COLOR_FAILURE,
+    FETCH_BYID_REQUEST,
+    FETCH_BYID_SUCCESS,
+    FETCH_BYID_FAILURE,
+    FETCH_CARD_CATEGORY,
+    FETCH_CARD_CATEGORY_S
 } from './productsTypes'
 
 const initialProductState = {
     loading: true,
     products: '',
+    error: ''
+}
+
+const initialByIdState = {
+    loading: true,
+    product: '',
     error: ''
 }
 
@@ -26,6 +37,10 @@ const initialColorState = {
     loading: true,
     color: '',
     error: ''
+}
+
+const initialCardState = {
+    category:true
 }
 
 
@@ -102,6 +117,51 @@ export const colorReducer = (state = initialColorState, action) => {
                 error: action.payload
             }
 
+        default:
+            return state
+    }
+}
+
+
+export const byidReducer = (state = initialByIdState, action) => {
+    switch (action.type) {
+        case FETCH_BYID_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case FETCH_BYID_SUCCESS:
+            return {
+                loading: false,
+                product: action.payload,
+                error: ''
+            }
+        case FETCH_BYID_FAILURE:
+            return {
+                loading: false,
+                product: '',
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+
+
+
+export const cardCategoryReducer = (state = initialCardState, action) => {
+    switch (action.type) {
+        case FETCH_CARD_CATEGORY:
+            return {
+                category: action.payload
+            }
+        case FETCH_CARD_CATEGORY_S:
+            return {
+                category: action.payload
+            }
+            
         default:
             return state
     }

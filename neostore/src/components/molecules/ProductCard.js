@@ -9,18 +9,16 @@ import { BiRupee } from 'react-icons/bi'
 function ProductCard(props) {
 
 
+  const { product_name, product_cost, product_rating, product_image,product_id } = props.product
 
-  const { product_name, product_cost, product_rating, product_image } = props.product
-
-
+  
   return (
     <React.Fragment>
       <Card style={{ width: '16rem', height: '20rem',borderBottom:'2px solid lightgray',borderTop:0 }}>
         <Card.Body>
         <img src={`http://180.149.241.208:3022/${product_image}`} style={{height:'8rem',width:'100%'}} />
-          {/* <Card.Img variant="top" src={`http://180.149.241.208:3022/${product_image}`} /> */}
           <Typography align='center' style={{height:'3em'}} className='pt-2'>
-            <Link href='#'>{product_name}</Link>
+            <Link href={`/productdetail/${product_id}`}>{product_name}</Link>
           </Typography>
           <Card.Text style={{ display: 'flex', justifyContent: "center" }} >
             <b style={{ fontFamily: 'Arial' }}>{`₹${product_cost}`}</b>

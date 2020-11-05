@@ -205,3 +205,17 @@ border-bottom: 2px solid lightgray;
     font-size: 27px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+
+/* Product Module */
+
+.page-link {
+    border: 0;
+    color: gray;
+}
+
+.page-item.disabled .page-link{
+    color: lightgray;
+}

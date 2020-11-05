@@ -1,4 +1,4 @@
-import { AppBar, createMuiTheme, Grid, Icon, ThemeProvider, Toolbar, Typography, Input, Paper, makeStyles, Button, Badge, IconButton, withStyles, Menu, MenuItem, Snackbar ,Link, } from '@material-ui/core'
+import { AppBar, createMuiTheme, Grid, Icon, ThemeProvider, Toolbar, Typography, Input, Paper, makeStyles, Button, Badge, IconButton, withStyles, Menu, MenuItem, Snackbar, Link, Collapse, List, ListItem, TextField, InputAdornment, } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -10,7 +10,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Alert } from 'react-bootstrap';
+import { Accordion, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 
@@ -112,13 +112,13 @@ function Header(props) {
     };
 
 
-    const handleLogout =()=>{
+    const handleLogout = () => {
         localStorage.removeItem('token')
         setopen(true)
         window.location.reload()
     }
     const history = useHistory()
-    const handleonClose =()=>{
+    const handleonClose = () => {
         setopen(false)
     }
 
@@ -144,9 +144,9 @@ function Header(props) {
                                         }
                                     }
                                 })}>
-<Link href='/dashboard' color='inherit' style={{textDecoration:'none',textTransform:'none'}}>
-                                    <Typography display='inline' style={{color:"white"}} variant='h4'>Neo</Typography>
-                                    <Typography display='inline' style={{ fontWeight: 'bold' }} color='secondary' variant='h4'>STORE</Typography>
+                                    <Link href='/dashboard' color='inherit' style={{ textDecoration: 'none', textTransform: 'none' }}>
+                                        <Typography display='inline' style={{ color: "white" }} variant='h4'>Neo</Typography>
+                                        <Typography display='inline' style={{ fontWeight: 'bold' }} color='secondary' variant='h4'>STORE</Typography>
                                     </Link>
                                 </ThemeProvider>
                             </Toolbar>
@@ -156,21 +156,21 @@ function Header(props) {
                         <Grid container justify='space-evenly'>
                             <Grid item>
                                 <Toolbar>
-                                    <Link href='/dashboard' style={{textDecoration:'none'}}>
-                                    <Typography variant='h6' style={{color:"white"}} >Home</Typography>
+                                    <Link href='/dashboard' style={{ textDecoration: 'none' }}>
+                                        <Typography variant='h6' style={{ color: "white" }} >Home</Typography>
                                     </Link>
                                 </Toolbar>
                             </Grid>
                             <Grid item>
                                 <Toolbar>
-                                <Link href='/commonproducts' style={{textDecoration:'none'}}>
-                                    <Typography variant='h6' style={{color:"white"}}>Products</Typography>
+                                    <Link href='/commonproducts' style={{ textDecoration: 'none' }}>
+                                        <Typography variant='h6' style={{ color: "white" }}>Products</Typography>
                                     </Link>
                                 </Toolbar>
                             </Grid>
                             <Grid item>
                                 <Toolbar>
-                                    <Typography variant='h6' style={{color:"Swhite"}}>Order</Typography>
+                                    <Typography variant='h6' style={{ color: "Swhite" }}>Order</Typography>
                                 </Toolbar>
                             </Grid>
                         </Grid>
@@ -181,14 +181,31 @@ function Header(props) {
                             <Grid item xs={12} lg={8}>
                                 <Grid container className={classes.searchBar}>
                                     <Toolbar disableGutters>
+
                                         <Paper component='form' classes={{ root: classes.root }}>
-                                            <SearchIcon style={{ color: 'black' }} fontSize='large' />
-                                            <Input type='search' fullWidth
-                                                placeholder='Search..'
-                                                disableUnderline
-                                            >
-                                            </Input>
+
+                                            {/* <SearchIcon style={{ color: 'black' }} fontSize='large' />
+                                                    <Input type='search' fullWidth
+                                                        placeholder='Search..'
+                                                        disableUnderline
+                                                    />*/}
+
+                                            <TextField
+                                                fullWidth
+                                                type="search"
+                                                variant="outlined"
+                                                placeholder='Search'
+                                                InputProps={{
+                                                    startAdornment: (
+                                                        <InputAdornment position="start">
+                                                            <SearchIcon fontSize='large' />
+                                                        </InputAdornment>
+                                                    )
+                                                }}
+                                            />
+
                                         </Paper>
+
                                     </Toolbar>
                                 </Grid>
                             </Grid>

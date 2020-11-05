@@ -8,16 +8,30 @@ import {
     FETCH_CATEGORY_SUCCESS,
     FETCH_COLOR_REQUEST,
     FETCH_COLOR_SUCCESS,
-    FETCH_COLOR_FAILURE
+    FETCH_COLOR_FAILURE,
+    FETCH_BYID_REQUEST,
+FETCH_BYID_SUCCESS,
+FETCH_BYID_FAILURE,
+FETCH_CARD_CATEGORY,
+FETCH_CARD_CATEGORY_S
 } from './productsTypes'
 
-export const fetchCommonProducts = () => {
+export const fetchCommonProducts = (id='',category_id='',color_id='',sortBy='',name='',sortIn='') => {
     return (dispatch) => {
         dispatch(fetchproductsrequest())
-        axios.get('http://180.149.241.208:3022/commonproducts')
+        axios.get('http://180.149.241.208:3022/commonproducts',{
+params:{
+    id,
+    category_id,
+    color_id,
+    sortBy,
+    name,
+    sortIn
+}
+        })
             .then((response) => {
                 dispatch(fetchproductssuccess(response.data))
-                // console.log(response.data)
+                console.log(response.data)
             }).catch((error) => {
                 // console.log(error.response)
                 dispatch(fetchproductsfailure(error.response))
@@ -54,9 +68,9 @@ export const fetchCategory = () => {
         axios.get('http://180.149.241.208:3022/getAllCategories')
             .then((response) => {
                 dispatch(fetchcategorysuccess(response.data))
-                console.log(response.data)
+                // console.log(response.data)
             }).catch((error) => {
-                console.log(error.response)
+                // console.log(error.response)
                 dispatch(fetchcategoryfailure(error.response))
             })
     }
@@ -90,9 +104,9 @@ export const fetchColor = () => {
         axios.get('http://180.149.241.208:3022/getAllColors')
             .then((response) => {
                 dispatch(fetchcolorsuccess(response.data))
-                console.log(response.data)
+                // console.log(response.data)
             }).catch((error) => {
-                console.log(error.response)
+                // console.log(error.response)
                 dispatch(fetchcolorfailure(error.response))
             })
     }
@@ -115,5 +129,58 @@ export const fetchcolorfailure = (error) => {
     return {
         type: FETCH_COLOR_FAILURE,
         payload: error
+    }
+}
+
+
+
+
+
+
+export const fetchById = (id) => {
+    return (dispatch) => {
+        dispatch(fetchbyidrequest())
+        axios.get(`http://180.149.241.208:3022/getProductByProdId/${id}`)
+            .then((response) => {
+                dispatch(fetchbyidsuccess(response.data))
+                // console.log(response.data)
+            }).catch((error) => {
+                // console.log(error.response)
+                dispatch(fetchbyidfailure(error.response))
+            })
+    }
+}
+
+export const fetchbyidrequest = () => {
+    return {
+        type: FETCH_BYID_REQUEST
+    }
+}
+
+export const fetchbyidsuccess = (data) => {
+    return {
+        type: FETCH_BYID_SUCCESS,
+        payload: data
+    }
+}
+
+export const fetchbyidfailure = (error) => {
+    return {
+        type: FETCH_BYID_FAILURE,
+        payload: error
+    }
+}
+
+
+export const fetchcardcategoryfailure = () => {
+    return {
+        type: FETCH_CARD_CATEGORY,
+        payload: false
+    }
+}
+export const fetchcardcategorysuccess = () => {
+    return {
+        type: FETCH_CARD_CATEGORY_S,
+        payload: true
     }
 }
