@@ -8,6 +8,7 @@ import { BiRupee } from 'react-icons/bi'
 import { fetchcardcategoryfailure, fetchcardcategorysuccess, fetchCommonProducts } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux'
 import CardError from './CardError'
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     placeSort: {
@@ -33,7 +34,6 @@ function ProductsCard(props) {
     const product = useSelector(state => state.product.products)
     const [sortBy, setsortBy] = useState({ normal: true, rating: false, lowtohigh: false, hightolow: false })
     const dispatch = useDispatch()
-
 
 
 

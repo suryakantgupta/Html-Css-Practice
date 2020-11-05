@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import { fetchCategory, fetchColor, fetchCommonProducts } from '../redux'
 import CardError from '../components/molecules/CardError'
+import { useParams } from 'react-router-dom'
 
 function ProductModule() {
 
@@ -21,12 +22,18 @@ function ProductModule() {
 
     const product = useSelector(state => state.product.products)
     const dispatch = useDispatch()
-
+    const {name} = useParams()
     useEffect(() => {
-        dispatch(fetchCommonProducts())
+        if(name==undefined){
+            dispatch(fetchCommonProducts())
+        }else{
+            dispatch(fetchCommonProducts('','','','',name))
+        }
         dispatch(fetchCategory())
         dispatch(fetchColor())
-    }, [])
+    }, [name])
+
+    
 
 
 

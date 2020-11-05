@@ -3,7 +3,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
@@ -12,6 +12,75 @@ import SendIcon from '@material-ui/icons/Send';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Accordion, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCommonProducts } from '../redux';
+
+
+
+const SearchbarDropdown = (props) => {
+    const { options, onInputChange } = props;
+    const ulRef = useRef();
+    const inputRef = useRef();
+    const history = useHistory()
+
+
+    useEffect(() => {
+        inputRef.current.addEventListener('click', (event) => {
+            event.stopPropagation();
+            ulRef.current.style.display = 'flex';
+            onInputChange(event);
+        });
+        inputRef.current.addEventListener('keyup', (e) => {
+            if (e.keyCode === 13) {
+                history.push(`/commonproducts/${inputRef.current.value}`)
+            }
+        })
+        // console.log(inputRef)
+        // ulRef.current.style.display = 'none';
+        // document.addEventListener('click', (event) => {
+        //     ulRef.current.style.display = 'none';
+        // });
+    }, []);
+
+
+    return (
+        <div className="search-bar-dropdown">
+            <SearchIcon className='mt-1' style={{ position: 'absolute', color: 'black', height: '1.5em', width: '1.5em' }} />
+            <input
+                id="search-bar"
+                type="text"
+                className="form-control"
+                placeholder="Search"
+                ref={inputRef}
+                onChange={onInputChange}
+
+            />
+
+            <ul id="results" className="list-group" ref={ulRef}>
+                {options.map((option) => {
+                    return (
+                        <button
+                            type="button"
+                            key={option.product_id}
+                            onClick={(e) => {
+                                inputRef.current.value = option.product_name;
+                            }}
+                            className="list-group-item list-group-item-action"
+                        >
+                            {option.product_name}
+                        </button>
+                    );
+                })}
+            </ul>
+        </div>
+    );
+};
+
+
+const defaultOptions = [];
+for (let i = 0; i < 10; i++) {
+    defaultOptions.push(`option ${i}`);
+}
 
 
 
@@ -97,6 +166,41 @@ const StyledMenu = withStyles({
 
 function Header(props) {
 
+
+
+
+
+    const dispatch = useDispatch()
+    const product = useSelector(state => state.product.products)
+    const loading = useSelector(state => state.product.loading)
+
+    useEffect(() => {
+        if (loading) {
+            dispatch(fetchCommonProducts())
+        }
+    }, [])
+
+
+
+    const [options, setOptions] = useState([]);
+    const onInputChange = (event) => {
+        if (!loading) {
+            setOptions(
+                product.product_details.filter((option) => option.product_name.includes(event.target.value))
+            );
+        }
+
+    };
+
+
+
+
+
+
+
+
+    // console.log(product)
+
     const classes = useStyles(); //Creates the instance of the styles to be used in the material component
 
 
@@ -121,6 +225,7 @@ function Header(props) {
     const handleonClose = () => {
         setopen(false)
     }
+
 
 
     return (
@@ -182,13 +287,16 @@ function Header(props) {
                                 <Grid container className={classes.searchBar}>
                                     <Toolbar disableGutters>
 
-                                        <Paper component='form' classes={{ root: classes.root }}>
 
-                                            {/* <SearchIcon style={{ color: 'black' }} fontSize='large' />
+                                        <SearchbarDropdown options={options} onInputChange={onInputChange} />
+
+                                        {/* <Paper component='form' classes={{ root: classes.root }}>
+
+                                            <SearchIcon style={{ color: 'black' }} fontSize='large' />
                                                     <Input type='search' fullWidth
                                                         placeholder='Search..'
                                                         disableUnderline
-                                                    />*/}
+                                                    />
 
                                             <TextField
                                                 fullWidth
@@ -204,7 +312,7 @@ function Header(props) {
                                                 }}
                                             />
 
-                                        </Paper>
+                                        </Paper> */}
 
                                     </Toolbar>
                                 </Grid>
