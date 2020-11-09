@@ -1,42 +1,65 @@
 import React, { useState } from 'react'
-import { createMuiTheme, TextField, ThemeProvider, Typography } from '@material-ui/core'
-import createTypography from '@material-ui/core/styles/createTypography'
+import { TextField, Typography } from '@material-ui/core'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap'
 
 function ForgetPass() {
 
+
+
+    /**
+         * Five States are declare here and there usses are as follows
+         * 1- On Validation showing error is done by this state
+         * 2- All the feilds of Forgot Password values are holded by this state
+         * 3- It handles the Modal to show Error
+         */
+
     const [validateError, setError] = useState({ ehelperNotValid: false, echeckError: false })
     const [email, setEmail] = useState('')
     const [modal, setModal] = useState({ err: false, message: '' })
 
-    const history = useHistory()
+    const history = useHistory() // This hook is used to redirect to other pages when certain condition meets
+
+    /**
+* @description This function handles the on submit action by preventing
+* the refresh of the page and calling the api of forgot password
+* @param {*} e is pass to prevent the refreshing of the page
+*/
+
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post('http://180.149.241.208:3022/forgotPassword', { email })
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 localStorage.setItem('ftoken', response.data.token)
                 history.push('/recoverpass')
             }).catch((err) => {
-                console.log(err.response)
+                // console.log(err.response)
                 setModal({ err: true, message: err.response.data.message })
             })
     }
+
+
+    /**
+     * @description This function validates the Email provided by the user 
+     * it is not in the correct formation it will give an error
+     */
+
+    const blurEmailValidator = () => {
+        let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        email === '' ? setError({ ehelperNotValid: false, echeckError: true }) : pattern.test(email) ? setError({ ehelperNotValid: false, echeckError: false }) : setError({ ehelperNotValid: true, echeckError: false })
+    }
+
+
+    /**
+ * @description: This function handles the Closing of modal when error occurred
+ */
 
     const handleClose = () => {
         window.location.reload()
         setModal({ ...modal, err: false })
     }
-
-
-
-    const blurEmailValidator = () => {
-        let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        email == '' ? setError({ ehelperNotValid: false, echeckError: true }) : pattern.test(email) ? setError({ ehelperNotValid: false, echeckError: false }) : setError({ ehelperNotValid: true, echeckError: false })
-    }
-
 
     return (
         <div className='row justify-content-center w-100 m-0'>
@@ -48,7 +71,7 @@ function ForgetPass() {
 
                     </div>
                     <div className="card-body d-flex justify-content-center">
-
+                        {/* Email Input */}
                         <TextField
                             // className={(validateError.echeckError || validateError.ehelperNotValid) && classes.errborder}
                             label='Email Address'
@@ -56,7 +79,7 @@ function ForgetPass() {
                             type='email'
                             fullWidth
                             error={(validateError.echeckError || validateError.ehelperNotValid)}
-                            helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'example abc@gmail.com') || ' '}
+                            helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Example abc@gmail.com') || ' '}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             onBlur={blurEmailValidator}

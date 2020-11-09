@@ -1,10 +1,8 @@
-import { Avatar, Box, Button, Container, Divider, Grid, Icon, IconButton, makeStyles, Tab, Tabs, Tooltip, Typography, useMediaQuery, useTheme } from '@material-ui/core'
-import React, { useEffect } from 'react'
+import { Avatar, Box, Button, Container, Divider, Grid, IconButton, makeStyles, Tab, Tabs, Tooltip, Typography, useMediaQuery, useTheme } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
 import SwipeableViews from 'react-swipeable-views';
 import { Carousel, Image } from 'react-bootstrap'
-import cake from '../../images/cake.jpg'
 import StarRatings from 'react-star-ratings';
-import { BiRupee } from 'react-icons/bi'
 import ShareIcon from '@material-ui/icons/Share';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import PinterestIcon from '@material-ui/icons/Pinterest';
@@ -17,11 +15,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchById } from '../../redux/products/productsAction';
 import Loading from '../Loading'
+import { GlassMagnifier } from 'react-image-magnifiers'
 
+
+/**
+ * @description This functional component renders the sliding part of /description and features
+ * 
+ * @param {*} props is passsed for the customization according to the use case
+ */
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
 
     return (
         <div
@@ -37,6 +41,8 @@ function TabPanel(props) {
         </div>
     );
 }
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: theme.palette.background.paper,
@@ -53,62 +59,43 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Main component
+ */
 function ProductDetail() {
-
-
-    const mobile = useMediaQuery('(max-width:400px)')
+    const mobile = useMediaQuery('(max-width:400px)')// Identifies the device
     const dispatch = useDispatch()
-
-
-
-    const { id } = useParams()
-
-
-    useEffect(() => {
-        dispatch(fetchById(id))
-    }, [])
+    const { id } = useParams() //Extract the id from url
 
     const product = useSelector(state => state.byid.product.product_details)
     const loading = useSelector(state => state.byid.loading)
-    useEffect(() => {
-        if (!loading) {
-            // const {product_image,product_name,product_rating} = product[0]
-        }
-    }, [loading])
-
-
-
 
     const classes = useStyles();
     const theme = useTheme();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
+    const [image, setimage] = useState()
 
+    //This function fecth the product by id
+    useEffect(() => {
+        dispatch(fetchById(id))
+    }, [id])
+    useEffect(() => {
+        if (!loading) {
+            setimage(`http://180.149.241.208:3022/${product[0].product_image}`)
+        }
+    }, [loading])
+
+    /**
+     * @description These two function handles the sliding to description and features
+     * @param {*} event 
+     * @param {*} newValue 
+     */
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
     const handleChangeIndex = (index) => {
         setValue(index);
     };
-
-
-
-
 
 
 
@@ -119,19 +106,26 @@ function ProductDetail() {
             {loading ? <Loading /> :
                 <React.Fragment>
                     <Header />
-                    <Container style={{marginBottom:'7%'}}>
+                    <Container style={{ marginBottom: '7%' }}>
                         <div style={{ marginTop: '3%', marginBottom: '3%' }}>
                             <Grid container justify='space-between'>
                                 <Grid item lg={6}>
                                     {!mobile && <Grid container spacing={8} >
                                         <Grid item>
-                                            <Image src={`http://180.149.241.208:3022/${product[0].product_image}`} width='100%' />
+                                            <GlassMagnifier
+                                                imageSrc={image}
+                                                allowOverflow={true}
+                                                magnifierSize='30%'
+                                                magnifierBorderSize='5'
+                                                magnifierBorderColor='black'
+                                            />
+                                            {/* <Image src={image} width='100%' /> */}
                                         </Grid>
                                         <Grid container item spacing={4}>
-                                            {product[0].subImages_id.product_subImages.map((name)=>
-                                            <Grid item>
-                                                <Image src={`http://180.149.241.208:3022/${name}`} fluid width='170rem' />
-                                            </Grid>)
+                                            {product[0].subImages_id.product_subImages.map((name) =>
+                                                <Grid item>
+                                                    <Image src={`http://180.149.241.208:3022/${name}`} onClick={() => setimage(`http://180.149.241.208:3022/${name}`)} fluid width='170rem' />
+                                                </Grid>)
                                             }
                                         </Grid>
                                     </Grid>}
@@ -216,12 +210,6 @@ function ProductDetail() {
                                 </Grid>
                             </Grid>
 
-
-
-
-
-
-                            {/* <div className={classes.root}> */}
                             <Grid container direction='column'>
                                 <Grid item>
                                     <Box width='50%'>

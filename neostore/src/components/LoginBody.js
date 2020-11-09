@@ -4,17 +4,12 @@ import gicon from '../images/google-icon.png';
 import ticon from '../images/twitter-icon.png';
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import { TextField, RadioGroup, InputAdornment, Button, IconButton, FormGroup, FormControlLabel, Radio, useMediaQuery } from '@material-ui/core';
+import { TextField, InputAdornment, IconButton} from '@material-ui/core';
 import {
-    withStyles,
     makeStyles,
 } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import CallIcon from '@material-ui/icons/Call';
-import { green, blue, red } from '@material-ui/core/colors';
 import { postLogin } from '../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -23,7 +18,7 @@ import { useHistory } from 'react-router-dom';
 
 function LoginBody(props) {
 
-
+//It styles the Material Components
     const useStyles = makeStyles({
 
         root: {
@@ -44,16 +39,30 @@ function LoginBody(props) {
 
 
     const classes = useStyles(); //object is define to use styles in material
+    const dispatch = useDispatch()
 
 
 
 
-
+/**
+ * @description Here four states are defined and their usses are as follows
+ * 1- Stores the value of login credenial
+ * 2- Provide logic to show error
+ * 3- Manages the password icon toggling
+ * 4- Makes sure that everything is valid before submit
+ */
     const [name, setname] = useState({ email: '', pass: '' })
     const [validateError, setError] = useState({ ehelperNotValid: false, echeckError: false, phelperNotValid: false, pcheckError: false })
     const [manage, setManage] = useState({ showPassword: false, cshowPassword: false })
     const [submitCheck, setSubmit] = useState({ echeck: true, pcheck: true })
 
+
+
+    /**
+ * @description This function validates the email Provided by the user
+ * is in the correct format
+ * @returns It returns the appropriate erors if validation fails
+ */
 
     const blurEmailValidator = () => {
         let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -71,6 +80,11 @@ function LoginBody(props) {
         }
     }
 
+/**
+ * @description This function validates the Password Provided by the user
+ * and check that if it is Alphanumeric or not
+ * @returns It returns the appropriate erors if validation fails
+ */
 
 
     const blurPassValidator = () => {
@@ -94,16 +108,13 @@ function LoginBody(props) {
         }
     }
 
-
+//This handles the password toggling
     const handleClickShowPassword = () => {
         setManage({ ...manage, showPassword: !manage.showPassword });
     };
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
-    const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -113,7 +124,7 @@ function LoginBody(props) {
 
     const history = useHistory()
 
-    const loginsuccess = useSelector(state => state.login.success)
+    const loginsuccess = useSelector(state => state.login.success)//Checks for authentication
 
     useEffect(() => {
         if(loginsuccess.token != undefined && localStorage.token != "undefined"){
@@ -136,9 +147,9 @@ function LoginBody(props) {
         <div className='container' >
             <div className='row mt-5'>
                 <div className='col-md-6 d-flex flex-column justify-content-end' id='socialloginbtn'>
-                    <button className='btn fbtn shadow'><img className='mr-3' src={ficon} height='60rem' />Login with Facebook</button>
-                    <button className='btn gbtn shadow'><img className='mr-3' src={gicon} height='60rem' />Login with Google</button>
-                    <button className='btn tbtn shadow'><img className='mr-3' src={ticon} height='60rem' />Login with Twitter</button>
+                    <button className='btn fbtn shadow'><img alt='Facebook' className='mr-3' src={ficon} height='60rem' />Login with Facebook</button>
+                    <button className='btn gbtn shadow'><img alt='Google' className='mr-3' src={gicon} height='60rem' />Login with Google</button>
+                    <button className='btn tbtn shadow'><img alt='Twitter' className='mr-3' src={ticon} height='60rem' />Login with Twitter</button>
                 </div>
 
                 <div className='col-md-6'>

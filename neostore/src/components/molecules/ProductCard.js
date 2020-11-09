@@ -1,23 +1,20 @@
-import { Box, Button, Grid, Icon, Typography, Link } from '@material-ui/core'
+import { Box, Button, Grid, Typography, Link } from '@material-ui/core'
 import StarRatings from 'react-star-ratings';
-import { Card, Image } from 'react-bootstrap'
-import cake from '../../images/cake.jpg'
+import { Card, } from 'react-bootstrap'
 import React from 'react'
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import { BiRupee } from 'react-icons/bi'
 
 function ProductCard(props) {
 
+// IT destructures the props from parent element
+  const { product_name, product_cost, product_rating, product_image, product_id } = props.product
 
-  const { product_name, product_cost, product_rating, product_image,product_id } = props.product
 
-  
   return (
     <React.Fragment>
-      <Card style={{ width: '16rem', height: '20rem',borderBottom:'2px solid lightgray',borderTop:0 }}>
+      <Card style={{ width: '16rem', height: '20rem', borderBottom: '2px solid lightgray', borderTop: 0 }}>
         <Card.Body>
-        <img src={`http://180.149.241.208:3022/${product_image}`} style={{height:'8rem',width:'100%'}} />
-          <Typography align='center' style={{height:'3em'}} className='pt-2'>
+          <img alt='Product' src={`http://180.149.241.208:3022/${product_image}`} style={{ height: '8rem', width: '100%' }} />
+          <Typography align='center' style={{ height: '3em' }} className='pt-2'>
             <Link href={`/productdetail/${product_id}`}>{product_name}</Link>
           </Typography>
           <Card.Text style={{ display: 'flex', justifyContent: "center" }} >

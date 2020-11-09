@@ -1,7 +1,26 @@
 import { Box, Button, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import EditIcon from '@material-ui/icons/Edit';
+
+const [profile, setprofile] = useState(true) //This will handle toggle between profile and edit porfile
+
+/**
+ * @description This function
+ */
+
+ const setToEditProfile = ()=>{
+setprofile(false)
+ }
+
+ /**
+  * 
+  */
+const setToProfile = ()=>{
+setprofile(true)
+}
+
+
 
 const useStyles= makeStyles((theme)=>({
     profile:{

@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Avatar, Button, Grid, makeStyles, Typography } from '@material-ui/core'
 import SubjectIcon from '@material-ui/icons/Subject';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
@@ -16,7 +16,7 @@ large:{
 
 
 
-function AccSidePanel() {
+function AccSidePanel(props) {
     const classess = useStyles()
     return (
         <React.Fragment>
@@ -35,28 +35,28 @@ function AccSidePanel() {
                 </Grid>
                 <Grid item>
                     <Grid container justify='center'>
-                        <Button startIcon={<SubjectIcon />} color='primary'>
+                        <Button onClick={()=>props.setPage(true,false,false,false)} startIcon={<SubjectIcon />} color='primary'>
                             Order
                     </Button>
                     </Grid>
                 </Grid>
                 <Grid item>
                     <Grid container justify='center'>
-                        <Button startIcon={<AccountBoxIcon />} color='primary'>
+                        <Button onClick={()=>props.setPage(false,true,false,false)} startIcon={<AccountBoxIcon />} color='primary'>
                             Profile
                     </Button>
                     </Grid>
                 </Grid>
                 <Grid item>
                     <Grid container justify='center'>
-                        <Button startIcon={<HomeIcon />} color='primary'>
+                        <Button  onClick={()=>props.setPage(false,false,true,false)} startIcon={<HomeIcon />} color='primary'>
                             Address
                     </Button>
                     </Grid>
                 </Grid>
                 <Grid item>
                     <Grid container justify='center'>
-                        <Button startIcon={<CompareArrowsIcon />} color='primary'>
+                        <Button  onClick={()=>props.setPage(false,false,false,true)} startIcon={<CompareArrowsIcon />} color='primary'>
                             Change Password
                     </Button>
                     </Grid>

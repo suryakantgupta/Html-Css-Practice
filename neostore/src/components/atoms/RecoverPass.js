@@ -11,22 +11,31 @@ import { Modal, Button } from 'react-bootstrap'
 function RecoverPass() {
 
 
+    /**
+     * Five States are declare here and there usses are as follows
+     * 1- All the feilds of Recover Password values are holded by this state
+     * 2- Password icon on and off is managed by this state
+     * 3- On Validation showing error is done by this state
+     * 4- It handles the Modal to show Error
+     * 5- It Handles the Snackbar on successfull operation
+     */
     const [rcpass, setrcpass] = useState({ vcode: '', npass: '', cpass: '' })
     const [showPassword, setSP] = useState({ p: false, c: false })
     const [validateError, setError] = useState({ phelperNotValid: false, pcheckError: false, chelperNotValid: false, ccheckError: false })
-
-
-
+    const [modal, setModal] = useState({ err: false, message: '' })
+    const [open, setopen] = useState(false)
 
 
     /**
      * @description This function validates the Password Provided by the user
+     * First it checks for the empty Field then it checks the lenght 
+     * if that critatria meets it checks the alphanumeric part
      * 
      * @returns It returns the appropriate erors if validation fails
      */
 
     const blurPassValidator = () => {
-        if (rcpass.npass == '') {
+        if (rcpass.npass === '') {
             setError({ ...validateError, phelperNotValid: false, pcheckError: true })
         } else {
             if (rcpass.npass.length < 8 || rcpass.npass.length > 12) {
@@ -44,15 +53,16 @@ function RecoverPass() {
 
     /**
      * @description This function validates the Confirm Password Provided by the user
+     * by verifying that it has the same value as New Password
      * 
      * @returns It returns the appropriate erors if validation fails
      */
 
     const blurConPassValidator = () => {
-        if (rcpass.cpass == '') {
+        if (rcpass.cpass === '') {
             setError({ ...validateError, chelperNotValid: false, ccheckError: true })
         } else {
-            if (rcpass.cpass == rcpass.npass) {
+            if (rcpass.cpass === rcpass.npass) {
                 setError({ ...validateError, chelperNotValid: false, ccheckError: false })
             } else {
                 setError({ ...validateError, chelperNotValid: true, ccheckError: false })
@@ -60,18 +70,15 @@ function RecoverPass() {
         }
     }
 
-    const [modal, setModal] = useState({ err: false, message: '' })
-    const [open, setopen] = useState(false)
-    const history = useHistory()
 
-    const handleClose = () => {
-        window.location.reload()
-        setModal({ ...modal, err: false })
-    }
-    const handleonClose = () => {
-        setopen(false)
-        history.push('/login')
-    }
+    const history = useHistory() // This hook is used to redirect to other pages when certain condition meets
+
+
+     /**
+     * @description This function handles the on submit action by preventing
+     * the refresh of the page and calling the api of recover pass
+     * @param {*} e is pass to prevent the refreshing of the page
+     */
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -85,32 +92,46 @@ function RecoverPass() {
             }
         }).then((response) => {
             setopen(true)
-            console.log(response.data.message)
+            // console.log(response.data.message)
             setModal({ ...modal, message: response.data.message })
-
         }).catch((error) => {
             setModal({ err: true, message: error.response.data.message })
-
         })
     }
 
 
+    /**
+     * @description: This function handles the Closing of modal when error occurred
+     */
+    const handleClose = () => {
+        window.location.reload()
+        setModal({ ...modal, err: false })
+    }
+
+    /**
+     * @description This Function handles the closing of Snackbar after successful operation 
+     */
+
+    const handleonClose = () => {
+        setopen(false)
+        history.push('/login')
+    }
 
 
+   
 
-
+    /**
+     * @description All these 4 function handlesthe password icon on and off functioning
+     */
     const handleClickShowPassword = () => {
         setSP({ ...showPassword, p: !showPassword.p });
     };
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
     const handleClickcShowPassword = () => {
         setSP({ ...showPassword, c: !showPassword.c });
     };
-
     const handleMouseDowncPassword = (event) => {
         event.preventDefault();
     };
@@ -131,25 +152,26 @@ function RecoverPass() {
                                         <Divider orientation='horizontal' />
                                     </Grid>
                                     <Grid container item justify='center'>
-                                        <Typography style={{ color: 'red' }} ><Icon><ErrorIcon /></Icon>Verification has been sent to your registered mail ID</Typography>
+                                        <Typography style={{ color: 'red' }} ><Icon><ErrorIcon /></Icon>Verification code has been sent to your registered mail ID</Typography>
                                     </Grid>
                                     <Grid item>
+                                        {/* Verification Code Input */}
                                         <TextField
                                             // className={(validateError.fcheckError || validateError.fhelperNotValid) && classes.errborder}
                                             label='Verification Code'
                                             variant='outlined'
                                             type='text'
                                             fullWidth
-                                            // error={(validateError.fcheckError || validateError.fhelperNotValid)}
                                             helperText=' '
-                                            // helperText={(validateError.fcheckError && 'You must enter a value') || (validateError.fhelperNotValid && 'Not Valid') || ''}
                                             value={rcpass.vcode}
                                             onChange={e => setrcpass({ ...rcpass, vcode: e.target.value })}
                                             required
                                         />
 
                                     </Grid>
+
                                     <Grid item>
+                                        {/* New Password Input */}
                                         <TextField
                                             // className={(validateError.fcheckError || validateError.fhelperNotValid) && classes.errborder}
                                             label='New Password'
@@ -170,18 +192,16 @@ function RecoverPass() {
                                                             onMouseDown={handleMouseDownPassword}
                                                             edge='end'
                                                         >
-
                                                             {showPassword.p ? <VisibilityIcon /> : <VisibilityOffIcon />}
                                                         </IconButton>
-
                                                     </InputAdornment>
                                                 )
-
                                             }}
                                         />
-
                                     </Grid>
+
                                     <Grid item>
+                                        {/* Confirm Password Input */}
                                         <TextField
                                             // className={(validateError.fcheckError || validateError.fhelperNotValid) && classes.errborder}
                                             label='Confirm Password'
@@ -202,17 +222,14 @@ function RecoverPass() {
                                                             onMouseDown={handleMouseDowncPassword}
                                                             edge='end'
                                                         >
-
                                                             {showPassword.c ? <VisibilityIcon /> : <VisibilityOffIcon />}
                                                         </IconButton>
-
                                                     </InputAdornment>
                                                 )
-
                                             }}
                                         />
-
                                     </Grid>
+
                                 </Grid>
                                 <div className='d-flex justify-content-center mt-3'>
                                     <button className='btn shadow-sm' type='submit' style={{ backgroundColor: '#3f51b5', color: 'white' }}>Submit</button>
@@ -226,8 +243,6 @@ function RecoverPass() {
                         onClose={handleonClose}
                         message={modal.message}
                     />
-
-
                     <Modal show={modal.err}>
                         <Modal.Header>
                             Error Occurred

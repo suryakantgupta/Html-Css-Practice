@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { TextField, RadioGroup, InputAdornment, IconButton, FormControlLabel, Radio, Button } from '@material-ui/core';
 import {
     makeStyles,
@@ -14,8 +14,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import CallIcon from '@material-ui/icons/Call';
 import { useDispatch, useSelector } from 'react-redux';
 import { postNewRegister } from '../redux';
-import Loading from './Loading';
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Modal } from 'react-bootstrap';
 
 
@@ -73,35 +72,40 @@ function RegBody() {
     const classes = useStyles(); //object is define to use styles in material
 
 /**
- * @description Here three states are used to manage the values and validation of Form
+ * @description Here Five states are used to manage the values and validation of Form
  * 
  * 1: First one  manages the values of the form fields provided by the user
  * 
  * 2: Second one manages the Validation of the fields in form
  * 
  * 3: Third controls the toggle  of the password icon
+ * 
+ * 4: This checks if all the feilds are filled and validated then it enables the register button
+ * 
+ * 5: It manages the Modal on specific condition to show
  */
 
     const [name, setname] = useState({ firstName: '', lastName: '', email: '', pass: '', conpass: '', mobile: '', gender:'male'})
     const [validateError, setError] = useState({ fhelperNotValid: false, fcheckError: false, lhelperNotValid: false, lcheckError: false, ehelperNotValid: false, echeckError: false, phelperNotValid: false, pcheckError: false, chelperNotValid: false, ccheckError: false, mhelperNotValid: false, mcheckError: false })
     const [manage, setManage] = useState({ showPassword: false, cshowPassword: false })
     const [submitCheck,setSubmit] = useState({fcheck:true,lcheck:true,echeck:true,pcheck:true,ccheck:true,mcheck:true})
+    const [show, setShow] = useState(true);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() //This hooks dispatches the function in the redux
+
+    /**
+     * @description Here three Selector hooks are used as follows
+     * 1- It containes the response body after registration
+     * 2-It check the loading state and shows the loader
+     * 3-It store the error it it has occurred and show it to the user
+     */
     const success = useSelector(state => state.user.success)
     const loading = useSelector(state => state.user.loading)
     const error = useSelector(state => state.user.error)
     
-
-    // const isFormValid = ()=>{
-    //    const {fcheck,lcheck,echeck,pcheck,ccheck,mcheck} = submitCheck
-        // return fcheck && lcheck && echeck && pcheck && ccheck && mcheck
-        // return false
-    // }
-
-
 /**
  * @description This function validates the First name Provided by the user
+ * is all alphabet it will give error if anything otherthan alphabets is entered
  * 
  * @returns It returns the appropriate erors if validation fails
  */
@@ -125,6 +129,7 @@ const blurfnameValidator = () => {
 
 /**
  * @description This function validates the Last name Provided by the user
+ * is all alphabet it will give error if anything otherthan alphabets is entered
  * 
  * @returns It returns the appropriate erors if validation fails
  */
@@ -147,7 +152,7 @@ const blurfnameValidator = () => {
 
 /**
  * @description This function validates the email Provided by the user
- * 
+ * is in the correct format
  * @returns It returns the appropriate erors if validation fails
  */
 
@@ -170,12 +175,12 @@ const blurfnameValidator = () => {
 
 /**
  * @description This function validates the Password Provided by the user
- * 
+ * and check that if it is Alphanumeric or not
  * @returns It returns the appropriate erors if validation fails
  */
 
 const blurPassValidator = () => {
-    if (name.pass === '') {
+    if (name.pass == '') {
         setError({...validateError, phelperNotValid: false, pcheckError: true })
         setSubmit({...submitCheck,pcheck:true})
     } else {
@@ -197,16 +202,17 @@ const blurPassValidator = () => {
 
 /**
  * @description This function validates the Confirm Password Provided by the user
+ * by checking that if it matches password or not
  * 
  * @returns It returns the appropriate erors if validation fails
  */
 
 const blurConPassValidator = () => {
-    if (name.conpass === '') {
+    if (name.conpass == '') {
         setError({...validateError, chelperNotValid: false, ccheckError: true })
         setSubmit({...submitCheck,ccheck:true})
     } else {
-        if (name.conpass === name.pass) {
+        if (name.conpass == name.pass) {
             setError({...validateError, chelperNotValid: false, ccheckError: false })
             setSubmit({...submitCheck,ccheck:false})
         } else {
@@ -218,6 +224,7 @@ const blurConPassValidator = () => {
 
 /**
  * @description This function validates the Mobile Number Provided by the user
+ * mobile number should begin with 6,7,8,9 and it should be of proper length
  * 
  * @returns It returns the appropriate erors if validation fails
  */
@@ -238,7 +245,7 @@ const blurConPassValidator = () => {
                 }
             }
         }
-        else if (name.mobile === '') {
+        else if (name.mobile == '') {
             setError({...validateError, mhelperNotValid: false, mcheckError: true })
             setSubmit({...submitCheck,mcheck:true})
         }
@@ -249,18 +256,27 @@ const blurConPassValidator = () => {
         console.log(name.mobile.length)
     }
 
+
+    /**
+     * @description It handles the submit action of the register button
+     * 
+     * @param {*} e is passed  to prevent the page from refreshing
+     * 
+     * @returns It dispatches the function in redux and post the user data thorugh api
+     */
     const handleSubmit = (e)=>{
         e.preventDefault()
         dispatch(postNewRegister(name))
     }
 
-    const history= useHistory()
-    const [show, setShow] = useState(true);
+    const history= useHistory() //This hook is used to redirect the user to other pages
+
+    //This handles the closing of success modal 
     const handleClose = () => {
         history.push('/login')
          setShow(false)
     };
-
+    //This handles the closing of error modal
     const handleeClose = () => {
         window.location.reload()
          setShow(false)
@@ -301,10 +317,6 @@ const blurConPassValidator = () => {
     }
 
 
-
-
-
-
 /**
  * This Section handles the icon chanage of the password and Confirm Password fields
  */
@@ -327,16 +339,14 @@ const blurConPassValidator = () => {
 
     return (
         <React.Fragment>
-        {/* {loading ? <Loading /> : */}
-        
          <div className='container' style={{ marginBottom: '10%' }}>
             <div className='d-flex justify-content-center flex-column flex-sm-row mt-5 mb-4' style={{ borderBottom: '1px solid lightgray' }}>
                 <div className='m-2'>
-                    <button className='btn fbtn shadow' style={{ width: '15rem' }} ><img className='' src={ficon} height='60rem' />Login with Facebook</button>
+                    <button className='btn fbtn shadow' style={{ width: '15rem' }} ><img alt='Register with Facebook' src={ficon} height='60rem' />Login with Facebook</button>
                 </div>
 
                 <div className='m-2'>
-                    <button className='btn gbtn shadow' style={{ width: '15rem' }}><img className='' src={gicon} height='60rem' />Login with Google</button>
+                    <button className='btn gbtn shadow' style={{ width: '15rem' }}><img alt='Register with Google' src={gicon} height='60rem' />Login with Google</button>
                 </div>
             </div>
 
@@ -346,14 +356,6 @@ const blurConPassValidator = () => {
                 <form className={classes.root} onSubmit={handleSubmit} >
                     <div className="card-body">
                         <label className="card-title regToNeo">Register to NeoSTORE</label>
-
-
-
-
-
-
-
-                        
 
                             <div className={classes.formgroup}>
                                 <TextField
@@ -409,7 +411,7 @@ const blurConPassValidator = () => {
                                     type='email'
                                     fullWidth
                                     error={(validateError.echeckError || validateError.ehelperNotValid)}
-                                    helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'example abc@gmail.com') || ' '}
+                                    helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Example abc@gmail.com') || ' '}
                                     value={name.email}
                                     onChange={e => setname({ ...name, email: e.target.value })}
                                     onBlur={blurEmailValidator}
@@ -515,7 +517,7 @@ const blurConPassValidator = () => {
                                     label='Male'
                                     labelPlacement='end'
                                 control={<Radio
-                                    checked={name.gender === 'male'}
+                                    checked={name.gender == 'male'}
                                     onChange={(e)=>{setname({...name,gender:e.target.value}) }}
                                     value="male"
                                 />}
@@ -524,7 +526,7 @@ const blurConPassValidator = () => {
                                 label='Female'
                                 labelPlacement='end'
                                 control={<Radio
-                                    checked={name.gender === 'female'}
+                                    checked={name.gender == 'female'}
                                     onChange={(e)=>{setname({...name,gender:e.target.value}) }}
                                     value="female"
                                     label='fred'
@@ -539,11 +541,8 @@ const blurConPassValidator = () => {
                     </div>
                     </form>
                 </div>
-
-
             </div>
         </div>
-        {/* } */}
         </React.Fragment>
     )
 }

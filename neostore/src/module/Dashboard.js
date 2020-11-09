@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Typography } from '@material-ui/core'
+import { Box, Button, Grid, Typography } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'

@@ -1,35 +1,40 @@
-import { AppBar, createMuiTheme, Grid, Icon, ThemeProvider, Toolbar, Typography, Input, Paper, makeStyles, Button, Badge, IconButton, withStyles, Menu, MenuItem, Snackbar, Link, Collapse, List, ListItem, TextField, InputAdornment, } from '@material-ui/core'
+import { AppBar, createMuiTheme, Grid, ThemeProvider, Toolbar, Typography, makeStyles, Button, Badge, withStyles, Menu, MenuItem, Snackbar, Link, } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import React, { useEffect, useRef, useState } from 'react'
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Accordion, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCommonProducts } from '../redux';
 
 
-
+/**
+ * @description This is the Search Bar Component to give suggetions in the dropdown
+ * suggesstion are the name of the product that is available
+ * @param {*} props is passed to get the list of option in the dropdown
+ */
 const SearchbarDropdown = (props) => {
-    const { options, onInputChange } = props;
-    const ulRef = useRef();
-    const inputRef = useRef();
-    const history = useHistory()
 
+    const { options, onInputChange } = props; //props are destructured in the option list and event type
 
+    const ulRef = useRef(); //This provide ref to ul for DOM manipulation
+    const inputRef = useRef(); //This provide ref to the search input field for DOM manipulation
+    const history = useHistory() //It is used to redirect to other page when certain conditions are met
+
+    /**
+     * @description This function adds the functionality to the input feild of
+     * the search bar by setting the display of the ul from none to flex
+     */
     useEffect(() => {
         inputRef.current.addEventListener('click', (event) => {
             event.stopPropagation();
             ulRef.current.style.display = 'flex';
             onInputChange(event);
         });
+
         inputRef.current.addEventListener('keyup', (e) => {
             if (e.keyCode === 13) {
                 history.push(`/commonproducts/${inputRef.current.value}`)
@@ -53,10 +58,10 @@ const SearchbarDropdown = (props) => {
                 placeholder="Search"
                 ref={inputRef}
                 onChange={onInputChange}
-
             />
 
             <ul id="results" className="list-group" ref={ulRef}>
+                {/* This Function makes the list in dropdown menu */}
                 {options.map((option) => {
                     return (
                         <button
@@ -76,11 +81,6 @@ const SearchbarDropdown = (props) => {
     );
 };
 
-
-const defaultOptions = [];
-for (let i = 0; i < 10; i++) {
-    defaultOptions.push(`option ${i}`);
-}
 
 
 
@@ -165,14 +165,30 @@ const StyledMenu = withStyles({
 
 
 function Header(props) {
+    const classes = useStyles(); //Creates the instance of the styles to be used in the material component
 
+    /**
+     * @description Three states are declared to handle the rendering in header
+     * 1-It handles all the option provided by search bar
+     * 2 and 3 are used to handle the dropdown of the login and register menu
+     */
 
+    const [options, setOptions] = useState([]);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [open, setopen] = useState(false)
 
+    const dispatch = useDispatch() //This hook is used to dispacth the action in the redux
 
-
-    const dispatch = useDispatch()
+    /**
+     * These hooks are used to access the data from redux
+     */
     const product = useSelector(state => state.product.products)
     const loading = useSelector(state => state.product.loading)
+
+    /**
+     * @description This hook check the component did mount state the it dispatches the api call
+     * for product
+     */
 
     useEffect(() => {
         if (loading) {
@@ -181,31 +197,29 @@ function Header(props) {
     }, [])
 
 
+    /**
+     * @description This function checks for the input in search feild and 
+     * accordingy gives the suggesstion from the products available
+     * 
+     * @param {*} event is used to access the value in searcg bar 
+     */
 
-    const [options, setOptions] = useState([]);
     const onInputChange = (event) => {
         if (!loading) {
-            setOptions(
-                product.product_details.filter((option) => option.product_name.includes(event.target.value))
-            );
+            try {
+                setOptions(
+                    product.product_details.filter((option) => option.product_name.includes(event.target.value))
+                );
+            } catch (error) {
+                setOptions([])
+            }
+
         }
 
     };
 
 
 
-
-
-
-
-
-    // console.log(product)
-
-    const classes = useStyles(); //Creates the instance of the styles to be used in the material component
-
-
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [open, setopen] = useState(false)
 
     //It handles the dropdown menu response
     const handleClick = (event) => {
@@ -215,18 +229,17 @@ function Header(props) {
         setAnchorEl(null);
     };
 
-
+    //It removes the token on logout and refresh the page
     const handleLogout = () => {
         localStorage.removeItem('token')
         setopen(true)
         window.location.reload()
     }
-    const history = useHistory()
+
+    //This handles the snackbar when it is closed
     const handleonClose = () => {
         setopen(false)
     }
-
-
 
     return (
         // <Grid container>
@@ -286,34 +299,8 @@ function Header(props) {
                             <Grid item xs={12} lg={8}>
                                 <Grid container className={classes.searchBar}>
                                     <Toolbar disableGutters>
-
-
+                                        {/* SearchBar */}
                                         <SearchbarDropdown options={options} onInputChange={onInputChange} />
-
-                                        {/* <Paper component='form' classes={{ root: classes.root }}>
-
-                                            <SearchIcon style={{ color: 'black' }} fontSize='large' />
-                                                    <Input type='search' fullWidth
-                                                        placeholder='Search..'
-                                                        disableUnderline
-                                                    />
-
-                                            <TextField
-                                                fullWidth
-                                                type="search"
-                                                variant="outlined"
-                                                placeholder='Search'
-                                                InputProps={{
-                                                    startAdornment: (
-                                                        <InputAdornment position="start">
-                                                            <SearchIcon fontSize='large' />
-                                                        </InputAdornment>
-                                                    )
-                                                }}
-                                            />
-
-                                        </Paper> */}
-
                                     </Toolbar>
                                 </Grid>
                             </Grid>
@@ -323,7 +310,6 @@ function Header(props) {
                                         <Button
                                             className={classes.btnBgColor}
                                             style={{ backgroundColor: 'white', outline: 'none', marginRight: '4px' }}
-
                                             startIcon={<Badge badgeContent={4} color='secondary'>
                                                 <ShoppingCartIcon />
                                             </Badge>}
@@ -349,7 +335,6 @@ function Header(props) {
                                         open={Boolean(anchorEl)}
                                         onClose={handleClose}
                                     >
-
                                         <MenuItem>
                                             {props.isLogedin ?
                                                 <ListItemText style={{ color: 'black' }} onClick={handleLogout} primary="Logout" /> :
@@ -359,9 +344,15 @@ function Header(props) {
                                         </MenuItem>
 
                                         <MenuItem>
-                                            <Link href='/register' style={{ textDecoration: 'none' }}>
-                                                <ListItemText style={{ color: 'black' }} primary="Register" />
-                                            </Link>
+                                            {props.isLogedin ?
+                                                <Link href='/myaccount' style={{ textDecoration: 'none' }}>
+                                                    <ListItemText style={{ color: 'black' }} primary="Profile" />
+                                                </Link>
+                                                :
+
+                                                <Link href='/register' style={{ textDecoration: 'none' }}>
+                                                    <ListItemText style={{ color: 'black' }} primary="Register" />
+                                                </Link>}
                                         </MenuItem>
                                     </StyledMenu>
                                 </Toolbar>
@@ -370,11 +361,7 @@ function Header(props) {
                     </Grid>
                 </Grid>
             </AppBar>
-            <Snackbar open={open} autoHideDuration={5000} onClose={handleonClose} message='You have successfully loged out' >
-                {/* <Alert>
-                    
-                </Alert> */}
-            </Snackbar>
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleonClose} message='You have successfully loged out' />
         </ThemeProvider>
 
     )

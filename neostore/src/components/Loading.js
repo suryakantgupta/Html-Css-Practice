@@ -1,7 +1,6 @@
 import { Grid } from '@material-ui/core'
-import React, { Component } from 'react'
+import React from 'react'
 import { Spinner } from 'react-bootstrap'
-import { connect } from 'react-redux'
 
 export const Loading = () => {
     return (

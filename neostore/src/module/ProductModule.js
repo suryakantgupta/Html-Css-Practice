@@ -1,8 +1,7 @@
-import { Container, Divider, Grid, ThemeProvider, createMuiTheme, Box } from '@material-ui/core'
+import { Container, Divider, Grid, Box } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import ProductDetail from '../components/molecules/ProductDetail'
 import ProductsCard from '../components/molecules/ProductsCard'
 import ProductSidePanel from '../components/molecules/ProductSidePanel'
 import Pagination from 'react-bootstrap/Pagination'
@@ -10,33 +9,78 @@ import PageItem from 'react-bootstrap/PageItem'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import { fetchCategory, fetchColor, fetchCommonProducts } from '../redux'
-import CardError from '../components/molecules/CardError'
 import { useParams } from 'react-router-dom'
 
 function ProductModule() {
 
-    const loading = useSelector(state => state.product.loading)
+
+/**
+ * @description Here 3 states are declared for product functionality as follows
+ * 1: It sets the active page no
+ * 2: It handles the disabling effect of pagination
+ * 3: It handles the setting of title according to category
+ */    
     const [active, setactive] = useState(1)
     const [disable, setdisable] = useState({ prev: false, next: false })
-    // const [large,setlarge] = useState(0)
+    const [title, settitle] = useState('All Categories')
 
+    const loading = useSelector(state => state.product.loading)
+    const cardError = useSelector(state => state.cardCategory.category)
     const product = useSelector(state => state.product.products)
+
     const dispatch = useDispatch()
-    const {name} = useParams()
+
+    const { name, category } = useParams()
+
+
+    /**
+     * @description Here if the name or category of the product is provided then the product fetching is done accordingly
+     * It also fetches the category and color
+     */
     useEffect(() => {
-        if(name==undefined){
+        if (name === undefined) {
             dispatch(fetchCommonProducts())
-        }else{
-            dispatch(fetchCommonProducts('','','','',name))
+        } else if (name === ' ' && category !== undefined) {
+            dispatch(fetchCommonProducts('', category, '', '', ''))
+        } else {
+            dispatch(fetchCommonProducts('', '', '', '', name))
         }
         dispatch(fetchCategory())
         dispatch(fetchColor())
     }, [name])
 
-    
+
+    /**
+     * It Governs the functionality of the pagination according to the listing of products
+     */
+    useEffect(() => {
+        if (active === 1) {
+            setdisable({ prev: true, next: false })
+        } else if (active !== 1 && active !== (product.total_count / 8)) {
+            setdisable({ prev: false, next: false })
+        } else if (active === (product.total_count / 8)) {
+            setdisable({ prev: false, next: true })
+        }
+    }, [active])
+
+    /**
+     * This works specifically when user click on the carousel image
+     */
+    useEffect(() => {
+        console.log(category)
+        if (category!==undefined) {
+            try{
+            settitle(product.product_details[0].category_id.category_name)
+                console.log(product.product_details[0])
+            }catch (error) {
+
+            }
+        }
+
+    }, [product])
 
 
-
+//It make the pagination numbers according to the available products
     const getPageItem = () => {
         let number = 8
         let item = []
@@ -47,37 +91,23 @@ function ProductModule() {
         return item
     }
 
-    useEffect(() => {
-        if(active==1){
-            setdisable({prev:true,next:false})
-        }else if (active !=1 && active != (product.total_count / 8)) {
-            setdisable({ prev:false, next: false })
-        } else if(active == (product.total_count / 8)){
-            setdisable({ prev:false, next: true })
-        }
-    }, [active])
+    const prevOnClick = () => {
+        setactive((prevState) => prevState - 1)
+    }
+    const nextOnClick = () => {
+        setactive((prevState) => prevState + 1)
+    }
+    const firstOnClick = () => {
+        setactive(1)
+    }
+    const lastOnClick = () => {
+        setactive((product.total_count / 8))
+    }
 
-const prevOnClick = () =>{
-    setactive((prevState)=>prevState-1)
-}
-const nextOnClick = () =>{
-    setactive((prevState)=>prevState+1)
-}
-const firstOnClick = () =>{
-    setactive(1)
-}
-const lastOnClick = () =>{
-    setactive((product.total_count / 8))
-}
-
-
-const cardError = useSelector(state => state.cardCategory.category)
-const [title, settitle] = useState('All Categories')
-const handleTitle = (data)=>{
-settitle(data)
-}
-console.log(title)
-
+//This function handles  the title when user changes category
+    const handleTitle = (data) => {
+        settitle(data)
+    }
 
     return (
         <React.Fragment>
@@ -93,9 +123,9 @@ console.log(title)
                                 </Box>
                             </Grid>
                             <Grid container item xs={12} lg={8}>
-                                
+
                                 <ProductsCard title={title} pagenumber={active} />
-                                
+
                             </Grid>
                         </Grid>
                         <Grid container justify='center' style={{ marginBottom: '10%' }}>

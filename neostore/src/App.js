@@ -27,7 +27,7 @@ function App() {
           <Route path='/forgotpass' exact render={()=><User body={'forgot'}/>} />
           <Route path='/recoverpass' exact render={()=><User body={'recover'}/>}/>
           <Route path='/myaccount' exact render={()=> <MyAccount />} />
-          <Route path='/commonproducts/:name?' render={()=> <ProductModule />} />
+          <Route path='/commonproducts/:name?/:category?' render={()=> <ProductModule />} />
           <Route path='/productdetail/:id'exact render={()=> <ProductDetail />} />
           
           </Provider>
