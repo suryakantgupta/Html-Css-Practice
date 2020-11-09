@@ -1,41 +1,38 @@
 import { Box, Button, Divider, Grid, makeStyles, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import EditIcon from '@material-ui/icons/Edit';
-
-const [profile, setprofile] = useState(true) //This will handle toggle between profile and edit porfile
-
-/**
- * @description This function
- */
-
- const setToEditProfile = ()=>{
-setprofile(false)
- }
-
- /**
-  * 
-  */
-const setToProfile = ()=>{
-setprofile(true)
-}
+import EditProfile from './EditProfile';
+import { fetchCustProfile } from '../../redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
-const useStyles= makeStyles((theme)=>({
-    profile:{
+const useStyles = makeStyles((theme) => ({
+    profile: {
 
     },
-[theme.breakpoints.down('sm')]:{
-    profile:{
-        textAlign:'center'     
+    [theme.breakpoints.down('sm')]: {
+        profile: {
+            textAlign: 'center'
+        }
     }
-}
 }))
 
-function Profile() {
+function Profile(props) {
 
-    const classes=useStyles()
+    const classes = useStyles()
+
+    const customer = useSelector(state => state.customer.customer)
+
+
+    console.log(customer)
+
+
+
+
+
+
 
     return (
         <div>
@@ -49,67 +46,67 @@ function Profile() {
                         <Grid container direction='column' spacing={4}>
                             <Grid container item>
                                 <Grid item xs={6}>
-                                    <b style={{fontFamily:'Arial',fontSize:'1.1rem'}}>First Name</b>
+                                    <b style={{ fontFamily: 'Arial', fontSize: '1.1rem' }}>First Name</b>
                                     {/* <Typography variantMapping=''>First Name</Typography> */}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography>Suryakant</Typography>
+                                    <Typography>{customer.first_name}</Typography>
                                 </Grid>
                             </Grid>
 
                             <Grid container item>
                                 <Grid item xs={6}>
-                                <b style={{fontFamily:'Arial',fontSize:'1.1rem'}}>Last Name</b>
+                                    <b style={{ fontFamily: 'Arial', fontSize: '1.1rem' }}>Last Name</b>
                                     {/* <Typography>Last Name</Typography> */}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography>Gupta</Typography>
+                                    <Typography>{customer.last_name}</Typography>
                                 </Grid>
                             </Grid>
 
                             <Grid container item>
                                 <Grid item xs={6}>
-                                <b style={{fontFamily:'Arial',fontSize:'1.1rem'}}>Gender</b>
+                                    <b style={{ fontFamily: 'Arial', fontSize: '1.1rem' }}>Gender</b>
                                     {/* <Typography>Gender</Typography> */}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography>Male</Typography>
+                                    <Typography>{customer.gender}</Typography>
                                 </Grid>
                             </Grid>
 
                             <Grid container item>
                                 <Grid item xs={6}>
-                                <b style={{fontFamily:'Arial',fontSize:'1.1rem'}}>Date of Birth</b>
+                                    <b style={{ fontFamily: 'Arial', fontSize: '1.1rem' }}>Date of Birth</b>
                                     {/* <Typography>Date of Birth</Typography> */}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography>26/10/1998</Typography>
+                                    <Typography>{customer.dob}</Typography>
                                 </Grid>
                             </Grid>
 
                             <Grid container item>
                                 <Grid item xs={6}>
-                                <b style={{fontFamily:'Arial',fontSize:'1.1rem'}}>Mobile Number</b>
+                                    <b style={{ fontFamily: 'Arial', fontSize: '1.1rem' }}>Mobile Number</b>
                                     {/* <Typography>Mobile Number</Typography> */}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography>8286620992</Typography>
+                                    <Typography>{customer.phone_no}</Typography>
                                 </Grid>
                             </Grid>
 
                             <Grid container item>
                                 <Grid item xs={6}>
-                                <b style={{fontFamily:'Arial',fontSize:'1.1rem'}}>Email</b>
+                                    <b style={{ fontFamily: 'Arial', fontSize: '1.1rem' }}>Email</b>
                                     {/* <Typography>Email</Typography> */}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography>suryakant.gupta@neosoftmail.com</Typography>
+                                    <Typography>{customer.email}</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Box>
                     <Divider orientation='horizontal' />
-                    <Button variant='outlined' style={{outline:0,marginTop:'3%',textTransform:'none'}} startIcon={<EditIcon />} >Edit</Button>
+                    <Button onClick={props.setToEp} variant='outlined' style={{ outline: 0, marginTop: '3%', textTransform: 'none' }} startIcon={<EditIcon />} >Edit</Button>
                 </Card.Body>
             </Card>
         </div>

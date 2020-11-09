@@ -5,7 +5,7 @@ import { combineReducers } from 'redux'
 import {reducer,cardreducer} from './dashboard/reducer'
 import {userReducer, userloginReducer} from './user/userReducer'
 import { productReducer,categoryReducer,colorReducer,byidReducer,cardCategoryReducer } from './products/productsReducer'
-
+import {customerProfileReducer} from './profile/profileReducer'
 
 const rootReducer = combineReducers({
   carousel: reducer,
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
   category:categoryReducer,
   color:colorReducer,
   byid:byidReducer,
-  cardCategory:cardCategoryReducer
+  cardCategory:cardCategoryReducer,
+  customer:customerProfileReducer
 })
 
 

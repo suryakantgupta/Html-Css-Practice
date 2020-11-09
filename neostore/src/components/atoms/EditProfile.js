@@ -7,6 +7,10 @@ import CallIcon from '@material-ui/icons/Call';
 import EmailIcon from '@material-ui/icons/Email';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCustProfile } from '../../redux';
+// const imageToBase64 = require('image-to-base64');
+const fileUpload = require('fuctbase64');
 
 const useStyles = makeStyles((theme) => ({
     profile: {
@@ -29,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function EditProfile() {
+function EditProfile(props) {
 
-
-    const [name, setname] = useState({ firstName: '', lastName: '', email: '', pass: '', conpass: '', mobile: '', gender: 'male' })
+    const customer = useSelector(state => state.customer.customer)
+    const [name, setname] = useState({ firstName: customer.first_name, lastName: customer.last_name, email: customer.email, mobile: customer.phone_no, gender: customer.gender, dob: customer.dob, b64image: '' })
     const [validateError, setError] = useState({ fhelperNotValid: false, fcheckError: false, lhelperNotValid: false, lcheckError: false, ehelperNotValid: false, echeckError: false, phelperNotValid: false, pcheckError: false, chelperNotValid: false, ccheckError: false, mhelperNotValid: false, mcheckError: false })
-    const [selectedDate, setSelectedDate] = useState('');
+    const dispatch = useDispatch()
 
     const classes = useStyles()
 
@@ -149,10 +153,12 @@ function EditProfile() {
 
 
 
-    //This Function handles the date of birth input entered by user
-    const handleDateChange = (e) => {
-        setSelectedDate(e.target.value);
-    };
+    const handleSubmit = () => {
+        dispatch(updateCustProfile(name))
+        
+        // console.log(name.dob)
+    }
+
 
 
 
@@ -244,8 +250,8 @@ function EditProfile() {
                                     type="date"
                                     fullWidth
                                     helperText=' '
-                                    value={selectedDate}
-                                    onChange={handleDateChange}
+                                    value={name.dob}
+                                    onChange={(e) => setname({ ...name, dob: e.target.value })}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -297,22 +303,28 @@ function EditProfile() {
                                     }}
                                 />
                             </Grid>
-
+                            {/* setname({ ...name, image: e.target.value }); */}
                             <Grid item>
-                                <input type='file' style={{ fontFamily: 'Arial' }} accept='image/*' />
+                                <input type='file' style={{ fontFamily: 'Arial' }} onChange={(e) => {
+                            
+                                    fileUpload(e).then((data) => {
+                                        console.log(data)
+                                        setname({ ...name, b64image: data.base64 })
+                                    })
+                                }} accept='image/*' />
                             </Grid>
                         </Grid>
                     </Box>
-                    <Divider orientation='horizontal' style={{marginBottom: '3%'}} />
+                    <Divider orientation='horizontal' style={{ marginBottom: '3%' }} />
                     <Grid container spacing={1}>
                         <Grid item>
                             <Box borderRadius={5} boxShadow={2}>
-                            <Button variant='outlined' style={{ outline: 0, textTransform: 'none' }} startIcon={<SaveIcon />} >Save</Button>
+                                <Button variant='outlined' style={{ outline: 0, textTransform: 'none' }} onClick={handleSubmit} startIcon={<SaveIcon />}>Save</Button>
                             </Box>
                         </Grid>
                         <Grid item>
                             <Box borderRadius={5} boxShadow={2}>
-                            <Button variant='outlined' style={{ outline: 0, textTransform: 'none' }} startIcon={<CloseIcon />} >Cancel</Button>
+                                <Button onClick={props.setToP} variant='outlined'  style={{ outline: 0, textTransform: 'none' }} startIcon={<CloseIcon />} >Cancel</Button>
                             </Box>
                         </Grid>
                     </Grid>

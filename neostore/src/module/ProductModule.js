@@ -10,16 +10,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import { fetchCategory, fetchColor, fetchCommonProducts } from '../redux'
 import { useParams } from 'react-router-dom'
+import Authentication from './Authentication'
 
 function ProductModule() {
 
 
-/**
- * @description Here 3 states are declared for product functionality as follows
- * 1: It sets the active page no
- * 2: It handles the disabling effect of pagination
- * 3: It handles the setting of title according to category
- */    
+    /**
+     * @description Here 3 states are declared for product functionality as follows
+     * 1: It sets the active page no
+     * 2: It handles the disabling effect of pagination
+     * 3: It handles the setting of title according to category
+     */
     const [active, setactive] = useState(1)
     const [disable, setdisable] = useState({ prev: false, next: false })
     const [title, settitle] = useState('All Categories')
@@ -68,11 +69,11 @@ function ProductModule() {
      */
     useEffect(() => {
         console.log(category)
-        if (category!==undefined) {
-            try{
-            settitle(product.product_details[0].category_id.category_name)
+        if (category !== undefined) {
+            try {
+                settitle(product.product_details[0].category_id.category_name)
                 console.log(product.product_details[0])
-            }catch (error) {
+            } catch (error) {
 
             }
         }
@@ -80,7 +81,7 @@ function ProductModule() {
     }, [product])
 
 
-//It make the pagination numbers according to the available products
+    //It make the pagination numbers according to the available products
     const getPageItem = () => {
         let number = 8
         let item = []
@@ -104,7 +105,7 @@ function ProductModule() {
         setactive((product.total_count / 8))
     }
 
-//This function handles  the title when user changes category
+    //This function handles  the title when user changes category
     const handleTitle = (data) => {
         settitle(data)
     }
@@ -113,7 +114,10 @@ function ProductModule() {
         <React.Fragment>
             {loading ? <Loading /> :
                 <React.Fragment>
-                    <Header />
+                    <Authentication
+                        render={(isLogedin, setisLogedin) => (<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
+                    />
+                    {/* <Header /> */}
                     <Divider orientation='horizontal' style={{ marginTop: '3%' }} />
                     <Container >
                         <Grid container justify='space-evenly'>
