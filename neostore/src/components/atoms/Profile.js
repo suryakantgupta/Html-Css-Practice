@@ -26,7 +26,7 @@ function Profile(props) {
     const customer = useSelector(state => state.customer.customer)
 
 
-    console.log(customer)
+    // console.log(customer)
 
 
 

@@ -13,7 +13,7 @@ const initialProfileState = {
     error:''
 }
 const initialProfileUpdateState = {
-    loading:true,
+    loading:null,
     // customer:'',
     // error:''
 }

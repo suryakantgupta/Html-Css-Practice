@@ -285,3 +285,12 @@ border-bottom: 2px solid lightgray;
     padding-left: 2em;
   }
   
+
+
+
+  /* Add Address  */
+
+  #savebtn:disabled {
+    background-color: lightgray;
+    color: #b3b3b3;
+  }

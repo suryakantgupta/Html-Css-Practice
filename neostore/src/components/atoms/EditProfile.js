@@ -1,5 +1,5 @@
 import { Box, Button, Divider, FormControlLabel, Grid, Input, InputAdornment, makeStyles, Radio, RadioGroup, TextField, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import EditIcon from '@material-ui/icons/Edit';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
@@ -39,7 +39,7 @@ function EditProfile(props) {
     const [name, setname] = useState({ firstName: customer.first_name, lastName: customer.last_name, email: customer.email, mobile: customer.phone_no, gender: customer.gender, dob: customer.dob, b64image: '' })
     const [validateError, setError] = useState({ fhelperNotValid: false, fcheckError: false, lhelperNotValid: false, lcheckError: false, ehelperNotValid: false, echeckError: false, phelperNotValid: false, pcheckError: false, chelperNotValid: false, ccheckError: false, mhelperNotValid: false, mcheckError: false })
     const dispatch = useDispatch()
-
+    const uloading = useSelector(state => state.updatecustomer.loading)
     const classes = useStyles()
 
 
@@ -150,13 +150,20 @@ function EditProfile(props) {
         }
     }
 
+    const [loading, setloading] = useState(uloading)
 
+useEffect(() => {
+    
+    if(uloading==false){
+        window.location.reload()
+    }else{
+        setloading(uloading)
+    }
+}, [uloading])
 
-
+// console.log(loading)
     const handleSubmit = () => {
         dispatch(updateCustProfile(name))
-        
-        // console.log(name.dob)
     }
 
 
@@ -306,7 +313,7 @@ function EditProfile(props) {
                             {/* setname({ ...name, image: e.target.value }); */}
                             <Grid item>
                                 <input type='file' style={{ fontFamily: 'Arial' }} onChange={(e) => {
-                            
+
                                     fileUpload(e).then((data) => {
                                         console.log(data)
                                         setname({ ...name, b64image: data.base64 })
@@ -324,7 +331,7 @@ function EditProfile(props) {
                         </Grid>
                         <Grid item>
                             <Box borderRadius={5} boxShadow={2}>
-                                <Button onClick={props.setToP} variant='outlined'  style={{ outline: 0, textTransform: 'none' }} startIcon={<CloseIcon />} >Cancel</Button>
+                                <Button onClick={props.setToP} variant='outlined' style={{ outline: 0, textTransform: 'none' }} startIcon={<CloseIcon />} >Cancel</Button>
                             </Box>
                         </Grid>
                     </Grid>

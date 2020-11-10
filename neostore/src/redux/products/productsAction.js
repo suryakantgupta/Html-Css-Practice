@@ -31,7 +31,7 @@ params:{
         })
             .then((response) => {
                 dispatch(fetchproductssuccess(response.data))
-                console.log(response.data)
+                // console.log(response.data)
             }).catch((error) => {
                 // console.log(error.response)
                 dispatch(fetchproductsfailure(error.response))

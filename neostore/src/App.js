@@ -10,6 +10,7 @@ import ProductModule from './module/ProductModule';
 import { Provider } from 'react-redux';
 import store from './redux/store'
 import ProductDetail from './components/molecules/ProductDetail';
+import AddAddress from './components/AddAddress';
 require('dotenv').config()
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='/myaccount' exact render={()=> <MyAccount />} />
           <Route path='/commonproducts/:name?/:category?' render={()=> <ProductModule />} />
           <Route path='/productdetail/:id'exact render={()=> <ProductDetail />} />
+          <Route path='/addaddress' exact render={()=> <AddAddress />} /> 
           
           </Provider>
           
