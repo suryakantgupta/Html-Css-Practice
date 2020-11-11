@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store'
 import ProductDetail from './components/molecules/ProductDetail';
 import AddAddress from './components/AddAddress';
+import ErrorPage from './components/ErrorPage';
 require('dotenv').config()
 
 
@@ -22,16 +23,16 @@ function App() {
           <Redirect exact from='/' to='/dashboard' />
           <Provider store={store}>
           <Route path="/dashboard" exact render={()=> <Dashboard />} />
-          
           <Route path="/login" exact render={()=> <User body={'login'}/>} />
           <Route path="/register" exact render={()=> <User body={'register'}/>} />
           <Route path='/forgotpass' exact render={()=><User body={'forgot'}/>} />
           <Route path='/recoverpass' exact render={()=><User body={'recover'}/>}/>
-          <Route path='/myaccount' exact render={()=> <MyAccount />} />
-          <Route path='/commonproducts/:name?/:category?' render={()=> <ProductModule />} />
+          <Route path='/myaccount/:page' exact render={()=> <MyAccount />} />
+          <Route path='/commonproducts/:name?/:category?' exact render={()=> <ProductModule />} />
+          {/* <Route path='/commonproducts/:name?/:category?' exact component={ProductModule} /> */}
           <Route path='/productdetail/:id'exact render={()=> <ProductDetail />} />
           <Route path='/addaddress' exact render={()=> <AddAddress />} /> 
-          
+          {/* <Route component={ErrorPage} /> */}
           </Provider>
           
         </Switch>

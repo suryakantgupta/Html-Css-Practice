@@ -11,6 +11,7 @@ function AddressSidePanel() {
 
 
     const [open, setopen] = useState({ orders: false, account: false }) //This state handles the dropdown of category and color menu
+    const history = useHistory()
 
     //This Handles the expansion and collapse of category
     const handleOrdersClick = () => {
@@ -41,7 +42,7 @@ function AddressSidePanel() {
                             <Collapse in={open.orders} unmountOnExit>
                                 <List>
                                     <ListItem style={{justifyContent:'center'}}>
-                                        <Button style={{textTransform:"none",outline:"none"}}>Orders</Button>
+                                        <Button onClick={()=> history.push('/myaccount/orders')} style={{textTransform:"none",outline:"none"}}>Orders</Button>
                                     </ListItem>
                                 </List>
                             </Collapse>
@@ -61,8 +62,8 @@ function AddressSidePanel() {
                             <Collapse in={open.account} unmountOnExit>
                                 <List>
                                     <ListItem style={{justifyContent:'center'}}>
-                                        <Button style={{textTransform:"none",outline:"none"}}>Profile</Button>
-                                        <Button style={{textTransform:"none",outline:"none"}}>Addresses</Button>
+                                        <Button onClick={()=> history.push('/myaccount/profile')} style={{textTransform:"none",outline:"none"}}>Profile</Button>
+                                        <Button onClick={()=> history.push('/myaccount/address')} style={{textTransform:"none",outline:"none"}}>Addresses</Button>
                                     </ListItem>
                                 </List>
                             </Collapse>

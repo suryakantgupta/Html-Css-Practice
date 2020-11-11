@@ -13,7 +13,8 @@ const initialProfileState = {
     error:''
 }
 const initialProfileUpdateState = {
-    loading:null,
+    loading:false,
+    positive:null
     // customer:'',
     // error:''
 }
@@ -54,6 +55,7 @@ export const updatecustomerProfileReducer = (state = initialProfileUpdateState,a
         case UPDATE_CUST_PROFILE_SUCCESS:
             return{
                 loading:false,
+                positive:action.positive
                 // customer:action.payload,
                 // error:''
             }

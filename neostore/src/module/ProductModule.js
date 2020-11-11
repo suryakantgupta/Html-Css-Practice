@@ -1,4 +1,4 @@
-import { Container, Divider, Grid, Box } from '@material-ui/core'
+import { Container, Divider, Grid, Box, CircularProgress } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -27,6 +27,7 @@ function ProductModule() {
 
     const loading = useSelector(state => state.product.loading)
     const cardError = useSelector(state => state.cardCategory.category)
+    const catloading = useSelector(state => state.cardCategory.loading)
     const product = useSelector(state => state.product.products)
 
     const dispatch = useDispatch()
@@ -46,10 +47,14 @@ function ProductModule() {
         } else {
             dispatch(fetchCommonProducts('', '', '', '', name))
         }
+
+    }, [name,category])
+
+
+    useEffect(() => {
         dispatch(fetchCategory())
         dispatch(fetchColor())
-    }, [name])
-
+    }, [])
 
     /**
      * It Governs the functionality of the pagination according to the listing of products
@@ -68,7 +73,6 @@ function ProductModule() {
      * This works specifically when user click on the carousel image
      */
     useEffect(() => {
-        console.log(category)
         if (category !== undefined) {
             try {
                 settitle(product.product_details[0].category_id.category_name)
@@ -112,7 +116,7 @@ function ProductModule() {
 
     return (
         <React.Fragment>
-            {loading ? <Loading /> :
+            {catloading ? <Loading /> :
                 <React.Fragment>
                     <Authentication
                         render={(isLogedin, setisLogedin) => (<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
@@ -127,9 +131,7 @@ function ProductModule() {
                                 </Box>
                             </Grid>
                             <Grid container item xs={12} lg={8}>
-
-                                <ProductsCard title={title} pagenumber={active} />
-
+                                {loading ? <Grid justify='center' alignContent='center' style={{height:'100vh'}} container><CircularProgress /></Grid> : <ProductsCard title={title} pagenumber={active} />}
                             </Grid>
                         </Grid>
                         <Grid container justify='center' style={{ marginBottom: '10%' }}>

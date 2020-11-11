@@ -4,7 +4,7 @@ import gicon from '../images/google-icon.png';
 import ticon from '../images/twitter-icon.png';
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import { TextField, InputAdornment, IconButton} from '@material-ui/core';
+import { TextField, InputAdornment, IconButton, Snackbar } from '@material-ui/core';
 import {
     makeStyles,
 } from '@material-ui/core/styles';
@@ -18,7 +18,7 @@ import { useHistory } from 'react-router-dom';
 
 function LoginBody(props) {
 
-//It styles the Material Components
+    //It styles the Material Components
     const useStyles = makeStyles({
 
         root: {
@@ -44,13 +44,13 @@ function LoginBody(props) {
 
 
 
-/**
- * @description Here four states are defined and their usses are as follows
- * 1- Stores the value of login credenial
- * 2- Provide logic to show error
- * 3- Manages the password icon toggling
- * 4- Makes sure that everything is valid before submit
- */
+    /**
+     * @description Here four states are defined and their usses are as follows
+     * 1- Stores the value of login credenial
+     * 2- Provide logic to show error
+     * 3- Manages the password icon toggling
+     * 4- Makes sure that everything is valid before submit
+     */
     const [name, setname] = useState({ email: '', pass: '' })
     const [validateError, setError] = useState({ ehelperNotValid: false, echeckError: false, phelperNotValid: false, pcheckError: false })
     const [manage, setManage] = useState({ showPassword: false, cshowPassword: false })
@@ -80,11 +80,11 @@ function LoginBody(props) {
         }
     }
 
-/**
- * @description This function validates the Password Provided by the user
- * and check that if it is Alphanumeric or not
- * @returns It returns the appropriate erors if validation fails
- */
+    /**
+     * @description This function validates the Password Provided by the user
+     * and check that if it is Alphanumeric or not
+     * @returns It returns the appropriate erors if validation fails
+     */
 
 
     const blurPassValidator = () => {
@@ -108,7 +108,7 @@ function LoginBody(props) {
         }
     }
 
-//This handles the password toggling
+    //This handles the password toggling
     const handleClickShowPassword = () => {
         setManage({ ...manage, showPassword: !manage.showPassword });
     };
@@ -124,22 +124,29 @@ function LoginBody(props) {
 
     const history = useHistory()
 
+    const loading = useSelector(state => state.login.loading)
     const loginsuccess = useSelector(state => state.login.success)//Checks for authentication
+    const loginfail = useSelector(state => state.login.error)//Checks for authentication
+    const positive = useSelector(state => state.login.positive)
+    const [open, setopen] = useState({ show: false, message: '' })
+
+    console.log(loginsuccess)
 
     useEffect(() => {
-        if(loginsuccess.token != undefined && localStorage.token != "undefined"){
-        localStorage.setItem('token', loginsuccess.token)
-        props.setisLogedin(true)
+
+        if (positive == true) {
+            localStorage.setItem('token', loginsuccess.token)
+            props.setisLogedin(true)
+        } else if (positive == false) {
+            setopen({ show: true, message: loginfail })
         }
-    }, [loginsuccess])
+    }, [positive])
 
     useEffect(() => {
         if (props.isLogedin) {
             history.push('/dashboard')
         }
     })
-
-
 
 
 
@@ -234,6 +241,7 @@ function LoginBody(props) {
                     <a href='/forgotpass'><label className='mb-0' id='regbtn'>Forgotten?</label></a>
                 </div>
             </div>
+            <Snackbar open={open.show} autoHideDuration={4000} onClose={() => setopen({ ...open, show: false })} message={open.message} />
         </div>
     )
 }

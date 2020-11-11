@@ -15,8 +15,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchById } from '../../redux/products/productsAction';
 import Loading from '../Loading'
-import { GlassMagnifier } from 'react-image-magnifiers'
-
+import { GlassMagnifier,SideBySideMagnifier } from 'react-image-magnifiers'
+import Authentication from '../../module/Authentication';
+import ReactImageMagnify from 'react-image-magnify'
 
 /**
  * @description This functional component renders the sliding part of /description and features
@@ -105,19 +106,28 @@ function ProductDetail() {
         <React.Fragment>
             {loading ? <Loading /> :
                 <React.Fragment>
-                    <Header />
+                    <Authentication
+            render={(isLogedin,setisLogedin)=>(<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
+            />
+                    {/* <Header /> */}
                     <Container style={{ marginBottom: '7%' }}>
                         <div style={{ marginTop: '3%', marginBottom: '3%' }}>
                             <Grid container justify='space-between'>
                                 <Grid item lg={6}>
                                     {!mobile && <Grid container spacing={8} >
                                         <Grid item>
-                                            <GlassMagnifier
-                                                imageSrc={image}
-                                                allowOverflow={true}
-                                                magnifierSize='30%'
-                                                magnifierBorderSize='5'
-                                                magnifierBorderColor='black'
+                                            <ReactImageMagnify {...{
+                                                smallImage:{
+                                                    src:image,
+                                                    isFluidWidth:true
+                                                },
+                                                largeImage:{
+                                                    src:image,
+                                                    width:2000,
+                                                    height:600
+                                                }
+                                            }}
+                                            style={{zIndex:2}}
                                             />
                                             {/* <Image src={image} width='100%' /> */}
                                         </Grid>
@@ -236,9 +246,9 @@ function ProductDetail() {
                                             {product[0].product_desc}
                                         </TabPanel>
                                         <TabPanel value={value} index={1} dir={theme.direction}>
-                                            Dimensions:{product[0].product_dimension}<br />
-                                    Material:{product[0].product_material}<br />
-                                    Manufacturer:{product[0].product_producer}<br />
+                                            <b>Dimensions</b>:{product[0].product_dimension}<br />
+                                    <b>Material</b>:{product[0].product_material}<br />
+                                    <b>Manufacturer</b>:{product[0].product_producer}<br />
                                         </TabPanel>
                                     </SwipeableViews>
                                 </Grid>

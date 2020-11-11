@@ -30,10 +30,6 @@ function Profile(props) {
 
 
 
-
-
-
-
     return (
         <div>
             <Card style={{ marginTop: '5%' }}>

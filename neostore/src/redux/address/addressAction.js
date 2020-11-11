@@ -4,13 +4,16 @@ import {
     GET_ADDRESS_FAILURE,
     ADD_ADDRESS_REQUEST,
     ADD_ADDRESS_SUCCESS,
-    ADD_ADDRESS_FAILURE
+    ADD_ADDRESS_FAILURE,
+    UPDATE_ADDRESS_REQUEST,
+    UPDATE_ADDRESS_SUCCESS,
+    UPDATE_ADDRESS_FAILURE
 } from "./addressTypes";
 import axios from 'axios'
 
 export const fetchcustaddress = () => {
     return (dispatch) => {
-        dispatch(fetchcustaddressrequest)
+        dispatch(fetchcustaddressrequest())
         axios.get('http://180.149.241.208:3022/getCustAddress', {
             headers: {
                 Authorization: `bearer ${localStorage.token}`
@@ -52,7 +55,7 @@ export const fetchcustaddressfailure = (data) => {
 
 export const addcustaddress = (data) => {
     return (dispatch) => {
-        dispatch(addcustaddressrequest)
+        dispatch(addcustaddressrequest())
         axios.post('http://180.149.241.208:3022/address', {
             address: data.address,
             pincode: data.pincode,
@@ -94,3 +97,56 @@ export const addcustaddressfailure = (data) => {
         payload: data
     }
 }
+
+
+
+
+
+
+export const updatecustaddress = (data) => {
+    return (dispatch) => {
+        dispatch(updatecustaddressrequest())
+        axios.put('http://180.149.241.208:3022/updateAddress', {
+            address_id:data.addressid,
+            address: data.address,
+            pincode: data.pincode,
+            city: data.city,
+            state: data.state,
+            country: data.country,
+            isDeliveryAddress:data.isdelivery
+        }, {
+            headers: {
+                Authorization: `bearer ${localStorage.token}`
+            }
+        }).then((response) => {
+            dispatch(updatecustaddresssuccess(response.data.success))
+            console.log(response.data)
+        }).catch((error) => {
+            dispatch(updatecustaddressfailure(error.response.data))
+            console.log(error.response.data)
+        })
+    }
+}
+
+
+
+export const updatecustaddressrequest = () => {
+    return {
+        type: UPDATE_ADDRESS_REQUEST
+    }
+}
+
+export const updatecustaddresssuccess = (data) => {
+    return {
+        type: UPDATE_ADDRESS_SUCCESS,
+        payload: data
+    }
+}
+
+export const updatecustaddressfailure = (data) => {
+    return {
+        type: UPDATE_ADDRESS_FAILURE,
+        payload: data
+    }
+}
+

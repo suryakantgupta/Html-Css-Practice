@@ -63,8 +63,8 @@ export const updateCustProfile = (datas) => {
                 }
 
             }).then((response) => {
-                dispatch(updatecustprofilesuccess())
-                console.log(response.data)
+                dispatch(updatecustprofilesuccess(response.data.success))
+                console.log(response.data.success)
             }).catch((error) => {
                 console.log(error.response)
             })
@@ -76,10 +76,10 @@ export const updatecustprofilerequest = () => {
         type: UPDATE_CUST_PROFILE_REQUEST
     }
 }
-export const updatecustprofilesuccess = () => {
+export const updatecustprofilesuccess = (bool) => {
     return {
         type: UPDATE_CUST_PROFILE_SUCCESS,
-        // payload: data
+        positive: bool
     }
 }
 export const updatecustprofilefailure = () => {

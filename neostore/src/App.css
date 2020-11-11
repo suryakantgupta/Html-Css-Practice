@@ -294,3 +294,8 @@ border-bottom: 2px solid lightgray;
     background-color: lightgray;
     color: #b3b3b3;
   }
+
+
+  .customcolor.MuiListItem-root.Mui-selected{
+      border: 2px solid red !important;
+  }

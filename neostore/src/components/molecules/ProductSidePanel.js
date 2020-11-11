@@ -15,8 +15,9 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'none',
         display: 'flex',
         justifyContent: 'flex-start'
-    }
+    },
 }))
+
 
 
 
@@ -45,38 +46,28 @@ function ProductSidePanel(props) {
 
     //This Handles the expansion and collapse of category
     const handleCategoryClick = () => {
-        if (open.category && !open.color) {
-            setopen({ ...open, category: !open.category })
-        } else if (!open.category && open.color) {
-            setopen({ color: false, category: !open.category })
-        } else {
-            setopen({ ...open, category: true })
-        }
+        setopen({ ...open, category: !open.category })
     }
 
     //This Handles the expansion and collapse of color
     const handleColorClick = () => {
-        if (!open.category && open.color) {
-            setopen({ ...open, color: !open.color })
-        } else if (open.category && !open.color) {
-            setopen({ category: false, color: !open.color })
-        } else {
-            setopen({ ...open, color: true })
-        }
+        setopen({ ...open, color: !open.color })
     }
-
     //This function lists the category in the menu
+    const [catselected, setcatselected] = useState('')
     const getCategory = () => {
         if (!loadingCategory) {
-            const listCategory = category.category_details.map((details) => <ListItem key={details.category_id} onClick={() => { dispatch(fetchCommonProducts('', details.category_id)); props.title(details.category_name) }} style={{ justifyContent: 'center' }} button divider><Typography>{details.category_name}</Typography></ListItem>)
+            // dispatch(fetchCommonProducts('', details.category_id))
+    const listCategory = category.category_details.map((details) => <ListItem key={details.category_id} selected={details.category_id == catselected } onClick={() => { history.push(`/commonproducts/ /${details.category_id}`); props.title(details.category_name);setcatselected(details.category_id) }} button style={{ justifyContent: 'center' }} divider><Typography>{details.category_name}</Typography></ListItem>)
             return listCategory
         }
     }
 
     //This function lists the color in the menu
+    const [colorselected, setcolorselected] = useState('')
     const getColor = () => {
         if (!loadingColor) {
-            const listColor = color.color_details.map((details) => <Tooltip key={details.color_id} title={details.color_name} placement="top-start"><ListItem key={details.color_id} onClick={() => dispatch(fetchCommonProducts('', '', details.color_id))} component='li' style={{ height: '30px', width: '40px', backgroundColor: details.color_code, display: 'inline-flex', margin: '1px 20px 1px 20px', border: '2px solid black', borderRadius: '5px' }} /></Tooltip>)
+            const listColor = color.color_details.map((details) => <Tooltip key={details.color_id} title={details.color_name} placement="top-start"><ListItem className='customcolor' key={details.color_id} selected={details.color_id == colorselected} onClick={() => {dispatch(fetchCommonProducts('', '', details.color_id)); setcolorselected(details.color_id)}} component='li' style={{ height: '30px', width: '40px', backgroundColor: details.color_code, display: 'inline-flex', margin: '1px 20px 1px 20px',border:'1px solid black', borderRadius: '5px' }} /></Tooltip>)
             return listColor
         }
     }
@@ -88,7 +79,7 @@ function ProductSidePanel(props) {
             <Grid container spacing={1} direction='column' style={{ marginTop: '10%' }} >
                 <Grid item>
                     <Box borderRadius='5px' boxShadow={3} width={1}>
-                        <Button size='large' onClick={() => { history.push('/commonproducts'); props.title("All Categories");window.location.reload() }} fullWidth variant='outlined' className={classes.button} style={{ outline: 'none', textTransform: 'none' }}>All Products</Button>
+                        <Button size='large' onClick={() => { history.push('/commonproducts'); props.title("All Categories"); window.location.reload() }} fullWidth variant='outlined' className={classes.button} style={{ outline: 'none', textTransform: 'none' }}>All Products</Button>
                     </Box>
                 </Grid>
                 <Grid item>

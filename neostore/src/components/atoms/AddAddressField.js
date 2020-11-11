@@ -1,9 +1,9 @@
-import { Box, Button, Divider, Grid, makeStyles, Snackbar, TextField, Typography } from '@material-ui/core'
+import { Box, Button, CircularProgress, Divider, Grid, makeStyles, Snackbar, TextField, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addcustaddress } from '../../redux';
 import { useHistory } from 'react-router-dom';
 
@@ -30,6 +30,9 @@ function AddAddressField() {
     const [v, setv] = useState({ amessage: '', pmessage: '', cmessage: '', smessage: '', comessage: '', })
     const [check, setcheck] = useState({ address: true, pincode: true, city: true, state: true, country: true })
     const [open, setopen] = useState(false)
+
+
+    const addloading = useSelector(state => state.addaddress.loading)
     const history = useHistory()
 
     /**
@@ -156,7 +159,7 @@ function AddAddressField() {
 
     const handleonClose = () => {
         setopen(false)
-        history.push('/myaccount')
+        history.push('/myaccount/address')
     }
 
 
@@ -236,18 +239,20 @@ function AddAddressField() {
                     <Grid container style={{ marginTop: '1em' }} spacing={1}>
                         <Grid item>
                             <Box borderRadius='5px' boxShadow={2}>
-                                <Button onClick={handleSubmit} variant='outlined' id='savebtn' style={{ outline: 0, textTransform: 'none' }} startIcon={<SaveIcon />} disabled={check.address || check.city || check.pincode || check.country || check.state}>Save</Button>
+                                <Button onClick={handleSubmit} variant='outlined' id='savebtn' style={{ outline: 0, textTransform: 'none' }} startIcon={
+                                addloading ? <CircularProgress size='1rem' /> : <SaveIcon />
+                                } disabled={check.address || check.city || check.pincode || check.country || check.state}>Save</Button>
                             </Box>
                         </Grid>
                         <Grid item>
                             <Box borderRadius='5px' boxShadow={2}>
-                                <Button href='/myaccount' variant='outlined' style={{ outline: 0, textTransform: 'none' }} startIcon={<CloseIcon />} >Close</Button>
+                                <Button onClick={()=>history.push('/myaccount/address')} variant='outlined' style={{ outline: 0, textTransform: 'none' }} startIcon={<CloseIcon />} >Close</Button>
                             </Box>
                         </Grid>
                     </Grid>
                 </Card.Body>
             </Card>
-            <Snackbar open={open} autoHideDuration={5000} onClose={handleonClose} message='Customer Address was registered successfully' />
+            <Snackbar open={open} autoHideDuration={4000} onClose={handleonClose} message='Customer Address was registered successfully' />
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { Box, Button, Divider, FormControlLabel, Grid, Input, InputAdornment, makeStyles, Radio, RadioGroup, TextField, Typography } from '@material-ui/core'
+import { Box, Button, CircularProgress, Divider, FormControlLabel, Grid, Input, InputAdornment, makeStyles, Radio, RadioGroup, Snackbar, TextField, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import EditIcon from '@material-ui/icons/Edit';
@@ -9,6 +9,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCustProfile } from '../../redux';
+import { useHistory } from 'react-router-dom';
 // const imageToBase64 = require('image-to-base64');
 const fileUpload = require('fuctbase64');
 
@@ -41,7 +42,7 @@ function EditProfile(props) {
     const dispatch = useDispatch()
     const uloading = useSelector(state => state.updatecustomer.loading)
     const classes = useStyles()
-
+    const positive = useSelector(state => state.updatecustomer.positive)
 
     /**
  * @description This function validates the First name Provided by the user
@@ -150,20 +151,13 @@ function EditProfile(props) {
         }
     }
 
-    const [loading, setloading] = useState(uloading)
-
-useEffect(() => {
-    
-    if(uloading==false){
-        window.location.reload()
-    }else{
-        setloading(uloading)
-    }
-}, [uloading])
-
+    const history = useHistory()
 // console.log(loading)
     const handleSubmit = () => {
         dispatch(updateCustProfile(name))
+    }
+    const handleClose = ()=>{
+        window.location.reload()
     }
 
 
@@ -326,7 +320,9 @@ useEffect(() => {
                     <Grid container spacing={1}>
                         <Grid item>
                             <Box borderRadius={5} boxShadow={2}>
-                                <Button variant='outlined' style={{ outline: 0, textTransform: 'none' }} onClick={handleSubmit} startIcon={<SaveIcon />}>Save</Button>
+                                <Button variant='outlined' style={{ outline: 0, textTransform: 'none' }} onClick={handleSubmit} startIcon={
+                                uloading ? <CircularProgress size='1rem' /> : <SaveIcon />
+                                }>Save</Button>
                             </Box>
                         </Grid>
                         <Grid item>
@@ -337,6 +333,7 @@ useEffect(() => {
                     </Grid>
                 </Card.Body>
             </Card>
+            <Snackbar open={positive} autoHideDuration={4000} onClose={handleClose} message='Saved successfully' />
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { bool } from 'prop-types'
 
 import {
     USER_REGISTER_POST,
@@ -12,7 +13,7 @@ import {
 export const postNewRegister = (data) => {
     return (dispatch) => {
         dispatch(userRegisterPost())
-        console.log(data)
+        // console.log(data)
         axios.post('http://180.149.241.208:3022/register', {
             first_name: data.firstName,
             last_name: data.lastName,
@@ -22,12 +23,11 @@ export const postNewRegister = (data) => {
             phone_no: data.mobile,
             gender: data.gender
         }).then((response) => {
-            dispatch(userRegisterSuccess(response.data.message))
-            console.log(response)
+            dispatch(userRegisterSuccess(response.data.message,response.data.success))
+            // console.log(response)
         }).catch((error) => {
-            dispatch(userRegisterFailure(error.response.data.message))
-            console.log(error.response)
-            // dispatch(userRegisterFailure())
+            dispatch(userRegisterFailure(error.response.data.message,error.response.data.success))
+            // console.log(error.response)
         })
     }
 }
@@ -38,17 +38,19 @@ export const userRegisterPost = () => {
     }
 }
 
-export const userRegisterSuccess = (data) => {
+export const userRegisterSuccess = (data,bool) => {
     return {
         type: USER_REGISTER_SUCCESS,
-        payload: data
+        payload: data,
+        positive:bool
     }
 }
 
-export const userRegisterFailure = (error) => {
+export const userRegisterFailure = (error,bool) => {
     return {
         type: USER_REGISTER_FAILURE,
-        payload: error
+        payload: error,
+        positive:bool
     }
 }
 
@@ -65,12 +67,11 @@ export const postLogin = (data) => {
     return (dispatch) => {
         dispatch(userLoginPost())
         axios.post('http://180.149.241.208:3022/login',data).then((response) => {
-            dispatch(userLoginSuccess(response.data))
+            dispatch(userLoginSuccess(response.data,response.data.success))
             console.log(response.data)
         }).catch((error) => {
-            dispatch(userLoginFailure(error.response.data.message))
+            dispatch(userLoginFailure(error.response.data.message,error.response.data.success))
             console.log(error.response)
-            // dispatch(userRegisterFailure())
         })
     }
 }
@@ -81,17 +82,19 @@ export const userLoginPost = () => {
     }
 }
 
-export const userLoginSuccess = (data) => {
+export const userLoginSuccess = (data,bool) => {
     return {
         type: USER_LOGIN_SUCCESS,
-        payload: data
+        payload: data,
+        positive:bool
     }
 }
 
-export const userLoginFailure = (error) => {
+export const userLoginFailure = (error,bool) => {
     return {
         type: USER_LOGIN_FAILURE,
-        payload: error
+        payload: error,
+        positive:bool
     }
 }
 

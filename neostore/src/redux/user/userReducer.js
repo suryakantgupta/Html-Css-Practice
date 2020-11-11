@@ -10,13 +10,15 @@ import {
 const initialUserState = {
     loading: false,
     success: null,
-    error: null
+    error: null,
+    positive: null
 }
 
 const initialLoginState = {
     loading: false,
     success: '',
-    error: ''
+    error: '',
+    positive:null
 }
 
 export const userReducer = (state = initialUserState, action) => {
@@ -31,14 +33,16 @@ export const userReducer = (state = initialUserState, action) => {
             return {
                 loading: false,
                 success: action.payload,
-                error: null
+                error: null,
+                positive: action.positive
             }
 
         case USER_REGISTER_FAILURE: {
             return {
                 loading: false,
                 success: null,
-                error: action.payload
+                error: action.payload,
+                positive: action.positive
             }
         }
 
@@ -64,14 +68,16 @@ export const userloginReducer = (state = initialLoginState, action) => {
             return {
                 loading: false,
                 success: action.payload,
-                error: ''
+                error: '',
+                positive:action.positive
             }
 
         case USER_LOGIN_FAILURE: {
             return {
                 loading: false,
                 success: '',
-                error: action.payload
+                error: action.payload,
+                positive:action.positive
             }
         }
         default: return state

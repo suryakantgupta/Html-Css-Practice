@@ -1,12 +1,12 @@
-import { Box, Button, Divider, Grid, makeStyles, Snackbar, TextField, Typography } from '@material-ui/core'
+import { Box, Button, CircularProgress, Divider, Grid, makeStyles, Snackbar, TextField, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from 'react-redux';
-import { addcustaddress } from '../../redux';
+import { addcustaddress, updatecustaddress } from '../../redux';
 import { useHistory } from 'react-router-dom';
-
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
     profile: {
@@ -25,18 +25,20 @@ function EditAddress(props) {
     const classes = useStyles()
 
     const addressdata = useSelector(state => state.address.address)
+    const updateloading = useSelector(state => state.updateaddress.loading)
+    const positive = useSelector(state => state.updateaddress.positive)
 
 // console.log(addressdata.customer_address)
 
     useEffect(() => {
         addressdata.customer_address.map((cd)=>{
             if(cd.address_id == props.addressid){
-                setadd({ address: cd.address, pincode: cd.pincode, city: cd.city, state: cd.state, country: cd.country })
+                setadd({...add,addressid:cd.address_id, address: cd.address, pincode: cd.pincode.toString(), city: cd.city, state: cd.state, country: cd.country })
             }
         })
     }, [])
 
-    const [add, setadd] = useState({ address: '', pincode: '', city: '', state: '', country: '' })
+    const [add, setadd] = useState({addressid:'', address: '', pincode: '', city: '', state: '', country: '',isdelivery:'' })
     const [validate, setvalidate] = useState({ address: false, pincode: false, city: false, state: false, country: false })
     const [v, setv] = useState({ amessage: '', pmessage: '', cmessage: '', smessage: '', comessage: '', })
     const [check, setcheck] = useState({ address: true, pincode: true, city: true, state: true, country: true })
@@ -78,6 +80,7 @@ function EditAddress(props) {
 
     const blurpincode = () => {
         let pattern = /^[0-9]+$/
+        console.log(add.pincode)
         if (add.pincode.trim().length == 0) {
             setvalidate({ ...validate, pincode: true })
             setv({ ...v, pmessage: 'You must enter a value' })
@@ -175,13 +178,13 @@ function EditAddress(props) {
      * redux function
      */
     const handleSubmit = () => {
-        dispatch(addcustaddress(add))
+        dispatch(updatecustaddress(add))
         setopen(true)
     }
 
     const handleonClose = () => {
         setopen(false)
-        history.push('/myaccount')
+        window.location.reload()
     }
 
 
@@ -261,7 +264,9 @@ function EditAddress(props) {
                     <Grid container style={{ marginTop: '1em' }} spacing={1}>
                         <Grid item>
                             <Box borderRadius='5px' boxShadow={2}>
-                                <Button onClick={handleSubmit} variant='outlined' id='savebtn' style={{ outline: 0, textTransform: 'none' }} startIcon={<SaveIcon />} disabled={check.address || check.city || check.pincode || check.country || check.state}>Save</Button>
+                                <Button onClick={handleSubmit} variant='outlined' id='savebtn' style={{ outline: 0, textTransform: 'none' }} startIcon=
+                                    {updateloading ? <CircularProgress size='1rem' /> : <SaveIcon />}
+                                 >Save</Button>
                             </Box>
                         </Grid>
                         <Grid item>
@@ -272,7 +277,7 @@ function EditAddress(props) {
                     </Grid>
                 </Card.Body>
             </Card>
-            <Snackbar open={open} autoHideDuration={5000} onClose={handleonClose} message='Customer Address was registered successfully' />
+            <Snackbar open={positive} autoHideDuration={4000} onClose={handleonClose} message='Customer Address was Updated successfully' />
         </div>
     )
 }

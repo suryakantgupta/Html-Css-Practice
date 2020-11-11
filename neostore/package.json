@@ -29,6 +29,7 @@
     "react-google-login": "^5.1.22",
     "react-icons": "^3.11.0",
     "react-image-magnifiers": "^1.4.0",
+    "react-image-magnify": "^2.7.4",
     "react-js-pagination": "^3.0.3",
     "react-paginate": "^6.5.0",
     "react-redux": "^7.2.1",

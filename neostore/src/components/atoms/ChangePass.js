@@ -1,10 +1,11 @@
-import { Grid, IconButton, InputAdornment, Snackbar, TextField, Typography } from '@material-ui/core'
+import { CircularProgress, Grid, IconButton, InputAdornment, Snackbar, TextField, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Button, Card, Modal, ModalBody } from 'react-bootstrap'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
+import Loading from '../Loading';
 
 
 
@@ -102,13 +103,14 @@ function ChangePass() {
     };
 
     const [open, setopen] = useState(false)
-
+const [loading, setloading] = useState(false)
     /**
      * @description This function will handle the submit by making api calls 
      * to the changepassword api and if successfull or an error occurs it will give the respective reponse
      */
     const handleSubmit = (e) => {
         e.preventDefault()
+        setloading(true)
         axios.post('http://180.149.241.208:3022/changePassword', {
             oldPass: value.old,
             newPass: value.new,
@@ -120,16 +122,17 @@ function ChangePass() {
         }).then((response) => {
             setmessage({ ...message, snack: response.data.message })
             setopen(true)
+            setloading(false)
         }).catch((error) => {
             setmessage({ ...message, snack: error.response.data.message })
             setmopen(true)
+            setloading(false)
         })
     }
     const history = useHistory()
     const handleonClose = () => {
         setopen(false)
-        window.location.reload()
-        // history.push('/myaccount')
+        history.push('/myaccount/profile')
     }
 
     const [mopen, setmopen] = useState(false)
@@ -146,7 +149,7 @@ function ChangePass() {
                 <Card.Header style={{ backgroundColor: '#f9f9f9' }}><Typography align='center' variant='h3'>Change Password</Typography></Card.Header>
                 <Card.Body>
                     <form onSubmit={handleSubmit}>
-                        <Grid container direction='column' spacing={3}>
+                        <Grid container direction='column' spacing={2}>
 
                             <Grid item>
                                 <TextField
@@ -233,15 +236,18 @@ function ChangePass() {
                             <Grid container item justify='center'>
                                 <Button type='submit' style={{ backgroundColor: '#3f51b5' }}>Submit</Button>
                             </Grid>
-
+                            <Grid container item justify='center'>
+                                {loading && <CircularProgress size='2rem' />}
+                            </Grid>
                         </Grid>
                     </form>
                 </Card.Body>
             </Card>
-            <Snackbar open={open} autoHideDuration={5000} onClose={handleonClose} message={message.snack} />
+            <Snackbar open={open} autoHideDuration={4000} onClose={handleonClose} message={message.snack} />
             <Modal show={mopen} onHide={handlemonClose}>
                 <ModalBody>{message.snack}</ModalBody>
             </Modal>
+
         </div>
     )
 }

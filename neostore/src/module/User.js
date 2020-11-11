@@ -36,8 +36,9 @@ function User(props) {
         <div>
 
             {/* <ErrorPage /> */}
-            {body.login && (loginloading ? <Loading /> :
+            {body.login && (
                 <React.Fragment>
+                    {loginloading && <Loading />}
                     <Header />
                     <Authentication 
                     render={(isLogedin,setisLogedin)=>(<LoginBody isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
@@ -62,8 +63,9 @@ function User(props) {
                 </React.Fragment>
             )
             }
-            {body.register && (loading ? <Loading /> :
+            {body.register && ( 
                 <React.Fragment>
+                    {loading && <Loading />}
                     <Header />
                     <RegBody />
                     <Footer />
