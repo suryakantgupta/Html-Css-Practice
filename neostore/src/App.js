@@ -12,6 +12,7 @@ import store from './redux/store'
 import ProductDetail from './components/molecules/ProductDetail';
 import AddAddress from './components/AddAddress';
 import ErrorPage from './components/ErrorPage';
+import Cart from './module/Cart';
 require('dotenv').config()
 
 
@@ -32,6 +33,7 @@ function App() {
           {/* <Route path='/commonproducts/:name?/:category?' exact component={ProductModule} /> */}
           <Route path='/productdetail/:id'exact render={()=> <ProductDetail />} />
           <Route path='/addaddress' exact render={()=> <AddAddress />} /> 
+          <Route path='/maincart' exact render={()=> <Cart />} /> 
           {/* <Route component={ErrorPage} /> */}
           </Provider>
           

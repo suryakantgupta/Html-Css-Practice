@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme)=>({
 function ErrorPage() {
     const classes = useStyles()
     return (
-        <Container>
+        <Container style={{marginTop:'4%',marginBottom:'4%'}}>
             <Grid container justify='center'>
                 <Grid item>
                     <Avatar variant='square' src={goku} className={classes.large} />

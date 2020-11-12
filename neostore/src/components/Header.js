@@ -9,6 +9,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCommonProducts } from '../redux';
+import { Modal, ModalBody } from 'react-bootstrap';
 
 
 /**
@@ -166,7 +167,7 @@ const StyledMenu = withStyles({
 
 function Header(props) {
     const classes = useStyles(); //Creates the instance of the styles to be used in the material component
-
+    const history = useHistory()
     /**
      * @description Three states are declared to handle the rendering in header
      * 1-It handles all the option provided by search bar
@@ -176,6 +177,7 @@ function Header(props) {
     const [options, setOptions] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
     const [open, setopen] = useState(false)
+    const [mopen, setmopen] = useState(false)
 
     const dispatch = useDispatch() //This hook is used to dispacth the action in the redux
 
@@ -184,6 +186,7 @@ function Header(props) {
      */
     const product = useSelector(state => state.product.products)
     const loading = useSelector(state => state.product.loading)
+    const addcart = useSelector(state => state.addcart.data)
 
     /**
      * @description This hook check the component did mount state the it dispatches the api call
@@ -241,6 +244,15 @@ function Header(props) {
         setopen(false)
     }
 
+    const handleOrderClick = () => {
+        if (props.isLogedin) {
+            history.push('/myaccount/order')
+        } else {
+            setmopen(true)
+        }
+    }
+
+
     return (
         // <Grid container>
         <ThemeProvider theme={navbarTheme}>
@@ -274,21 +286,21 @@ function Header(props) {
                         <Grid container justify='space-evenly'>
                             <Grid item>
                                 <Toolbar>
-                                    <Link href='/dashboard' style={{ textDecoration: 'none' }}>
-                                        <Typography variant='h6' style={{ color: "white" }} >Home</Typography>
-                                    </Link>
+                                    {/* <Link href='/dashboard' style={{ textDecoration: 'none' }}> */}
+                                    <Typography onClick={() => history.push('/dashboard')} variant='h6' style={{ color: "white" }} >Home</Typography>
+                                    {/* </Link> */}
                                 </Toolbar>
                             </Grid>
                             <Grid item>
                                 <Toolbar>
-                                    <Link href='/commonproducts' style={{ textDecoration: 'none' }}>
-                                        <Typography variant='h6' style={{ color: "white" }}>Products</Typography>
-                                    </Link>
+                                    {/* <Link href='/commonproducts' style={{ textDecoration: 'none' }}> */}
+                                    <Typography onClick={() => history.push('/commonproducts')} variant='h6' style={{ color: "white" }}>Products</Typography>
+                                    {/* </Link> */}
                                 </Toolbar>
                             </Grid>
                             <Grid item>
                                 <Toolbar>
-                                    <Typography variant='h6' style={{ color: "Swhite" }}>Order</Typography>
+                                    <Typography onClick={handleOrderClick} variant='h6' style={{ color: "Swhite" }}>Order</Typography>
                                 </Toolbar>
                             </Grid>
                         </Grid>
@@ -308,9 +320,10 @@ function Header(props) {
                                 <Grid container justify='flex-end'>
                                     <Toolbar disableGutters>
                                         <Button
+                                            onClick={() => history.push('/maincart')}
                                             className={classes.btnBgColor}
                                             style={{ backgroundColor: 'white', outline: 'none', marginRight: '4px' }}
-                                            startIcon={<Badge badgeContent={4} color='secondary'>
+                                            startIcon={<Badge badgeContent={addcart==null ?0:addcart.length} color='secondary' showZero>
                                                 <ShoppingCartIcon />
                                             </Badge>}
                                         >
@@ -362,6 +375,11 @@ function Header(props) {
                 </Grid>
             </AppBar>
             <Snackbar open={open} autoHideDuration={5000} onClose={handleonClose} message='You have successfully loged out' />
+            <Modal show={mopen} onHide={() => { setmopen(false); history.push('/login') }} >
+                <ModalBody>
+                    <Typography>You must log in first</Typography>
+                </ModalBody>
+            </Modal>
         </ThemeProvider>
 
     )

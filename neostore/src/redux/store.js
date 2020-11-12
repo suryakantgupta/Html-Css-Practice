@@ -7,6 +7,7 @@ import {userReducer, userloginReducer} from './user/userReducer'
 import { productReducer,categoryReducer,colorReducer,byidReducer,cardCategoryReducer } from './products/productsReducer'
 import {customerProfileReducer , updatecustomerProfileReducer} from './profile/profileReducer'
 import { addAddressReducer, getAddressReducer, updateAddressReducer } from './address/addressReducer'
+import { addtocartReducer, getCartReducer } from './cart/CartReducer'
 
 const rootReducer = combineReducers({
   carousel: reducer,
@@ -22,7 +23,9 @@ const rootReducer = combineReducers({
   updatecustomer:updatecustomerProfileReducer,
   address:getAddressReducer,
   addaddress:addAddressReducer,
-  updateaddress:updateAddressReducer
+  updateaddress:updateAddressReducer,
+  getcart:getCartReducer,
+  addcart:addtocartReducer
 })
 
 

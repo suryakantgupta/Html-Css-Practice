@@ -12,14 +12,16 @@ import Profile from '../components/atoms/Profile'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Loading from '../components/Loading'
+import Order from '../components/orderatoms/Order'
+import ErrorPage from '../components/ErrorPage'
 import { fetchcustaddress, fetchCustProfile, updateCustProfile } from '../redux'
 import Authentication from './Authentication'
 
 function MyAccount() {
 
-    const {page} = useParams()
+    const { page } = useParams()
 
-    const [defaultPage, setdefaultPage] = useState({ order: false, profile: false, address: false, changepass: false })
+    const [defaultPage, setdefaultPage] = useState({ order: false, profile: false, address: false, changepass: false, error: false })
     const [profilepage, setprofilepage] = useState(true) //This will handle toggle between profile and edit porfile
     const [editaddress, seteditaddress] = useState(true) //This will handle toggle between address and edit address
     const [addressid, setaddressid] = useState('')
@@ -27,12 +29,16 @@ function MyAccount() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(page=='profile'){
-            setdefaultPage({ order: false, profile: true, address: false, changepass: false })
-        }else if(page=='address'){
-            setdefaultPage({ order: false, profile: false, address: true, changepass: false })
-        }else if(page=='changepass'){
-            setdefaultPage({ order: false, profile: false, address: false, changepass: true })
+        if (page == 'profile') {
+            setdefaultPage({ order: false, profile: true, address: false, changepass: false, error: false })
+        } else if (page == 'address') {
+            setdefaultPage({ order: false, profile: false, address: true, changepass: false, error: false })
+        } else if (page == 'changepass') {
+            setdefaultPage({ order: false, profile: false, address: false, changepass: true, error: false })
+        } else if (page == 'order') {
+            setdefaultPage({ order: true, profile: false, address: false, changepass: false, error: false })
+        } else {
+            setdefaultPage({ order: false, profile: false, address: false, changepass: false, error: true })
         }
     }, [page])
 
@@ -42,7 +48,6 @@ function MyAccount() {
         dispatch(fetchcustaddress())
     }, [])
 
-    console.log(page)
     const loadings = useSelector(state => state.customer.loading)
     const aloading = useSelector(state => state.address.loading)
 
@@ -77,43 +82,36 @@ function MyAccount() {
         seteditaddress(true)
     }
 
-    // const setDefault = (order, profile, address, changepass) => {
-    //     setdefaultPage({
-    //         order,
-    //         profile,
-    //         address,
-    //         changepass
-    //     })
-    // }
-
-
 
     return (
         <div>
-            
-                <React.Fragment>
-                    <Authentication
-                        render={(isLogedin, setisLogedin) => (<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
-                    />
-                    <Container style={{ marginTop: '3%', marginBottom: '10%' }}>
-                        <Grid container>
-                            <Typography variant='h4'>My Account</Typography>
+
+            <React.Fragment>
+                <Authentication
+                    render={(isLogedin, setisLogedin) => (<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
+                />
+                {defaultPage.error ? <ErrorPage /> : <Container style={{ marginTop: '3%', marginBottom: '10%' }}>
+                    <Grid container>
+                        <Typography variant='h4'>My Account</Typography>
+                    </Grid>
+                    <Divider />
+                    <Grid container>
+                        <Grid item xs={12} lg={4}>
+                            <AccSidePanel />
                         </Grid>
-                        <Divider />
-                        <Grid container>
-                            <Grid item xs={12} lg={4}>
-                                <AccSidePanel />
-                            </Grid>
-                            <Grid item xs={12} lg={8}>
-                                {defaultPage.profile ? (loadings ? <Grid container justify='center'><CircularProgress /></Grid> : (profilepage ? <Profile setToEp={setToEditProfile} /> : <EditProfile setToP={setToProfile} />)) : null}
-                                {defaultPage.address ? (aloading ? <Grid container justify='center'><CircularProgress /></Grid> :  (editaddress ? <Address setToEA={setToEditAddress} /> : <EditAddress addressid={addressid} setToA={setToAddress} />)) : null}
-                                {defaultPage.changepass && <ChangePass />}
-                            </Grid>
+                        <Grid item xs={12} lg={8}>
+                            {defaultPage.profile ? (loadings ? <Grid container justify='center'><CircularProgress /></Grid> : (profilepage ? <Profile setToEp={setToEditProfile} /> : <EditProfile setToP={setToProfile} />)) : null}
+                            {defaultPage.address ? (aloading ? <Grid container justify='center'><CircularProgress /></Grid> : (editaddress ? <Address setToEA={setToEditAddress} /> : <EditAddress addressid={addressid} setToA={setToAddress} />)) : null}
+                            {defaultPage.changepass && <ChangePass />}
+                            {defaultPage.order && <Authentication
+                                render={(isLogedin, setisLogedin) => (<Order isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
+                            />}
                         </Grid>
-                    </Container>
-                    <Footer />
-                </React.Fragment>
-            
+                    </Grid>
+                </Container>}
+                <Footer />
+            </React.Fragment>
+
         </div>
     )
 }

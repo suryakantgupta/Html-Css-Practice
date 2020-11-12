@@ -56,6 +56,7 @@ export const updateCustProfile = (datas) => {
         data.append('phone_no', datas.mobile)
         data.append('dob', datas.dob)
         data.append('profile_img', `data:image/jpeg;base64,${datas.b64image}`)
+        
         axios.put('http://180.149.241.208:3022/profile', data,
             {
                 headers: {

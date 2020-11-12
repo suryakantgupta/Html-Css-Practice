@@ -130,7 +130,7 @@ function LoginBody(props) {
     const positive = useSelector(state => state.login.positive)
     const [open, setopen] = useState({ show: false, message: '' })
 
-    console.log(loginsuccess)
+    // console.log(loginsuccess)
 
     useEffect(() => {
 
