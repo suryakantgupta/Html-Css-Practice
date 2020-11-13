@@ -13,6 +13,8 @@ import ProductDetail from './components/molecules/ProductDetail';
 import AddAddress from './components/AddAddress';
 import ErrorPage from './components/ErrorPage';
 import Cart from './module/Cart';
+import Addresses from './components/orderatoms/Addresses';
+import Checkout from './components/orderatoms/Checkout';
 require('dotenv').config()
 
 
@@ -33,7 +35,9 @@ function App() {
           {/* <Route path='/commonproducts/:name?/:category?' exact component={ProductModule} /> */}
           <Route path='/productdetail/:id'exact render={()=> <ProductDetail />} />
           <Route path='/addaddress' exact render={()=> <AddAddress />} /> 
-          <Route path='/maincart' exact render={()=> <Cart />} /> 
+          <Route path='/maincart' exact render={()=> <Cart />} />
+          <Route path='/order-placed' exact render={()=> <Checkout />} />
+          {/* <Route path='/editaddress/:id?' exact render={()=> <Addresses />} /> */}
           {/* <Route component={ErrorPage} /> */}
           </Provider>
           

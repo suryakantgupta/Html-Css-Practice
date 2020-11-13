@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   address:getAddressReducer,
   addaddress:addAddressReducer,
   updateaddress:updateAddressReducer,
-  getcart:getCartReducer,
+  // getcart:getCartReducer,
   addcart:addtocartReducer
 })
 

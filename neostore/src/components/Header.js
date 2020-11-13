@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCommonProducts } from '../redux';
+import { fetchCommonProducts, postLogout } from '../redux';
 import { Modal, ModalBody } from 'react-bootstrap';
 
 
@@ -234,14 +234,20 @@ function Header(props) {
 
     //It removes the token on logout and refresh the page
     const handleLogout = () => {
-        localStorage.removeItem('token')
+        dispatch(postLogout(addcart))
+        console.log(addcart)
+        // localStorage.setItem('cart',JSON.stringify([]))
+        
         setopen(true)
-        window.location.reload()
+        // window.location.reload()
     }
 
     //This handles the snackbar when it is closed
     const handleonClose = () => {
         setopen(false)
+        localStorage.removeItem('token')
+        localStorage.removeItem('cart')
+        window.location.reload()
     }
 
     const handleOrderClick = () => {
@@ -323,7 +329,7 @@ function Header(props) {
                                             onClick={() => history.push('/maincart')}
                                             className={classes.btnBgColor}
                                             style={{ backgroundColor: 'white', outline: 'none', marginRight: '4px' }}
-                                            startIcon={<Badge badgeContent={addcart==null ?0:addcart.length} color='secondary' showZero>
+                                            startIcon={<Badge badgeContent={addcart == null ? 0 : addcart.length} color='secondary' showZero>
                                                 <ShoppingCartIcon />
                                             </Badge>}
                                         >
@@ -358,7 +364,7 @@ function Header(props) {
 
                                         <MenuItem>
                                             {props.isLogedin ?
-                                                <Link href='/myaccount' style={{ textDecoration: 'none' }}>
+                                                <Link href='/myaccount/profile' style={{ textDecoration: 'none' }}>
                                                     <ListItemText style={{ color: 'black' }} primary="Profile" />
                                                 </Link>
                                                 :

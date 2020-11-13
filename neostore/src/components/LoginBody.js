@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { postLogin } from '../redux';
+import { fetchcart, postLogin } from '../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -136,6 +136,7 @@ function LoginBody(props) {
 
         if (positive == true) {
             localStorage.setItem('token', loginsuccess.token)
+            dispatch(fetchcart())
             props.setisLogedin(true)
         } else if (positive == false) {
             setopen({ show: true, message: loginfail })

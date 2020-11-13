@@ -3,8 +3,8 @@ import React, { useEffect } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ProductCarousel from '../components/molecules/ProductCarousel'
-import { connect } from 'react-redux'
-import { fetchDashboardCardProducts, fetchDashboardProducts } from '../redux'
+import { connect, useDispatch } from 'react-redux'
+import { fetchcart, fetchDashboardCardProducts, fetchDashboardProducts } from '../redux'
 import { Loading } from '../components/Loading'
 import ProductCard from '../components/molecules/ProductCard'
 import Authentication from './Authentication'
@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom'
 function Dashboard(props) {
 
 
+const dispatch = useDispatch()
 
     useEffect(() => {
         props.fetchDashboardProducts()

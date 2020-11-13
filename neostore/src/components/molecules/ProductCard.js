@@ -7,7 +7,7 @@ import { addtocart } from '../../redux';
 
 function ProductCard(props) {
 
-  const [open, setopen] = useState(false)
+  const [open, setopen] = useState({ show: false, message: '' })
 
 
   // IT destructures the props from parent element
@@ -15,17 +15,26 @@ function ProductCard(props) {
   // console.log(props.product.product_id)
 
   const dispatch = useDispatch()
-const addcart = useSelector(state => state.addcart)
-// console.log(addcart)
+  const addcart = useSelector(state => state.addcart.data)
+  console.log(addcart)
 
-
+// console.log(props.product)
   const handleAddtoCart = () => {
-    dispatch(addtocart(props.product))
-    setopen(true)
+    const temp ={
+      quantity:1,
+      product_id:props.product
+    }
+    // console.log(addcart.filter((product)=>product_id==product.product_id).length==0)
+    if (addcart.filter((product) => product_id == product.product_id.product_id).length == 0) {
+      dispatch(addtocart(temp))
+      setopen({ show: true, message: 'Added Successfully' })
+    } else {
+      setopen({ show: true, message: 'Already Added to the Cart' })
+    }
   }
 
-  const handleClose = ()=>{
-    setopen(false)
+  const handleClose = () => {
+    setopen({ show: false, message: '' })
   }
 
   return (
@@ -49,7 +58,7 @@ const addcart = useSelector(state => state.addcart)
           </Grid>
         </Card.Body>
       </Card>
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} message='Added Successfully' />
+      <Snackbar open={open.show} autoHideDuration={2000} onClose={handleClose} message={open.message} />
     </React.Fragment>
   )
 }
