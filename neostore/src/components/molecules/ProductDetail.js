@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Container, Divider, Grid, IconButton, makeStyles, Tab, Tabs, Tooltip, Typography, useMediaQuery, useTheme } from '@material-ui/core'
+import { Avatar, Backdrop, Box, Button, Container, Divider, Fade, Grid, IconButton, makeStyles, Modal, Snackbar, Tab, Tabs, Tooltip, Typography, useMediaQuery, useTheme } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import SwipeableViews from 'react-swipeable-views';
 import { Carousel, Image } from 'react-bootstrap'
@@ -15,9 +15,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchById } from '../../redux/products/productsAction';
 import Loading from '../Loading'
-import { GlassMagnifier,SideBySideMagnifier } from 'react-image-magnifiers'
+import { GlassMagnifier, SideBySideMagnifier } from 'react-image-magnifiers'
 import Authentication from '../../module/Authentication';
 import ReactImageMagnify from 'react-image-magnify'
+import { addtocart } from '../../redux';
+import axios from 'axios'
+
+
+
+
 
 /**
  * @description This functional component renders the sliding part of /description and features
@@ -56,7 +62,21 @@ const useStyles = makeStyles((theme) => ({
         socialBox: {
             width: '80%'
         }
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '1px solid lightgray',
+        borderRadius:'10px',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        width:'20rem',
+        height:'13rem'
+    },
 }));
 
 
@@ -67,9 +87,42 @@ function ProductDetail() {
     const mobile = useMediaQuery('(max-width:400px)')// Identifies the device
     const dispatch = useDispatch()
     const { id } = useParams() //Extract the id from url
+    const [open, setopen] = useState({ show: false, message: '' })
+    const [mopen, setmopen] = useState(false)
+    const [rating, setrating] = useState(0)
+
+
+
 
     const product = useSelector(state => state.byid.product.product_details)
     const loading = useSelector(state => state.byid.loading)
+    // console.log(product)
+    const addcart = useSelector(state => state.addcart.data)
+    // console.log(addcart)
+
+    const handleAddtoCart = () => {
+        const temp = {
+            quantity: 1,
+            product_id: product[0]
+        }
+        // console.log(addcart.filter((product)=>product_id==product.product_id).length==0)
+        if (addcart.filter((product) => id == product.product_id.product_id).length == 0) {
+            dispatch(addtocart(temp))
+            setopen({ show: true, message: 'Added Successfully' })
+        } else {
+            setopen({ show: true, message: 'Already Added to the Cart' })
+        }
+    }
+
+
+    const handleClose = () => {
+        setopen({ show: false, message: '' })
+    }
+
+
+
+
+
 
     const classes = useStyles();
     const theme = useTheme();
@@ -97,7 +150,26 @@ function ProductDetail() {
     const handleChangeIndex = (index) => {
         setValue(index);
     };
+    const handlemOpen = () => {
+        setmopen(true);
+    };
 
+    const handlemClose = () => {
+        setmopen(false);
+    };
+
+
+    const changeRating = (newrating) => {
+        axios.put('http://180.149.241.208:3022/updateProductRatingByCustomer',{
+            product_id:id,
+            product_rating:newrating
+        },{
+            headers: {
+                Authorization: `bearer ${localStorage.token}`
+            }
+        })
+        setrating(newrating)
+    }
 
 
 
@@ -107,8 +179,8 @@ function ProductDetail() {
             {loading ? <Loading /> :
                 <React.Fragment>
                     <Authentication
-            render={(isLogedin,setisLogedin)=>(<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
-            />
+                        render={(isLogedin, setisLogedin) => (<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
+                    />
                     {/* <Header /> */}
                     <Container style={{ marginBottom: '7%' }}>
                         <div style={{ marginTop: '3%', marginBottom: '3%' }}>
@@ -117,17 +189,17 @@ function ProductDetail() {
                                     {!mobile && <Grid container spacing={8} >
                                         <Grid item>
                                             <ReactImageMagnify {...{
-                                                smallImage:{
-                                                    src:image,
-                                                    isFluidWidth:true
+                                                smallImage: {
+                                                    src: image,
+                                                    isFluidWidth: true
                                                 },
-                                                largeImage:{
-                                                    src:image,
-                                                    width:2000,
-                                                    height:600
+                                                largeImage: {
+                                                    src: image,
+                                                    width: 2000,
+                                                    height: 600
                                                 }
                                             }}
-                                            style={{zIndex:2}}
+                                                style={{ zIndex: 2 }}
                                             />
                                             {/* <Image src={image} width='100%' /> */}
                                         </Grid>
@@ -208,11 +280,46 @@ function ProductDetail() {
                                         <Grid item>
                                             <Grid container spacing={2}>
                                                 <Grid item>
-                                                    <Button variant='contained' style={{ backgroundColor: '#00acee', color: 'white' }}>Add to Cart</Button>
+                                                    <Button onClick={handleAddtoCart} variant='contained' style={{ backgroundColor: '#00acee', color: 'white' }}>Add to Cart</Button>
                                                 </Grid>
                                                 <Grid item>
-                                                    <Button variant='contained' style={{ backgroundColor: '#754b10', color: 'white' }}>Rate Product</Button>
+                                                    <Button onClick={handlemOpen} variant='contained' style={{ backgroundColor: '#754b10', color: 'white' }}>Rate Product</Button>
                                                 </Grid>
+                                                <Modal
+                                                    className={classes.modal}
+                                                    open={mopen}
+                                                    onClose={handlemClose}
+                                                    closeAfterTransition
+                                                    BackdropComponent={Backdrop}
+                                                    BackdropProps={{
+                                                        timeout: 500,
+                                                    }}
+                                                >
+                                                    <Fade in={mopen}>
+                                                        <div className={classes.paper}>
+                                                            <Grid container className='text-center' direction='column' spacing={2}>
+                                                                <Grid item>
+                                                                    <Typography>Rate</Typography>
+                                                                </Grid>
+                                                                <Grid item>
+                                                                    <Divider orientation='horizontal'/>
+                                                                </Grid>
+                                                                <Grid item>
+                                                                    <StarRatings
+                                                                        rating={rating}
+                                                                        numberOfStars={5}
+                                                                        changeRating={changeRating}
+                                                                        starDimension="30px"
+                                                                        starSpacing="1px"
+                                                                    />
+                                                                </Grid>
+                                                                <Grid item>
+                                                                    <Button onClick={handlemClose} style={{backgroundColor:'#3f51b5',outline:'none',textTransform:'none',color:'white'}}>Done</Button>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </div>
+                                                    </Fade>
+                                                </Modal>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -247,8 +354,8 @@ function ProductDetail() {
                                         </TabPanel>
                                         <TabPanel value={value} index={1} dir={theme.direction}>
                                             <b>Dimensions</b>:{product[0].product_dimension}<br />
-                                    <b>Material</b>:{product[0].product_material}<br />
-                                    <b>Manufacturer</b>:{product[0].product_producer}<br />
+                                            <b>Material</b>:{product[0].product_material}<br />
+                                            <b>Manufacturer</b>:{product[0].product_producer}<br />
                                         </TabPanel>
                                     </SwipeableViews>
                                 </Grid>
@@ -258,6 +365,7 @@ function ProductDetail() {
                     <Footer />
                 </React.Fragment>
             }
+            <Snackbar open={open.show} autoHideDuration={2000} onClose={handleClose} message={open.message} />
         </React.Fragment>
     )
 }

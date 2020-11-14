@@ -5,13 +5,14 @@ import {
     ADD_TO_CART,
     DELETE_FROM_CART,
     PLUS_CART,
-    MINUS_CART
+    MINUS_CART,
+    FETCH_ORDER_DETAILS
 } from './CartTypes'
 
 const initialCartState = {
-    loading: true,
+    // loading: true,
     data: '',
-    error: ''
+    // error: ''
 }
 const addtocartState = {
     data: JSON.parse(localStorage.getItem('cart')) == undefined ? [] : JSON.parse(localStorage.getItem('cart')),
@@ -21,29 +22,29 @@ const addtocartState = {
 
 
 
-// export const getCartReducer = (state = initialCartState, action) => {
-//     switch (action.type) {
-//         case FETCH_CART_REQUEST:
-//             return {
-//                 ...state,
-//                 loading: true
-//             }
-//         case FETCH_CART_SUCCESS:
-//             return {
-//                 loading: true,
-//                 data: action.payload,
-//                 error: ''
-//             }
-//         case FETCH_CART_FAILURE:
-//             return {
-//                 loading: true,
-//                 data: '',
-//                 error: action.payload
-//             }
-//         default:
-//             return state
-//     }
-// }
+export const getCartReducer = (state = initialCartState, action) => {
+    switch (action.type) {
+        case FETCH_ORDER_DETAILS:
+            return {
+                data: action.payload
+            }
+
+        // case FETCH_CART_SUCCESS:
+        //     return {
+        //         loading: true,
+        //         data: action.payload,
+        //         error: ''
+        //     }
+        // case FETCH_CART_FAILURE:
+        //     return {
+        //         loading: true,
+        //         data: '',
+        //         error: action.payload
+        //     }
+        default:
+            return state
+    }
+}
 
 export const addtocartReducer = (state = addtocartState, action) => {
     switch (action.type) {
@@ -111,7 +112,7 @@ export const addtocartReducer = (state = addtocartState, action) => {
 
         case FETCH_CART_SUCCESS:
             console.log(action.payload)
-            if (localStorage.getItem('cart') == undefined || localStorage.getItem('cart')=='[]') {
+            if (localStorage.getItem('cart') == undefined || localStorage.getItem('cart') == '[]') {
                 let temp = []
                 console.log(action.payload != undefined)
                 if (action.payload != undefined) {
@@ -135,6 +136,7 @@ export const addtocartReducer = (state = addtocartState, action) => {
             return {
                 data: JSON.parse(localStorage.getItem('cart'))
             }
+
 
 
 

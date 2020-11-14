@@ -14,7 +14,7 @@ import Header from '../components/Header'
 import Loading from '../components/Loading'
 import Order from '../components/orderatoms/Order'
 import ErrorPage from '../components/ErrorPage'
-import { fetchcustaddress, fetchCustProfile, updateCustProfile } from '../redux'
+import { fetchcustaddress, fetchCustProfile, fetchorderdetails, updateCustProfile } from '../redux'
 import Authentication from './Authentication'
 
 function MyAccount() {
@@ -46,6 +46,7 @@ function MyAccount() {
     useEffect(() => {
         dispatch(fetchCustProfile())
         dispatch(fetchcustaddress())
+        dispatch(fetchorderdetails())
     }, [])
 
     const loadings = useSelector(state => state.customer.loading)

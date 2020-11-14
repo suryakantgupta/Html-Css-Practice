@@ -10,3 +10,4 @@ export const DELETE_FROM_CART = 'DELETE_FROM_CART'
 export const PLUS_CART = 'PLUS_CART'
 export const MINUS_CART = 'MINUS_CART'
 
+export const FETCH_ORDER_DETAILS = 'FETCH_ORDER_DETAILS'

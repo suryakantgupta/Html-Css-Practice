@@ -115,14 +115,14 @@ export const postLogout = (data) => {
             headers: {
                 Authorization: `bearer ${localStorage.token}`
             }
+        }).then((response) => {
+            // dispatch(userLogoutSuccess(response.data))
+            localStorage.removeItem('cart')
+            console.log(response.data)
+        }).catch((error) => {
+            // dispatch(userLogoutFailure(error.response.data))
+            console.log(error.response, error)
         })
-        // .then((response) => {
-        //     // dispatch(userLogoutSuccess(response.data))
-        //     console.log(response.data)
-        // }).catch((error) => {
-        //     // dispatch(userLogoutFailure(error.response.data))
-        //     console.log(error.response, error)
-        // })
     }
 }
 
@@ -144,6 +144,7 @@ export const postCheckout = (data) => {
             }
         }).then((response) => {
             // dispatch(userLogoutSuccess(response.data))
+            localStorage.removeItem('cart')
             console.log(response.data)
         }).catch((error) => {
             // dispatch(userLogoutFailure(error.response.data))

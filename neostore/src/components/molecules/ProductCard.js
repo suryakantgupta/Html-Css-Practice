@@ -16,9 +16,9 @@ function ProductCard(props) {
 
   const dispatch = useDispatch()
   const addcart = useSelector(state => state.addcart.data)
-  console.log(addcart)
+  // console.log(addcart)
 
-// console.log(props.product)
+console.log(props.product)
   const handleAddtoCart = () => {
     const temp ={
       quantity:1,
