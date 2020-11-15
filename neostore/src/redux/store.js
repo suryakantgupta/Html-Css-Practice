@@ -6,7 +6,7 @@ import {reducer,cardreducer} from './dashboard/reducer'
 import {userReducer, userloginReducer} from './user/userReducer'
 import { productReducer,categoryReducer,colorReducer,byidReducer,cardCategoryReducer } from './products/productsReducer'
 import {customerProfileReducer , updatecustomerProfileReducer} from './profile/profileReducer'
-import { addAddressReducer, getAddressReducer, updateAddressReducer } from './address/addressReducer'
+import { addAddressReducer, deleteAddressReducer, getAddressReducer, updateAddressReducer } from './address/addressReducer'
 import { addtocartReducer, getCartReducer } from './cart/CartReducer'
 
 const rootReducer = combineReducers({
@@ -25,7 +25,8 @@ const rootReducer = combineReducers({
   addaddress:addAddressReducer,
   updateaddress:updateAddressReducer,
   getcart:getCartReducer,
-  addcart:addtocartReducer
+  addcart:addtocartReducer,
+  deladd:deleteAddressReducer
 })
 
 

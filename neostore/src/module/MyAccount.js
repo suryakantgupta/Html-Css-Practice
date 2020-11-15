@@ -1,7 +1,7 @@
 import { CircularProgress, Container, Divider, Grid, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import AccSidePanel from '../components/AccSidePanel'
 import AddAddress from '../components/AddAddress'
 import Address from '../components/atoms/Address'
@@ -17,17 +17,31 @@ import ErrorPage from '../components/ErrorPage'
 import { fetchcustaddress, fetchCustProfile, fetchorderdetails, updateCustProfile } from '../redux'
 import Authentication from './Authentication'
 
-function MyAccount() {
+function MyAccount(props) {
 
     const { page } = useParams()
 
-    const [defaultPage, setdefaultPage] = useState({ order: false, profile: false, address: false, changepass: false, error: false })
+    const [defaultPage, setdefaultPage] = useState({ order: false, profile: false, address: false, changepass: false, error: false })//This will set the page to be rendered
     const [profilepage, setprofilepage] = useState(true) //This will handle toggle between profile and edit porfile
     const [editaddress, seteditaddress] = useState(true) //This will handle toggle between address and edit address
-    const [addressid, setaddressid] = useState('')
+    const [addressid, setaddressid] = useState('')//This will hold the value of address id
+
+    const loadings = useSelector(state => state.customer.loading)//This will check the loading status of get customer profile
+    const aloading = useSelector(state => state.address.loading)//This will check the loading status of get address
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
+//Gets invoked onload
+    useEffect(() => {
+        dispatch(fetchCustProfile())//Makes the customer profile api call
+        dispatch(fetchcustaddress())//Makes the customer address api call
+        dispatch(fetchorderdetails())//Make the custome order details api call
+    }, [])
+
+/**
+ * @description This will set the page according to the url 
+ */
     useEffect(() => {
         if (page == 'profile') {
             setdefaultPage({ order: false, profile: true, address: false, changepass: false, error: false })
@@ -42,15 +56,13 @@ function MyAccount() {
         }
     }, [page])
 
-
+//It will check if customer is loged in or not if not it will redirect to dashboard
     useEffect(() => {
-        dispatch(fetchCustProfile())
-        dispatch(fetchcustaddress())
-        dispatch(fetchorderdetails())
-    }, [])
+        if(!props.isLogedin){
+            history.push('/dashboard')
+        }
+    }, [props.isLogedin])
 
-    const loadings = useSelector(state => state.customer.loading)
-    const aloading = useSelector(state => state.address.loading)
 
     /**
      * @description This function will set the profile page to edit profile when edit button is clicked
@@ -107,12 +119,12 @@ function MyAccount() {
                             {defaultPage.order && <Authentication
                                 render={(isLogedin, setisLogedin) => (<Order isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
                             />}
+                            {defaultPage.error && <ErrorPage />}
                         </Grid>
                     </Grid>
                 </Container>}
                 <Footer />
             </React.Fragment>
-
         </div>
     )
 }

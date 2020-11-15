@@ -356,21 +356,23 @@ function Header(props) {
                                         <MenuItem>
                                             {props.isLogedin ?
                                                 <ListItemText style={{ color: 'black' }} onClick={handleLogout} primary="Logout" /> :
-                                                <Link href='/login' style={{ textDecoration: 'none' }}>
-                                                    <ListItemText style={{ color: 'black' }} primary="Login" />
-                                                </Link>}
+                                                // <Link href='/login' style={{ textDecoration: 'none' }}>
+                                                    <ListItemText onClick={()=>history.push('/login')} style={{ color: 'black' }} primary="Login" />
+                                                // {/* </Link> */}
+                                                }
                                         </MenuItem>
 
                                         <MenuItem>
                                             {props.isLogedin ?
-                                                <Link href='/myaccount/profile' style={{ textDecoration: 'none' }}>
-                                                    <ListItemText style={{ color: 'black' }} primary="Profile" />
-                                                </Link>
+                                                // <Link href='/myaccount/profile' style={{ textDecoration: 'none' }}>
+                                                    <ListItemText onClick={()=>history.push('/myaccount/profile')} style={{ color: 'black' }} primary="Profile" />
+                                                // </Link>
                                                 :
 
-                                                <Link href='/register' style={{ textDecoration: 'none' }}>
-                                                    <ListItemText style={{ color: 'black' }} primary="Register" />
-                                                </Link>}
+                                                // <Link href='/register' style={{ textDecoration: 'none' }}>
+                                                    <ListItemText onClick={()=>history.push('/register')} style={{ color: 'black' }} primary="Register" />
+                                                // </Link>
+                                                }
                                         </MenuItem>
                                     </StyledMenu>
                                 </Toolbar>

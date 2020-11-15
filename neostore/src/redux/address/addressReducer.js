@@ -7,7 +7,10 @@ import {
     ADD_ADDRESS_FAILURE,
     UPDATE_ADDRESS_REQUEST,
     UPDATE_ADDRESS_SUCCESS,
-    UPDATE_ADDRESS_FAILURE
+    UPDATE_ADDRESS_FAILURE,
+    DELETE_ADDRESS_REQUEST,
+    DELETE_ADDRESS_SUCCESS,
+    DELETE_ADDRESS_FAILURE
 } from "./addressTypes";
 
 const initialaddressState = {
@@ -23,6 +26,11 @@ const addaddressState = {
 }
 
 const updateaddressState = {
+    loading: false,
+    positive: null
+}
+
+const deleteaddressState = {
     loading: false,
     positive: null
 }
@@ -90,6 +98,29 @@ export const updateAddressReducer = (state = updateaddressState, action) => {
                 positive:action.payload
             }
         case UPDATE_ADDRESS_FAILURE:
+            return {
+                loading: false,
+                positive:action.payload
+            }
+        default:
+            return state
+    }
+}
+
+
+export const deleteAddressReducer = (state = deleteaddressState, action) => {
+    switch (action.type) {
+        case DELETE_ADDRESS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case DELETE_ADDRESS_SUCCESS:
+            return {
+                loading: false,
+                positive:action.payload
+            }
+        case DELETE_ADDRESS_FAILURE:
             return {
                 loading: false,
                 positive:action.payload

@@ -1,4 +1,4 @@
-import { Avatar, Button, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core'
 import SubjectIcon from '@material-ui/icons/Subject';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
@@ -19,10 +19,8 @@ const useStyles = makeStyles((theme) => ({
 function AccSidePanel(props) {
 
     const history = useHistory()
-
     const classess = useStyles()
-
-    const customer = useSelector(state => state.customer)
+    const customer = useSelector(state => state.customer)// This gets the details of customer by making the api call
 
     return (
         <React.Fragment>
@@ -41,30 +39,38 @@ function AccSidePanel(props) {
                 </Grid>
                 <Grid item>
                     <Grid container justify='center'>
-                        <Button onClick={() => history.push('/myaccount/order')} startIcon={<SubjectIcon />} color='primary'>
-                            Order
+                        <Box width='55%'>
+                            <Button fullWidth onClick={() => history.push('/myaccount/order')} startIcon={<SubjectIcon />} color='primary'>
+                                Order
                     </Button>
+                        </Box>
                     </Grid>
                 </Grid>
                 <Grid item>
                     <Grid container justify='center'>
-                        <Button onClick={() => history.push('/myaccount/profile')} startIcon={<AccountBoxIcon />} color='primary'>
-                            Profile
+                        <Box width='55%'>
+                            <Button fullWidth onClick={() => history.push('/myaccount/profile')} startIcon={<AccountBoxIcon />} color='primary'>
+                                Profile
                     </Button>
+                        </Box>
                     </Grid>
                 </Grid>
                 <Grid item>
                     <Grid container justify='center'>
-                        <Button onClick={() => history.push('/myaccount/address')} startIcon={<HomeIcon />} color='primary'>
-                            Address
+                        <Box width='55%'>
+                            <Button fullWidth onClick={() => history.push('/myaccount/address')} startIcon={<HomeIcon />} color='primary'>
+                                Address
                     </Button>
+                        </Box>
                     </Grid>
                 </Grid>
                 <Grid item>
                     <Grid container justify='center'>
-                        <Button onClick={() => history.push('/myaccount/changepass')} startIcon={<CompareArrowsIcon />} color='primary'>
-                            Change Password
+                        <Box width='55%'>
+                            <Button fullWidth onClick={() => history.push('/myaccount/changepass')} startIcon={<CompareArrowsIcon />} color='primary'>
+                                Change Password
                     </Button>
+                        </Box>
                     </Grid>
                 </Grid>
             </Grid>

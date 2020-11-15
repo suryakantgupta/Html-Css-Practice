@@ -7,7 +7,10 @@ import {
     ADD_ADDRESS_FAILURE,
     UPDATE_ADDRESS_REQUEST,
     UPDATE_ADDRESS_SUCCESS,
-    UPDATE_ADDRESS_FAILURE
+    UPDATE_ADDRESS_FAILURE,
+    DELETE_ADDRESS_REQUEST,
+    DELETE_ADDRESS_SUCCESS,
+    DELETE_ADDRESS_FAILURE
 } from "./addressTypes";
 import axios from 'axios'
 
@@ -146,6 +149,48 @@ export const updatecustaddresssuccess = (data) => {
 export const updatecustaddressfailure = (data) => {
     return {
         type: UPDATE_ADDRESS_FAILURE,
+        payload: data
+    }
+}
+
+
+
+
+export const deletecustaddress = (id) => {
+    return (dispatch) => {
+        dispatch(deletecustaddressrequest())
+        axios.delete(`http://180.149.241.208:3022/deladdress/${id}`,{
+            headers: {
+                Authorization: `bearer ${localStorage.token}`
+            }
+        }).then((response) => {
+            dispatch(deletecustaddresssuccess(response.data.success))
+            console.log(response.data)
+        }).catch((error) => {
+            dispatch(deletecustaddressfailure(error.response.data))
+            console.log(error.response.data)
+        })
+    }
+}
+
+
+
+export const deletecustaddressrequest = () => {
+    return {
+        type: DELETE_ADDRESS_REQUEST
+    }
+}
+
+export const deletecustaddresssuccess = (data) => {
+    return {
+        type: DELETE_ADDRESS_SUCCESS,
+        payload: data
+    }
+}
+
+export const deletecustaddressfailure = (data) => {
+    return {
+        type: DELETE_ADDRESS_FAILURE,
         payload: data
     }
 }
