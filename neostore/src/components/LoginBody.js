@@ -10,33 +10,29 @@ import {
 } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { fetchcart, postLogin } from '../redux';
+import { fetchcart, fetchcustaddress, postLogin } from '../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+//It styles the Material Components
+const useStyles = makeStyles({
 
+    root: {
+
+    },
+    passColor: {
+        '& .MuiSvgIcon-root': {
+            color: '#000000'
+        }
+    },
+    errborder: {
+        '& fieldset': {
+            borderWidth: '3px'
+        }
+    }
+})
 
 
 function LoginBody(props) {
-
-    //It styles the Material Components
-    const useStyles = makeStyles({
-
-        root: {
-
-        },
-        passColor: {
-            '& .MuiSvgIcon-root': {
-                color: '#000000'
-            }
-        },
-        errborder: {
-            '& fieldset': {
-                borderWidth: '3px'
-            }
-        }
-    })
-
-
 
     const classes = useStyles(); //object is define to use styles in material
     const dispatch = useDispatch()
@@ -57,6 +53,14 @@ function LoginBody(props) {
     const [submitCheck, setSubmit] = useState({ echeck: true, pcheck: true })
 
 
+    const loading = useSelector(state => state.login.loading)
+    const loginsuccess = useSelector(state => state.login.success)//Checks for authentication
+    const loginfail = useSelector(state => state.login.error)//Checks for authentication
+    const positive = useSelector(state => state.login.positive)
+    const [open, setopen] = useState({ show: false, message: '' })
+
+
+    const history = useHistory()
 
     /**
  * @description This function validates the email Provided by the user
@@ -122,27 +126,21 @@ function LoginBody(props) {
     }
 
 
-    const history = useHistory()
-
-    const loading = useSelector(state => state.login.loading)
-    const loginsuccess = useSelector(state => state.login.success)//Checks for authentication
-    const loginfail = useSelector(state => state.login.error)//Checks for authentication
-    const positive = useSelector(state => state.login.positive)
-    const [open, setopen] = useState({ show: false, message: '' })
-
-    // console.log(loginsuccess)
+    /**
+     * @description This will check if user has made successful login or not
+     */
 
     useEffect(() => {
-
         if (positive == true) {
-            setopen({show:false,message:''})
+            setopen({ show: false, message: '' })
             localStorage.setItem('token', loginsuccess.token)
             dispatch(fetchcart())
+            // dispatch(fetchcustaddress())//Makes the customer address api call
             props.setisLogedin(true)
         } else if (positive == false) {
             setopen({ show: true, message: loginfail })
         }
-    }, [positive,loading])
+    }, [positive, loading])
 
     useEffect(() => {
         if (props.isLogedin) {
@@ -240,7 +238,7 @@ function LoginBody(props) {
                     <a href='/register'><label className='mb-0' id='regbtn'>Register Now</label></a>
                 </div>
                 <div className='col-md-3'>
-                    <a href='/forgotpass'><label className='mb-0' id='regbtn'>Forgotten?</label></a>
+                    <a onClick={() => history.push('/forgotpass')}><label className='mb-0' id='regbtn'>Forgotten?</label></a>
                 </div>
             </div>
             {!loading && <Snackbar open={open.show} autoHideDuration={4000} onClose={() => setopen({ ...open, show: false })} message={open.message} />}

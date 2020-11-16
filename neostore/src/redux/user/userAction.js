@@ -116,14 +116,15 @@ export const postLogout = (data) => {
             headers: {
                 Authorization: `bearer ${localStorage.token}`
             }
-        }).then((response) => {
-            dispatch(userLogoutSuccess(response.data.success))
-            // localStorage.removeItem('cart')
-            console.log(response.data)
-        }).catch((error) => {
-            // dispatch(userLogoutFailure(error.response.data))
-            // console.log(error.response, error)
         })
+        // .then((response) => {
+        //     dispatch(userLogoutSuccess(response.data.success))
+        //     // localStorage.removeItem('cart')
+        //     console.log(response.data)
+        // }).catch((error) => {
+        //     // dispatch(userLogoutFailure(error.response.data))
+        //     // console.log(error.response, error)
+        // })
     }
 }
 
@@ -132,8 +133,11 @@ export const postCheckout = (data) => {
         let temp = [...data]
         let temp2 = []
         temp.map((pd) => {
+            console.log(pd)
             pd.product_id.quantity = pd.quantity
             pd.product_id.total = pd.quantity * pd.product_id.product_cost
+            pd.product_id.product_category = [pd.product_id.category_id]
+            pd.product_id.product_color = [pd.product_id.color_id]
             temp2.push(pd.product_id)
         })
         temp2.push({ flag: 'checkout' })

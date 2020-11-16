@@ -116,7 +116,7 @@ export const updatecustaddress = (data) => {
     return (dispatch) => {
         dispatch(updatecustaddressrequest())
         axios.put('http://180.149.241.208:3022/updateAddress', {
-            address_id:data.addressid,
+            address_id:data.address_id,
             address: data.address,
             pincode: data.pincode,
             city: data.city,

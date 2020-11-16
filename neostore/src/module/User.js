@@ -25,7 +25,7 @@ function User(props) {
         } else if (props.body == 'recover') {
             setbody({ recover: true })
         }
-    }, [])
+    }, [props.body])
 
     const loading = useSelector(state => state.user.loading)
     const loginloading = useSelector(state => state.login.loading)

@@ -1,4 +1,4 @@
-import { Divider, Grid, TextField, Typography, InputAdornment, IconButton, Container, Icon, Snackbar, } from '@material-ui/core'
+import {Button as Btn, Divider, Grid, TextField, Typography, InputAdornment, IconButton, Container, Icon, Snackbar, CircularProgress, } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -24,6 +24,7 @@ function RecoverPass() {
     const [validateError, setError] = useState({ phelperNotValid: false, pcheckError: false, chelperNotValid: false, ccheckError: false })
     const [modal, setModal] = useState({ err: false, message: '' })
     const [open, setopen] = useState(false)
+    const [loading, setloading] = useState(false)
 
 
     /**
@@ -82,6 +83,7 @@ function RecoverPass() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setloading(true)
         axios.post('http://180.149.241.208:3022/recoverPassword', {
             otpCode: rcpass.vcode,
             newPass: rcpass.npass,
@@ -94,8 +96,10 @@ function RecoverPass() {
             setopen(true)
             // console.log(response.data.message)
             setModal({ ...modal, message: response.data.message })
+            setloading(false)
         }).catch((error) => {
             setModal({ err: true, message: error.response.data.message })
+            setloading(false)
         })
     }
 
@@ -104,7 +108,7 @@ function RecoverPass() {
      * @description: This function handles the Closing of modal when error occurred
      */
     const handleClose = () => {
-        window.location.reload()
+        // window.location.reload()
         setModal({ ...modal, err: false })
     }
 
@@ -116,8 +120,6 @@ function RecoverPass() {
         setopen(false)
         history.push('/login')
     }
-
-
    
 
     /**
@@ -229,10 +231,13 @@ function RecoverPass() {
                                             }}
                                         />
                                     </Grid>
-
                                 </Grid>
                                 <div className='d-flex justify-content-center mt-3'>
-                                    <button className='btn shadow-sm' type='submit' style={{ backgroundColor: '#3f51b5', color: 'white' }}>Submit</button>
+                                    <Btn type='submit' variant='contained' style={{ backgroundColor: '#3f51b5', color: 'white',textTransform:'none' }}
+                                    startIcon=
+                                        {loading && <CircularProgress color='white' size='1rem'/>}
+                                    >Submit</Btn>
+                                    {/* <button className='btn shadow-sm' type='submit' style={{ backgroundColor: '#3f51b5', color: 'white' }}>Submit</button> */}
                                 </div>
                             </form>
                         </Card.Body>

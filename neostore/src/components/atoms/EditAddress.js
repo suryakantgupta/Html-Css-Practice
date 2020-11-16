@@ -33,12 +33,12 @@ function EditAddress(props) {
     useEffect(() => {
         addressdata.customer_address.map((cd)=>{
             if(cd.address_id == props.addressid){
-                setadd({...add,addressid:cd.address_id, address: cd.address, pincode: cd.pincode.toString(), city: cd.city, state: cd.state, country: cd.country })
+                setadd({...add,address_id:cd.address_id, address: cd.address, pincode: cd.pincode.toString(), city: cd.city, state: cd.state, country: cd.country })
             }
         })
     }, [])
 
-    const [add, setadd] = useState({addressid:'', address: '', pincode: '', city: '', state: '', country: '',isdelivery:'' })
+    const [add, setadd] = useState({address_id:'', address: '', pincode: '', city: '', state: '', country: '',isdelivery:'' })
     const [validate, setvalidate] = useState({ address: false, pincode: false, city: false, state: false, country: false })
     const [v, setv] = useState({ amessage: '', pmessage: '', cmessage: '', smessage: '', comessage: '', })
     const [check, setcheck] = useState({ address: true, pincode: true, city: true, state: true, country: true })

@@ -246,6 +246,7 @@ function Header(props) {
     const handleonClose = () => {
         setopen(false)
         localStorage.removeItem('token')
+        localStorage.removeItem('cart')
         window.location.reload()
     }
 

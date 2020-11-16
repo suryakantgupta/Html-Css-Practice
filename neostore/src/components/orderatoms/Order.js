@@ -25,7 +25,7 @@ function Order(props) {
 
     const orderDetails = useSelector(state => state.getcart.data)
     const loadings = useSelector(state => state.customer.loading)
-    // console.log(orderDetails)
+    console.log(orderDetails)
 
     const getInvoice = (created, id, obj) => {
         axios.post('http://180.149.241.208:3022/getInvoiceOfOrder', {
@@ -37,17 +37,16 @@ function Order(props) {
                 headers: {
                     Authorization: `bearer ${localStorage.token}`
                 }
-            }).then((response)=>{
+            }).then((response) => {
                 console.log(response)
-                window.open(`http://180.149.241.208:3022/${response.data.receipt}`,'_blank')
-            }).catch((error)=>{
+                window.open(`http://180.149.241.208:3022/${response.data.receipt}`, '_blank')
+            }).catch((error) => {
                 console.log(error)
             })
     }
 
     return (<React.Fragment>
-        {/* {show && < div style={{ marginTop: '3%', marginBottom: '3%' }
-        }>
+        {!loadings && (orderDetails.product_details.length == 0 ? < div style={{ marginTop: '3%', marginBottom: '3%' }}>
             <Grid container justify='center' style={{ paddingBottom: '4%' }}>
                 <Typography variant='h2'>No Orders Found</Typography>
             </Grid>
@@ -55,8 +54,9 @@ function Order(props) {
             <Grid container justify='center'>
                 <Button href='/commonproducts' style={{ backgroundColor: '#3f51b5' }}>Go To Products Page</Button>
             </Grid>
-        </div >} */}
-        {!loadings && <Grid container direction='column' spacing={4} style={{ marginTop: '5%', marginBottom: '5%' }}>
+        </div >
+        :
+        <Grid container direction='column' spacing={4} style={{ marginTop: '5%', marginBottom: '5%' }}>
             <React.Fragment>
                 {orderDetails.product_details.map((pd) => (
                     <Grid item>
@@ -98,7 +98,7 @@ function Order(props) {
                     </Grid>
                 ))}
             </React.Fragment>
-        </Grid>}
+        </Grid>)}
     </React.Fragment >
     )
 }

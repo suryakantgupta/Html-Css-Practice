@@ -1,6 +1,7 @@
 import { Button, Container, Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import Authentication from '../../module/Authentication'
 import Footer from '../Footer'
 import Header from '../Header'
 
@@ -8,7 +9,9 @@ function Checkout() {
 
     const history = useHistory()
     return (<React.Fragment>
-        <Header />
+        <Authentication
+              render={(isLogedin, setisLogedin) => (<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
+            />
         <Container>
             <div style={{ display: 'grid', height: '80vh', placeContent: 'center',margin:'10%' }}>
                 <Grid container className='text-center' direction='column' spacing={5}>

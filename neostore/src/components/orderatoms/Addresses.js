@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import { postCheckout, updatecustaddress } from '../../redux'
+import { fetchcart, postCheckout, updatecustaddress } from '../../redux'
 
 function Addresses(props) {
 
@@ -21,15 +21,16 @@ function Addresses(props) {
         }
     }, [addresserror])
 
-    console.log(logcheckout)
+    // console.log(logcheckout)
     useEffect(() => {
         if(logcheckout){
             localStorage.removeItem('cart')
+            dispatch(fetchcart())
             history.push('/order-placed')
         }
     }, [logcheckout])
 
-    // console.log(address)
+    console.log(address.customer_address)
     // console.log(addresserror)
     const dispatch = useDispatch()
    const history = useHistory()

@@ -31,7 +31,7 @@ function ForgetPass() {
         e.preventDefault()
         axios.post('http://180.149.241.208:3022/forgotPassword', { email })
             .then((response) => {
-                // console.log(response)
+                // console.log(response.data)
                 localStorage.setItem('ftoken', response.data.token)
                 history.push('/recoverpass')
             }).catch((err) => {
@@ -57,7 +57,7 @@ function ForgetPass() {
  */
 
     const handleClose = () => {
-        window.location.reload()
+        // window.location.reload()
         setModal({ ...modal, err: false })
     }
 
