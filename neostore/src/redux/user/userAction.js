@@ -7,7 +7,9 @@ import {
     USER_REGISTER_FAILURE,
     USER_LOGIN_POST,
     USER_LOGIN_SUCCESS,
-    USER_LOGIN_FAILURE
+    USER_LOGIN_FAILURE,
+    USER_LOGOUT_SUCCESS,
+    USER_CHECKOUT_SUCCESS
 } from './userTypes'
 
 export const postNewRegister = (data) => {
@@ -68,10 +70,10 @@ export const postLogin = (data) => {
         dispatch(userLoginPost())
         axios.post('http://180.149.241.208:3022/login', data).then((response) => {
             dispatch(userLoginSuccess(response.data, response.data.success))
-            console.log(response.data)
+            // console.log(response.data)
         }).catch((error) => {
             dispatch(userLoginFailure(error.response.data.message, error.response.data.success))
-            console.log(error.response)
+            // console.log(error.response)
         })
     }
 }
@@ -109,19 +111,18 @@ export const postLogout = (data) => {
             temp2.push(pd.product_id)
         })
         temp2.push({ flag: 'logout' })
-        // dispatch(userLoginPost())
         console.log(temp2)
         axios.post('http://180.149.241.208:3022/addProductToCartCheckout', temp2, {
             headers: {
                 Authorization: `bearer ${localStorage.token}`
             }
         }).then((response) => {
-            // dispatch(userLogoutSuccess(response.data))
-            localStorage.removeItem('cart')
+            dispatch(userLogoutSuccess(response.data.success))
+            // localStorage.removeItem('cart')
             console.log(response.data)
         }).catch((error) => {
             // dispatch(userLogoutFailure(error.response.data))
-            console.log(error.response, error)
+            // console.log(error.response, error)
         })
     }
 }
@@ -137,43 +138,33 @@ export const postCheckout = (data) => {
         })
         temp2.push({ flag: 'checkout' })
         // dispatch(userLoginPost())
-        console.log(temp2)
+        // console.log(temp2)
         axios.post('http://180.149.241.208:3022/addProductToCartCheckout', temp2, {
             headers: {
                 Authorization: `bearer ${localStorage.token}`
             }
         }).then((response) => {
-            // dispatch(userLogoutSuccess(response.data))
-            localStorage.removeItem('cart')
-            console.log(response.data)
+            dispatch(usercheckoutSuccess(response.data.success))
+           console.log(response.data)
         }).catch((error) => {
             // dispatch(userLogoutFailure(error.response.data))
-            console.log(error.response, error)
+            console.log(error.response)
         })
     }
 }
 
-export const userLogoutPost = () => {
+export const userLogoutSuccess = (bool) => {
     return {
-        type: USER_LOGIN_POST
-    }
-}
-
-export const userLogoutSuccess = (data, bool) => {
-    return {
-        type: USER_LOGIN_SUCCESS,
-        payload: data,
+        type: USER_LOGOUT_SUCCESS,
+        // payload: data,
         positive: bool
     }
 }
 
-export const userLogoutFailure = (error, bool) => {
+export const usercheckoutSuccess = (bool) => {
     return {
-        type: USER_LOGIN_FAILURE,
-        payload: error,
-        positive: bool
+        type: USER_CHECKOUT_SUCCESS,
+        // payload: data,
+        payload: bool
     }
 }
-
-
-

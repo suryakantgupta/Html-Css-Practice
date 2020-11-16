@@ -18,7 +18,7 @@ import { fetchcustaddress } from '../redux';
 import EditorderAddress from '../components/orderatoms/EditorderAddress';
 
 
-export default function Cart() {
+export default function Cart(props) {
     const history = useHistory()
     const dispatch = useDispatch()
     const addcart = useSelector(state => state.addcart.data)

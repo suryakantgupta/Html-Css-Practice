@@ -1,4 +1,20 @@
 import React from 'react'
+import axios from 'axios'
+
+const handleTandC = ()=>{
+axios.get('http://180.149.241.208:3022/getTermsAndConditions').then((response)=>{
+    console.log(response.data)
+    window.open(`http://180.149.241.208:3022/${response.data.termsAndConditions_details[0].fileName}`,'_blank')
+})
+}
+
+
+const handlereturnPolicy = ()=>{
+axios.get('http://180.149.241.208:3022/getGuarantee').then((response)=>{
+    console.log(response.data)
+    window.open(`http://180.149.241.208:3022/${response.data.guarantee_details[0].fileName}`,'_blank')
+})
+}
 
 function Footer() {
     return (
@@ -33,10 +49,10 @@ function Footer() {
                                 <h5 className="mt-3 mb-4">
                                     Information
                             </h5>
-                                <small>
+                                <small onClick={handleTandC}>
                                     Terms and Conditions
                         </small>
-                                <small>
+                                <small onClick={handlereturnPolicy}>
                                     Gurantee and Return Policy
                         </small>
                                 <small>

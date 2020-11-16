@@ -25,7 +25,7 @@ function Order(props) {
 
     const orderDetails = useSelector(state => state.getcart.data)
     const loadings = useSelector(state => state.customer.loading)
-    console.log(orderDetails)
+    // console.log(orderDetails)
 
     const getInvoice = (created, id, obj) => {
         axios.post('http://180.149.241.208:3022/getInvoiceOfOrder', {

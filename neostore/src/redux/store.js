@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { combineReducers } from 'redux'
 import {reducer,cardreducer} from './dashboard/reducer'
-import {userReducer, userloginReducer} from './user/userReducer'
+import {userReducer, userloginReducer,logcheckoutReducer} from './user/userReducer'
 import { productReducer,categoryReducer,colorReducer,byidReducer,cardCategoryReducer } from './products/productsReducer'
 import {customerProfileReducer , updatecustomerProfileReducer} from './profile/profileReducer'
 import { addAddressReducer, deleteAddressReducer, getAddressReducer, updateAddressReducer } from './address/addressReducer'
@@ -26,7 +26,8 @@ const rootReducer = combineReducers({
   updateaddress:updateAddressReducer,
   getcart:getCartReducer,
   addcart:addtocartReducer,
-  deladd:deleteAddressReducer
+  deladd:deleteAddressReducer,
+  logcheckout:logcheckoutReducer
 })
 
 

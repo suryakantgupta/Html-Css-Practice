@@ -135,13 +135,14 @@ function LoginBody(props) {
     useEffect(() => {
 
         if (positive == true) {
+            setopen({show:false,message:''})
             localStorage.setItem('token', loginsuccess.token)
             dispatch(fetchcart())
             props.setisLogedin(true)
         } else if (positive == false) {
             setopen({ show: true, message: loginfail })
         }
-    }, [positive])
+    }, [positive,loading])
 
     useEffect(() => {
         if (props.isLogedin) {
@@ -242,7 +243,7 @@ function LoginBody(props) {
                     <a href='/forgotpass'><label className='mb-0' id='regbtn'>Forgotten?</label></a>
                 </div>
             </div>
-            <Snackbar open={open.show} autoHideDuration={4000} onClose={() => setopen({ ...open, show: false })} message={open.message} />
+            {!loading && <Snackbar open={open.show} autoHideDuration={4000} onClose={() => setopen({ ...open, show: false })} message={open.message} />}
         </div>
     )
 }

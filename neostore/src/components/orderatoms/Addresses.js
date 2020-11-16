@@ -9,6 +9,7 @@ function Addresses(props) {
 
     const addresserror = useSelector(state => state.address.error)
     const address = useSelector(state => state.address.address)
+    const logcheckout = useSelector(state => state.logcheckout.positive)
     const [found, setfound] = useState(false)
     const [selectedValue, setSelectedValue] = useState(true)
 
@@ -18,9 +19,17 @@ function Addresses(props) {
         } else {
             setfound(true)
         }
-    }, [])
+    }, [addresserror])
 
-    console.log(address)
+    console.log(logcheckout)
+    useEffect(() => {
+        if(logcheckout){
+            localStorage.removeItem('cart')
+            history.push('/order-placed')
+        }
+    }, [logcheckout])
+
+    // console.log(address)
     // console.log(addresserror)
     const dispatch = useDispatch()
    const history = useHistory()
@@ -28,7 +37,7 @@ function Addresses(props) {
 
 
     const getaddress = () => {
-        console.log(address.customer_address)
+        // console.log(address.customer_address)
         const addresscards = address.customer_address.map((cd) => (<Box boxShadow={2}>
             <Card style={{ marginTop: '1em' }}>
                 <Card.Body>
@@ -52,7 +61,7 @@ function Addresses(props) {
 
     return (
         <React.Fragment>
-            {!found && <div style={{ marginTop: '4%' }}>
+            {!found && <div style={{ marginTop: '4%',marginBottom:'10%' }}>
                 <Grid container justify='center'>
                     <Typography variant='h2'>No Address Found</Typography>
                 </Grid>
@@ -79,7 +88,7 @@ function Addresses(props) {
                                 </Grid>
                                 <Grid item>
                                     <Box boxShadow={2} borderRadius='5px'>
-                                        <Button onClick={()=>{dispatch(postCheckout(addcart)); history.push('/order-placed')}} style={{ width: '100%', backgroundColor: 'white', color: 'black', border: 0 }} disabled={selectedValue==true}>Place Order</Button>
+                                        <Button onClick={()=>{dispatch(postCheckout(addcart))}} style={{ width: '100%', backgroundColor: 'white', color: 'black', border: 0 }} disabled={selectedValue==true}>Place Order</Button>
                                     </Box>
                                 </Grid>
                             </Grid>

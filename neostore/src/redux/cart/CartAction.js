@@ -19,10 +19,10 @@ export const fetchcart = () => {
             }
         }).then((response) => {
             response.data.product_details.map((product) => dispatch(fetchcartsuccess(product)))
-            console.log(response.data)
+            // console.log(response.data)
         }).catch((error) => {
             dispatch(fetchcartsuccess(error.response))
-            console.log(error.response)
+            // console.log(error.response)
         })
     }
 }
@@ -39,10 +39,10 @@ export const deletecart = (id) => {
             }
         }).then((response) => {
             dispatch(delfromcart(id))
-            console.log(response.data)
+            // console.log(response.data)
         }).catch((error) => {
             dispatch(delfromcart(id))
-            console.log(error.response)
+            // console.log(error.response)
         })
     }
 }
@@ -100,7 +100,7 @@ export const fetchorderdetails = () => {
             }
         }).then((response) => {
             dispatch(getorderdetails(response.data))
-            console.log(response.data)
+            // console.log(response.data)
         })
     }
 }

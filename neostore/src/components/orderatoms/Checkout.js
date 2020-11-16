@@ -10,7 +10,7 @@ function Checkout() {
     return (<React.Fragment>
         <Header />
         <Container>
-            <div style={{ display: 'grid', height: '80vh', placeContent: 'center' }}>
+            <div style={{ display: 'grid', height: '80vh', placeContent: 'center',margin:'10%' }}>
                 <Grid container className='text-center' direction='column' spacing={5}>
                     <Grid item>
                         <Typography variant='h2'>Thank you for your order</Typography>

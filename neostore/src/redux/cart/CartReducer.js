@@ -111,10 +111,10 @@ export const addtocartReducer = (state = addtocartState, action) => {
             }
 
         case FETCH_CART_SUCCESS:
-            console.log(action.payload)
+            // console.log(action.payload)
             if (localStorage.getItem('cart') == undefined || localStorage.getItem('cart') == '[]') {
                 let temp = []
-                console.log(action.payload != undefined)
+                // console.log(action.payload != undefined)
                 if (action.payload != undefined) {
                     temp.push(action.payload)
                     localStorage.setItem('cart', JSON.stringify(temp))

@@ -14,6 +14,10 @@ import {
 } from "./addressTypes";
 import axios from 'axios'
 
+/**
+ * @description This function make the api call to get customers address
+ * @returns the dispatch function that will be the type in the reducer file
+ */
 export const fetchcustaddress = () => {
     return (dispatch) => {
         dispatch(fetchcustaddressrequest())
@@ -23,10 +27,10 @@ export const fetchcustaddress = () => {
             }
         }).then((response) => {
             dispatch(fetchcustaddresssuccess(response.data))
-            console.log(response.data)
+            // console.log(response.data)
         }).catch((error) => {
             dispatch(fetchcustaddressfailure(error.response.data))
-            console.log(error.response.data)
+            // console.log(error.response.data)
         })
     }
 }
@@ -54,7 +58,10 @@ export const fetchcustaddressfailure = (data) => {
 }
 
 
-
+/**
+ * @description This function make the api call to add new address
+ * @returns the dispatch function that will be the type in the reducer file
+ */
 
 export const addcustaddress = (data) => {
     return (dispatch) => {
@@ -71,14 +78,13 @@ export const addcustaddress = (data) => {
             }
         }).then((response) => {
             dispatch(addcustaddresssuccess(response.data))
-            console.log(response.data)
+            // console.log(response.data)
         }).catch((error) => {
             dispatch(addcustaddressfailure(error.response.data))
-            console.log(error.response.data)
+            // console.log(error.response.data)
         })
     }
 }
-
 
 
 export const addcustaddressrequest = () => {
@@ -101,10 +107,10 @@ export const addcustaddressfailure = (data) => {
     }
 }
 
-
-
-
-
+/**
+ * @description This function make the api call to update the existing customers address
+ * @returns the dispatch function that will be the type in the reducer file
+ */
 
 export const updatecustaddress = (data) => {
     return (dispatch) => {
@@ -123,10 +129,10 @@ export const updatecustaddress = (data) => {
             }
         }).then((response) => {
             dispatch(updatecustaddresssuccess(response.data.success))
-            console.log(response.data)
+            // console.log(response.data)
         }).catch((error) => {
             dispatch(updatecustaddressfailure(error.response.data))
-            console.log(error.response.data)
+            // console.log(error.response.data)
         })
     }
 }
@@ -154,7 +160,10 @@ export const updatecustaddressfailure = (data) => {
 }
 
 
-
+/**
+ * @description This function make the api call to delete customers address
+ * @returns the dispatch function that will be the type in the reducer file
+ */
 
 export const deletecustaddress = (id) => {
     return (dispatch) => {
@@ -165,10 +174,10 @@ export const deletecustaddress = (id) => {
             }
         }).then((response) => {
             dispatch(deletecustaddresssuccess(response.data.success))
-            console.log(response.data)
+            // console.log(response.data)
         }).catch((error) => {
             dispatch(deletecustaddressfailure(error.response.data))
-            console.log(error.response.data)
+            // console.log(error.response.data)
         })
     }
 }
