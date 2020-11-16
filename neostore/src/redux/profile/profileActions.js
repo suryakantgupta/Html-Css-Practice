@@ -20,7 +20,7 @@ export const fetchCustProfile = () => {
                 dispatch(fetchcustprofilesuccess(response.data.customer_proile))
                 // console.log(response.data)
             }).catch((error) => {
-                console.log(error)
+                // console.log(error)
             })
     }
 }
@@ -65,9 +65,9 @@ export const updateCustProfile = (datas) => {
 
             }).then((response) => {
                 dispatch(updatecustprofilesuccess(response.data.success))
-                console.log(response.data.success)
+                // console.log(response.data.success)
             }).catch((error) => {
-                console.log(error.response)
+                // console.log(error.response)
             })
     }
 }

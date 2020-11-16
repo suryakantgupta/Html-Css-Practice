@@ -10,26 +10,38 @@ import {
     FETCH_COLOR_SUCCESS,
     FETCH_COLOR_FAILURE,
     FETCH_BYID_REQUEST,
-FETCH_BYID_SUCCESS,
-FETCH_BYID_FAILURE,
-FETCH_CARD_CATEGORY,
-FETCH_CARD_CATEGORY_S
+    FETCH_BYID_SUCCESS,
+    FETCH_BYID_FAILURE,
+    FETCH_CARD_CATEGORY,
+    FETCH_CARD_CATEGORY_S
 } from './productsTypes'
 
-export const fetchCommonProducts = (id='',category_id='',color_id='',sortBy='',name='',sortIn='') => {
+/**
+ * @description This function gets the product as per parameter and if  nothing is passed then 
+ * it gets all the products
+ * @param {*} id is the product ID
+ * @param {*} category_id It is the category id of the product
+ * @param {*} color_id It is the color id of the product
+ * @param {*} sortBy 
+ * @param {*} name 
+ * @param {*} sortIn 
+ */
+
+export const fetchCommonProducts = (id = '', category_id = '', color_id = '', sortBy = '', name = '', sortIn = '',pageNo,perPage) => {
     return (dispatch) => {
         dispatch(fetchproductsrequest())
-        axios.get('http://180.149.241.208:3022/commonproducts',{
-params:{
-    id,
-    category_id,
-    color_id,
-    sortBy,
-    name,
-    sortIn
-}
-        })
-            .then((response) => {
+        axios.get('http://180.149.241.208:3022/commonproducts', {
+            params: {
+                id,
+                category_id,
+                color_id,
+                sortBy,
+                name,
+                sortIn,
+                pageNo,
+                perPage
+            }
+        }).then((response) => {
                 dispatch(fetchproductssuccess(response.data))
                 // console.log(response.data)
             }).catch((error) => {
@@ -61,7 +73,9 @@ export const fetchproductsfailure = (error) => {
 
 
 
-
+/**
+ * @description This function fetch the list of category
+ */
 export const fetchCategory = () => {
     return (dispatch) => {
         dispatch(fetchcategoryrequest())
@@ -97,7 +111,9 @@ export const fetchcategoryfailure = (error) => {
 }
 
 
-
+/**
+ * @description This function fetch the list of color
+ */
 export const fetchColor = () => {
     return (dispatch) => {
         dispatch(fetchcolorrequest())
@@ -134,8 +150,10 @@ export const fetchcolorfailure = (error) => {
 
 
 
-
-
+/**
+ * @description This function fetches the product details by id
+ * @param {*} id 
+ */
 
 export const fetchById = (id) => {
     return (dispatch) => {

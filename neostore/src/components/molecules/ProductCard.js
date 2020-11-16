@@ -19,6 +19,11 @@ function ProductCard(props) {
   // console.log(addcart)
 
 // console.log(props.product)
+
+/**
+ * @description This function handle add to cart products and also checks that if the
+ * product is already in the cart or not
+ */
   const handleAddtoCart = () => {
     const temp ={
       quantity:1,

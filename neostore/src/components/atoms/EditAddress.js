@@ -46,19 +46,6 @@ function EditAddress(props) {
     const history = useHistory()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * @description This function Validate the address field if it is empty or not
      */

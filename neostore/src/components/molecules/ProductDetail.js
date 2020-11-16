@@ -12,14 +12,15 @@ import { IoLogoGoogle } from 'react-icons/io'
 import Header from '../Header';
 import Footer from '../Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { fetchById } from '../../redux/products/productsAction';
 import Loading from '../Loading'
 import { GlassMagnifier, SideBySideMagnifier } from 'react-image-magnifiers'
 import Authentication from '../../module/Authentication';
 import ReactImageMagnify from 'react-image-magnify'
 import { addtocart } from '../../redux';
-import axios from 'axios'
+import axios from 'axios';
+import { FacebookShareButton,FacebookIcon } from 'react-share'
 
 
 
@@ -71,11 +72,11 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         backgroundColor: theme.palette.background.paper,
         border: '1px solid lightgray',
-        borderRadius:'10px',
+        borderRadius: '10px',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
-        width:'20rem',
-        height:'13rem'
+        width: '20rem',
+        height: '13rem'
     },
 }));
 
@@ -90,6 +91,8 @@ function ProductDetail() {
     const [open, setopen] = useState({ show: false, message: '' })
     const [mopen, setmopen] = useState(false)
     const [rating, setrating] = useState(0)
+    // const location = useLocation()
+    // console.log(location)
 
 
 
@@ -160,10 +163,10 @@ function ProductDetail() {
 
 
     const changeRating = (newrating) => {
-        axios.put('http://180.149.241.208:3022/updateProductRatingByCustomer',{
-            product_id:id,
-            product_rating:newrating
-        },{
+        axios.put('http://180.149.241.208:3022/updateProductRatingByCustomer', {
+            product_id: id,
+            product_rating: newrating
+        }, {
             headers: {
                 Authorization: `bearer ${localStorage.token}`
             }
@@ -267,8 +270,8 @@ function ProductDetail() {
                                         <Grid container item>
                                             <Box className={classes.socialBox}>
                                                 <Grid container justify='space-between'>
-
-                                                    <Avatar style={{ backgroundColor: '#3b5998' }}><AiFillFacebook /></Avatar>
+                                                    <FacebookShareButton url={window.location.href.toString()}><FacebookIcon round={true} size={43} /></FacebookShareButton>
+                                                    {/* <Avatar style={{ backgroundColor: '#3b5998' }}><AiFillFacebook /></Avatar> */}
                                                     <Avatar style={{ backgroundColor: '#db4437' }}><IoLogoGoogle /></Avatar>
                                                     <Avatar style={{ backgroundColor: '#25d366' }}><WhatsAppIcon /></Avatar>
                                                     <Avatar style={{ backgroundColor: '#E60023' }}><PinterestIcon /></Avatar>
@@ -302,7 +305,7 @@ function ProductDetail() {
                                                                     <Typography>Rate</Typography>
                                                                 </Grid>
                                                                 <Grid item>
-                                                                    <Divider orientation='horizontal'/>
+                                                                    <Divider orientation='horizontal' />
                                                                 </Grid>
                                                                 <Grid item>
                                                                     <StarRatings
@@ -314,7 +317,7 @@ function ProductDetail() {
                                                                     />
                                                                 </Grid>
                                                                 <Grid item>
-                                                                    <Button onClick={handlemClose} style={{backgroundColor:'#3f51b5',outline:'none',textTransform:'none',color:'white'}}>Done</Button>
+                                                                    <Button onClick={handlemClose} style={{ backgroundColor: '#3f51b5', outline: 'none', textTransform: 'none', color: 'white' }}>Done</Button>
                                                                 </Grid>
                                                             </Grid>
                                                         </div>

@@ -76,7 +76,7 @@ function ProductSidePanel(props) {
     return (
         <React.Fragment>
 
-            <Grid container spacing={1} direction='column' style={{ marginTop: '10%' }} >
+            <Grid container spacing={1} direction='column' style={{ marginTop: '10%',marginBottom:'2%' }} >
                 <Grid item>
                     <Box borderRadius='5px' boxShadow={3} width={1}>
                         <Button size='large' onClick={() => { history.push('/commonproducts'); props.title("All Categories"); window.location.reload() }} fullWidth variant='outlined' className={classes.button} style={{ outline: 'none', textTransform: 'none' }}>All Products</Button>

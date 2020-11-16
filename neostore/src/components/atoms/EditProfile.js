@@ -160,10 +160,6 @@ function EditProfile(props) {
         window.location.reload()
     }
 
-
-
-
-
     return (
         <div>
             <Card style={{ marginTop: '5%' }}>

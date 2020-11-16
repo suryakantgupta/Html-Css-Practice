@@ -25,11 +25,6 @@ function Profile(props) {
 
     const customer = useSelector(state => state.customer.customer)
 
-
-    // console.log(customer)
-
-
-
     return (
         <div>
             <Card style={{ marginTop: '5%' }}>

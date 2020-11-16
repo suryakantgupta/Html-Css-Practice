@@ -65,7 +65,10 @@ export const fetchcartsuccess = (data) => {
 //     }
 // }
 
-
+/**
+ * @description This function is called when product is added to the cart
+ * @param {*} data contains the product details
+ */
 export const addtocart = (data) => {
     return {
         type: ADD_TO_CART,
@@ -73,24 +76,9 @@ export const addtocart = (data) => {
     }
 }
 
-export const delfromcart = (id) => {
-    return {
-        type: DELETE_FROM_CART,
-        payload: id
-    }
-}
-export const pluscart = (id) => {
-    return {
-        type: PLUS_CART,
-        payload: id
-    }
-}
-export const minuscart = (id) => {
-    return {
-        type: MINUS_CART,
-        payload: id
-    }
-}
+/**
+ * @description This funcion Gets the list of ordered products
+ */
 
 export const fetchorderdetails = () => {
     return (dispatch) => {
@@ -109,5 +97,30 @@ export const getorderdetails = (data) => {
     return {
         type: FETCH_ORDER_DETAILS,
         payload: data
+    }
+}
+
+
+//This function removes product from cart
+export const delfromcart = (id) => {
+    return {
+        type: DELETE_FROM_CART,
+        payload: id
+    }
+}
+
+//Increase the quantity of products in cart
+export const pluscart = (id) => {
+    return {
+        type: PLUS_CART,
+        payload: id
+    }
+}
+
+//Decrease the quantity of product in cart
+export const minuscart = (id) => {
+    return {
+        type: MINUS_CART,
+        payload: id
     }
 }

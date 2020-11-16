@@ -18,6 +18,7 @@ function RecoverPass() {
      * 3- On Validation showing error is done by this state
      * 4- It handles the Modal to show Error
      * 5- It Handles the Snackbar on successfull operation
+     * 6- it handles the loading state
      */
     const [rcpass, setrcpass] = useState({ vcode: '', npass: '', cpass: '' })
     const [showPassword, setSP] = useState({ p: false, c: false })

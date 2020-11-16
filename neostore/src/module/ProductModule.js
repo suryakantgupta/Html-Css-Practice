@@ -27,7 +27,7 @@ function ProductModule() {
 
     const loading = useSelector(state => state.product.loading)
     const cardError = useSelector(state => state.cardCategory.category)
-    const catloading = useSelector(state => state.cardCategory.loading)
+    // const catloading = useSelector(state => state.cardCategory.loading)
     const product = useSelector(state => state.product.products)
 
     const dispatch = useDispatch()
@@ -41,14 +41,14 @@ function ProductModule() {
      */
     useEffect(() => {
         if (name === undefined) {
-            dispatch(fetchCommonProducts())
+            dispatch(fetchCommonProducts('','','','','','',active,8))
         } else if (name === ' ' && category !== undefined) {
             dispatch(fetchCommonProducts('', category, '', '', ''))
         } else {
             dispatch(fetchCommonProducts('', '', '', '', name))
         }
 
-    }, [name,category])
+    }, [name, category,active])
 
 
     useEffect(() => {
@@ -116,7 +116,7 @@ function ProductModule() {
 
     return (
         <React.Fragment>
-            {catloading ? <Loading /> :
+            {/* {false ? <Loading /> : */}
                 <React.Fragment>
                     <Authentication
                         render={(isLogedin, setisLogedin) => (<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
@@ -130,23 +130,23 @@ function ProductModule() {
                                     <ProductSidePanel title={handleTitle} />
                                 </Box>
                             </Grid>
-                            <Grid container item xs={12} lg={8}>
-                                {loading ? <Grid justify='center' alignContent='center' style={{height:'100vh'}} container><CircularProgress /></Grid> : <ProductsCard title={title} pagenumber={active} />}
+                            <Grid item xs={12} lg={8}>
+                                {loading ? <Grid justify='center' alignContent='center' style={{ height: '100vh' }} container><CircularProgress /></Grid> : <ProductsCard title={title} pagenumber={active} />}
+                                <Grid container style={{ marginBottom: '10%',marginLeft:'6%' }}>
+                                    {cardError && <Pagination>
+                                        <Pagination.First onClick={firstOnClick} disabled={disable.prev} />
+                                        <Pagination.Prev onClick={prevOnClick} disabled={disable.prev}>Previous</Pagination.Prev>
+                                        {getPageItem()}
+                                        <Pagination.Next onClick={nextOnClick} disabled={disable.next}>Next</Pagination.Next>
+                                        <Pagination.Last onClick={lastOnClick} disabled={disable.next} />
+                                    </Pagination>}
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid container justify='center' style={{ marginBottom: '10%' }}>
-                            {cardError && <Pagination>
-                                <Pagination.First onClick={firstOnClick} disabled={disable.prev} />
-                                <Pagination.Prev onClick={prevOnClick} disabled={disable.prev}>Previous</Pagination.Prev>
-                                {getPageItem()}
-                                <Pagination.Next onClick={nextOnClick} disabled={disable.next}>Next</Pagination.Next>
-                                <Pagination.Last onClick={lastOnClick} disabled={disable.next} />
-                            </Pagination>}
                         </Grid>
                     </Container>
                     <Footer />
                 </React.Fragment>
-            }
+            {/* } */}
         </React.Fragment>
     )
 }

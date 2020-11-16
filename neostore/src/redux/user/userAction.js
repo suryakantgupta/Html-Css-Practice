@@ -111,7 +111,7 @@ export const postLogout = (data) => {
             temp2.push(pd.product_id)
         })
         temp2.push({ flag: 'logout' })
-        console.log(temp2)
+        // console.log(temp2)
         axios.post('http://180.149.241.208:3022/addProductToCartCheckout', temp2, {
             headers: {
                 Authorization: `bearer ${localStorage.token}`
@@ -149,10 +149,10 @@ export const postCheckout = (data) => {
             }
         }).then((response) => {
             dispatch(usercheckoutSuccess(response.data.success))
-           console.log(response.data)
+        //    console.log(response.data)
         }).catch((error) => {
             // dispatch(userLogoutFailure(error.response.data))
-            console.log(error.response)
+            // console.log(error.response)
         })
     }
 }

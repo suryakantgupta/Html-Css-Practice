@@ -9,6 +9,10 @@ import {
     CARD_DASHBOARD_PRODUCTS_FAILURE
   } from './types'
 
+
+  /**
+   * @description this makes call for the product in the carausel of dashboard
+   */
 export const fetchDashboardProducts = ()=>{
     return (dispatch)=>{
         dispatch(fetchProductsRequest())
@@ -43,11 +47,9 @@ export const fetchProductsRequest = () => {
     }
   }
   
-
-
-
-
-
+  /**
+   * @description this makes call for the product in the card section of dashboard
+   */
 
   export const fetchDashboardCardProducts = ()=>{
     return (dispatch)=>{
