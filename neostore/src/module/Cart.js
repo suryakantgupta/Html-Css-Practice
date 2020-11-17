@@ -16,6 +16,7 @@ import ReviewOrder from '../components/orderatoms/ReviewOrder';
 import Addresses from '../components/orderatoms/Addresses';
 import { fetchcustaddress } from '../redux';
 import EditorderAddress from '../components/orderatoms/EditorderAddress';
+import Loading from '../components/Loading';
 
 
 export default function Cart(props) {
@@ -23,6 +24,7 @@ export default function Cart(props) {
     const dispatch = useDispatch()
     const addcart = useSelector(state => state.addcart.data)
     const [activeStep, setActiveStep] = useState(0);
+    const checkoutloading = useSelector(state => state.logcheckout.loading)
 
     const handlenext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -57,9 +59,11 @@ export default function Cart(props) {
 
     return (
         <div>
+            {checkoutloading && <Loading />}
             <Authentication
                 render={(isLogedin, setisLogedin) => (<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
             />
+            
             <Stepper activeStep={activeStep} style={{ marginTop: '2em' }}>
                 <Step key='Cart'>
                     <StepLabel onClick={handleback} >Cart</StepLabel>

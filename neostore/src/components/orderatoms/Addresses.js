@@ -4,15 +4,18 @@ import { Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { fetchcart, postCheckout, updatecustaddress } from '../../redux'
+import Loading from '../Loading'
 
 function Addresses(props) {
 
     const addresserror = useSelector(state => state.address.error)
     const address = useSelector(state => state.address.address)
     const logcheckout = useSelector(state => state.logcheckout.positive)
+
+
     const [found, setfound] = useState(false)
     const [selectedValue, setSelectedValue] = useState(true)
-
+    // console.log(logcheckout)
     useEffect(() => {
         if (addresserror.status_code == 404) {
             setfound(false)
@@ -23,17 +26,17 @@ function Addresses(props) {
 
     // console.log(logcheckout)
     useEffect(() => {
-        if(logcheckout){
+        if (logcheckout) {
             localStorage.removeItem('cart')
             dispatch(fetchcart())
             history.push('/order-placed')
         }
     }, [logcheckout])
 
-    console.log(address.customer_address)
+    // console.log(address.customer_address)
     // console.log(addresserror)
     const dispatch = useDispatch()
-   const history = useHistory()
+    const history = useHistory()
     const addcart = useSelector(state => state.addcart.data)
 
 
@@ -62,7 +65,7 @@ function Addresses(props) {
 
     return (
         <React.Fragment>
-            {!found && <div style={{ marginTop: '4%',marginBottom:'10%' }}>
+            {!found && <div style={{ marginTop: '4%', marginBottom: '10%' }}>
                 <Grid container justify='center'>
                     <Typography variant='h2'>No Address Found</Typography>
                 </Grid>
@@ -72,32 +75,34 @@ function Addresses(props) {
                 </Grid>
             </div>}
 
-            {found && <div style={{ margin: '4%' }}>
-                <Box boxShadow={2}>
-                    <Card style={{ padding: '1em' }}>
-                        <Card.Header style={{ backgroundColor: 'white' }}><Typography variant='h4'>Address</Typography></Card.Header>
-                        <Card.Body>
-                            {getaddress()}
-                        </Card.Body>
-                        <Card.Footer style={{ backgroundColor: 'white' }}>
+            {found && < React.Fragment>
+                <div style={{ margin: '4%' }}>
+                    <Box boxShadow={2}>
+                        <Card style={{ padding: '1em' }}>
+                            <Card.Header style={{ backgroundColor: 'white' }}><Typography variant='h4'>Address</Typography></Card.Header>
+                            <Card.Body>
+                                {getaddress()}
+                            </Card.Body>
+                            <Card.Footer style={{ backgroundColor: 'white' }}>
 
-                            <Grid container spacing={2}>
-                                <Grid item>
-                                    <Box boxShadow={2} borderRadius='5px'>
-                                        <Button href='/addaddress' style={{ width: '100%', backgroundColor: 'white', color: 'black', border: 0 }}>Add Address</Button>
-                                    </Box>
+                                <Grid container spacing={2}>
+                                    <Grid item>
+                                        <Box boxShadow={2} borderRadius='5px'>
+                                            <Button href='/addaddress' style={{ width: '100%', backgroundColor: 'white', color: 'black', border: 0 }}>Add Address</Button>
+                                        </Box>
+                                    </Grid>
+                                    <Grid item>
+                                        <Box boxShadow={2} borderRadius='5px'>
+                                            <Button onClick={() => { dispatch(postCheckout(addcart)) }} style={{ width: '100%', backgroundColor: 'white', color: 'black', border: 0 }} disabled={selectedValue == true}>Place Order</Button>
+                                        </Box>
+                                    </Grid>
                                 </Grid>
-                                <Grid item>
-                                    <Box boxShadow={2} borderRadius='5px'>
-                                        <Button onClick={()=>{dispatch(postCheckout(addcart))}} style={{ width: '100%', backgroundColor: 'white', color: 'black', border: 0 }} disabled={selectedValue==true}>Place Order</Button>
-                                    </Box>
-                                </Grid>
-                            </Grid>
 
-                        </Card.Footer>
-                    </Card>
-                </Box>
-            </div>
+                            </Card.Footer>
+                        </Card>
+                    </Box>
+                </div>
+            </ React.Fragment>
 
             }
         </React.Fragment>

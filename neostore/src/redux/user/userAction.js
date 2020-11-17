@@ -9,7 +9,9 @@ import {
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAILURE,
     USER_LOGOUT_SUCCESS,
-    USER_CHECKOUT_SUCCESS
+    USER_CHECKOUT_SUCCESS,
+    USER_CHECKOUT_REQUEST,
+    USER_CHECKOUT_COMPLETE
 } from './userTypes'
 
 export const postNewRegister = (data) => {
@@ -141,7 +143,7 @@ export const postCheckout = (data) => {
             temp2.push(pd.product_id)
         })
         temp2.push({ flag: 'checkout' })
-        // dispatch(userLoginPost())
+        dispatch(usercheckoutrequest())
         // console.log(temp2)
         axios.post('http://180.149.241.208:3022/addProductToCartCheckout', temp2, {
             headers: {
@@ -149,11 +151,13 @@ export const postCheckout = (data) => {
             }
         }).then((response) => {
             dispatch(usercheckoutSuccess(response.data.success))
+            dispatch(usercheckoutcomplete())
         //    console.log(response.data)
         }).catch((error) => {
             // dispatch(userLogoutFailure(error.response.data))
             // console.log(error.response)
         })
+
     }
 }
 
@@ -170,5 +174,16 @@ export const usercheckoutSuccess = (bool) => {
         type: USER_CHECKOUT_SUCCESS,
         // payload: data,
         payload: bool
+    }
+}
+
+export const usercheckoutrequest = ()=>{
+    return {
+        type:USER_CHECKOUT_REQUEST
+    }
+}
+export const usercheckoutcomplete = ()=>{
+    return {
+        type:USER_CHECKOUT_COMPLETE
     }
 }

@@ -6,7 +6,9 @@ import {
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAILURE,
     USER_LOGOUT_SUCCESS,
-    USER_CHECKOUT_SUCCESS
+    USER_CHECKOUT_SUCCESS,
+    USER_CHECKOUT_REQUEST,
+    USER_CHECKOUT_COMPLETE
 } from './userTypes'
 
 const initialUserState = {
@@ -25,6 +27,7 @@ const initialLoginState = {
 
 
 const initialLogoutState = {
+    loading:false,
     positive:null
 }
 
@@ -96,9 +99,20 @@ export const userloginReducer = (state = initialLoginState, action) => {
 
 export const logcheckoutReducer = (state = initialLogoutState,action)=>{
     switch (action.type) {
+        case USER_CHECKOUT_REQUEST:
+            return{
+                ...state,
+                loading:true
+            }
         case USER_CHECKOUT_SUCCESS:
             return{
-                positive:action.payload
+                positive:action.payload,
+                loading:false
+            }
+        case USER_CHECKOUT_COMPLETE:
+            return{
+                positive:null,
+                loading:false
             }
         default:
             return state

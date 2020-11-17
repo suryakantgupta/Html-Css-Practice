@@ -153,16 +153,16 @@ function ProductsCard(props) {
         }
     }
 
-    const getperPageCards = (pageNo, perPage) => {
-        Axios.get('http://180.149.241.208:3022/commonproducts', {
-            params: {
-                pageNo,
-                perPage
-            }
-        }).then((response) => {
-            console.log(response.data)
-        })
-    }
+    // const getperPageCards = (pageNo, perPage) => {
+    //     Axios.get('http://180.149.241.208:3022/commonproducts', {
+    //         params: {
+    //             pageNo,
+    //             perPage
+    //         }
+    //     }).then((response) => {
+    //         console.log(response.data)
+    //     })
+    // }
 
 
 
@@ -190,7 +190,7 @@ function ProductsCard(props) {
                 </Grid>
             </Grid>
             <Grid container className={classes.placeCard} spacing={2}>
-                {getperPageCards(props.pagenumber, 8)}
+                {/* {getperPageCards(props.pagenumber, 8)} */}
                 {sortBy.normal && getCards()}
                 {sortBy.lowtohigh && ltoh()}
                 {sortBy.hightolow && htol()}
