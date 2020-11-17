@@ -8,7 +8,9 @@ import {
     USER_LOGOUT_SUCCESS,
     USER_CHECKOUT_SUCCESS,
     USER_CHECKOUT_REQUEST,
-    USER_CHECKOUT_COMPLETE
+    USER_CHECKOUT_COMPLETE,
+    LOGIN_SHOW,
+    LOGIN_HIDE
 } from './userTypes'
 
 const initialUserState = {
@@ -22,13 +24,14 @@ const initialLoginState = {
     loading: false,
     success: '',
     error: '',
-    positive:null
+    positive: null,
+    show: false
 }
 
 
 const initialLogoutState = {
-    loading:false,
-    positive:null
+    loading: false,
+    positive: null
 }
 
 
@@ -78,18 +81,33 @@ export const userloginReducer = (state = initialLoginState, action) => {
 
         case USER_LOGIN_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 success: action.payload,
                 error: '',
-                positive:action.positive
+                positive: action.positive
             }
 
         case USER_LOGIN_FAILURE: {
             return {
+                ...state,
                 loading: false,
                 success: '',
                 error: action.payload,
-                positive:action.positive
+                positive: action.positive
+            }
+        }
+
+        case LOGIN_SHOW: {
+            return {
+                ...state,
+                show:action.payload
+            }
+        }
+        case LOGIN_HIDE: {
+            return {
+                ...state,
+                show:action.payload
             }
         }
         default: return state
@@ -97,22 +115,22 @@ export const userloginReducer = (state = initialLoginState, action) => {
 }
 
 
-export const logcheckoutReducer = (state = initialLogoutState,action)=>{
+export const logcheckoutReducer = (state = initialLogoutState, action) => {
     switch (action.type) {
         case USER_CHECKOUT_REQUEST:
-            return{
+            return {
                 ...state,
-                loading:true
+                loading: true
             }
         case USER_CHECKOUT_SUCCESS:
-            return{
-                positive:action.payload,
-                loading:false
+            return {
+                positive: action.payload,
+                loading: false
             }
         case USER_CHECKOUT_COMPLETE:
-            return{
-                positive:null,
-                loading:false
+            return {
+                positive: null,
+                loading: false
             }
         default:
             return state

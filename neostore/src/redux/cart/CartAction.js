@@ -30,7 +30,7 @@ export const fetchcart = () => {
 
 
 export const deletecart = (id) => {
-    console.log(id)
+    // console.log(id)
     return (dispatch) => {
         // dispatch(fetchcartrequest)
         axios.delete(`http://180.149.241.208:3022/deletecustomercart/${id}`, {

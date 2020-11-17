@@ -38,7 +38,15 @@ function App() {
             />} />
             <Route path='/commonproducts/:name?/:category?' exact render={() => <ProductModule />} />
             {/* <Route path='/commonproducts/:name?/:category?' exact component={ProductModule} /> */}
-            <Route path='/productdetail/:id' exact render={() => <ProductDetail />} />
+            <Route path='/productdetail/:id' exact render={() => <Authentication
+              render={(isLogedin, setisLogedin) => {
+                try {
+                  return <ProductDetail isLogedin={isLogedin} setisLogedin={setisLogedin} />
+                } catch (error) {
+                  return <ErrorPage />
+                }
+              }}
+            />} />
             <Route path='/addaddress' exact render={() => <AddAddress />} />
             <Route path='/maincart' exact render={() => <Authentication
               render={(isLogedin, setisLogedin) => (<Cart isLogedin={isLogedin} setisLogedin={setisLogedin} />)}

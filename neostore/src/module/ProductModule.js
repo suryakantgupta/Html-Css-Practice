@@ -76,7 +76,7 @@ function ProductModule() {
         if (category !== undefined) {
             try {
                 settitle(product.product_details[0].category_id.category_name)
-                console.log(product.product_details[0])
+                // console.log(product.product_details[0])
             } catch (error) {
 
             }

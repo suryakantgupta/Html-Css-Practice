@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCommonProducts, postLogout } from '../redux';
+import { fetchCommonProducts, fetchCommonProductsheader, postLogout } from '../redux';
 import { Modal, ModalBody } from 'react-bootstrap';
 
 
@@ -184,8 +184,8 @@ function Header(props) {
     /**
      * These hooks are used to access the data from redux
      */
-    const product = useSelector(state => state.product.products)
-    const loading = useSelector(state => state.product.loading)
+    const product = useSelector(state => state.product.hproduct)
+    const loading = useSelector(state => state.product.hloading)
     const addcart = useSelector(state => state.addcart.data)
 
     /**
@@ -193,9 +193,10 @@ function Header(props) {
      * for product
      */
 
+    //  console.log(product)
     useEffect(() => {
         if (loading) {
-            dispatch(fetchCommonProducts())
+            dispatch(fetchCommonProductsheader())
         }
     }, [])
 
@@ -382,7 +383,7 @@ function Header(props) {
                     </Grid>
                 </Grid>
             </AppBar>
-            <Snackbar open={open} autoHideDuration={5000} onClose={handleonClose} message='You have successfully loged out' />
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleonClose} message='You have successfully loged out' />
             <Modal show={mopen} onHide={() => { setmopen(false); history.push('/login') }} >
                 <ModalBody>
                     <Typography>You must log in first</Typography>

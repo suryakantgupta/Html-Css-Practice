@@ -1,5 +1,6 @@
 // require('dotenv').config()
 import axios from 'axios'
+import { BASE_URL } from '../../config'
 import {
     FETCH_DASHBOARD_PRODUCTS_REQUEST,
     FETCH_DASHBOARD_PRODUCTS_SUCCESS,
@@ -8,6 +9,7 @@ import {
     CARD_DASHBOARD_PRODUCTS_SUCCESS,
     CARD_DASHBOARD_PRODUCTS_FAILURE
   } from './types'
+  
 
 
   /**
@@ -16,7 +18,7 @@ import {
 export const fetchDashboardProducts = ()=>{
     return (dispatch)=>{
         dispatch(fetchProductsRequest())
-        axios.get(`http://180.149.241.208:3022/getAllCategories`)
+        axios.get(`${BASE_URL}/getAllCategories`)
         .then(response => {
             dispatch(fetchProductsSuccess(response.data))
         })

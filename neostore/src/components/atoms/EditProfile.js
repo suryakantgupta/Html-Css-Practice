@@ -152,11 +152,12 @@ function EditProfile(props) {
     }
 
     const history = useHistory()
-// console.log(loading)
-    const handleSubmit = () => {
+    // console.log(loading)
+    const handleSubmit = (e) => {
+        e.preventDefault()
         dispatch(updateCustProfile(name))
     }
-    const handleClose = ()=>{
+    const handleClose = () => {
         window.location.reload()
     }
 
@@ -164,169 +165,172 @@ function EditProfile(props) {
         <div>
             <Card style={{ marginTop: '5%' }}>
                 <Card.Body>
-                    <Card.Title>
-                        <Typography className={classes.profile} variant='h4'>Edit Profile</Typography>
-                    </Card.Title>
-                    <Divider orientation='horizontal' />
-                    <Box marginY='5%'>
-                        <Grid container direction='column' spacing={1}>
-                            <Grid item>
-                                <TextField
-                                    // className={(validateError.fcheckError || validateError.fhelperNotValid) && classes.errborder}
-                                    label='First Name'
-                                    variant='outlined'
-                                    type='text'
-                                    fullWidth
-                                    error={(validateError.fcheckError || validateError.fhelperNotValid)}
-                                    helperText={(validateError.fcheckError && 'You must enter a value') || (validateError.fhelperNotValid && 'It can only accepts alphabets') || ' '}
-                                    value={name.firstName}
-                                    onChange={e => setname({ ...name, firstName: e.target.value })}
-                                    onBlur={blurfnameValidator}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment>
-                                                <TextFieldsIcon />
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
+                    <form onSubmit={handleSubmit}>
+                        <Card.Title>
+                            <Typography className={classes.profile} variant='h4'>Edit Profile</Typography>
+                        </Card.Title>
+                        <Divider orientation='horizontal' />
 
-                            </Grid>
-
-                            <Grid item>
-                                <TextField
-                                    className={(validateError.lcheckError || validateError.lhelperNotValid) && classes.errborder}
-                                    label='Last Name'
-                                    variant='outlined'
-                                    type='text'
-                                    fullWidth
-                                    error={(validateError.lcheckError || validateError.lhelperNotValid)}
-                                    helperText={(validateError.lcheckError && 'You must enter a value') || (validateError.lhelperNotValid && 'It  can only accepts alphabets') || ' '}
-                                    value={name.lastName}
-                                    onInputCapture={e => setname({ ...name, lastName: e.target.value })}
-                                    onBlur={blurlnameValidator}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment>
-                                                <TextFieldsIcon />
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
-                            </Grid>
-
-                            <Grid item>
-                                <RadioGroup row>
-                                    <FormControlLabel
-                                        label='Male'
-                                        labelPlacement='end'
-                                        control={<Radio
-                                            checked={name.gender == 'male'}
-                                            onChange={(e) => { setname({ ...name, gender: e.target.value }) }}
-                                            value="male"
-                                        />}
+                        <Box marginY='5%'>
+                            <Grid container direction='column' spacing={1}>
+                                <Grid item>
+                                    <TextField
+                                        // className={(validateError.fcheckError || validateError.fhelperNotValid) && classes.errborder}
+                                        label='First Name'
+                                        variant='outlined'
+                                        type='text'
+                                        fullWidth
+                                        error={(validateError.fcheckError || validateError.fhelperNotValid)}
+                                        helperText={(validateError.fcheckError && 'You must enter a value') || (validateError.fhelperNotValid && 'It can only accepts alphabets') || ' '}
+                                        value={name.firstName}
+                                        onChange={e => setname({ ...name, firstName: e.target.value })}
+                                        onBlur={blurfnameValidator}
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment>
+                                                    <TextFieldsIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
-                                    <FormControlLabel
-                                        label='Female'
-                                        labelPlacement='end'
-                                        control={<Radio
-                                            checked={name.gender == 'female'}
-                                            onChange={(e) => { setname({ ...name, gender: e.target.value }) }}
-                                            value="female"
-                                            label='fred'
-                                        />}
+
+                                </Grid>
+
+                                <Grid item>
+                                    <TextField
+                                        className={(validateError.lcheckError || validateError.lhelperNotValid) && classes.errborder}
+                                        label='Last Name'
+                                        variant='outlined'
+                                        type='text'
+                                        fullWidth
+                                        error={(validateError.lcheckError || validateError.lhelperNotValid)}
+                                        helperText={(validateError.lcheckError && 'You must enter a value') || (validateError.lhelperNotValid && 'It  can only accepts alphabets') || ' '}
+                                        value={name.lastName}
+                                        onInputCapture={e => setname({ ...name, lastName: e.target.value })}
+                                        onBlur={blurlnameValidator}
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment>
+                                                    <TextFieldsIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
-                                </RadioGroup>
+                                </Grid>
+
+                                <Grid item>
+                                    <RadioGroup row>
+                                        <FormControlLabel
+                                            label='Male'
+                                            labelPlacement='end'
+                                            control={<Radio
+                                                checked={name.gender == 'male'}
+                                                onChange={(e) => { setname({ ...name, gender: e.target.value }) }}
+                                                value="male"
+                                            />}
+                                        />
+                                        <FormControlLabel
+                                            label='Female'
+                                            labelPlacement='end'
+                                            control={<Radio
+                                                checked={name.gender == 'female'}
+                                                onChange={(e) => { setname({ ...name, gender: e.target.value }) }}
+                                                value="female"
+                                                label='fred'
+                                            />}
+                                        />
+                                    </RadioGroup>
+                                </Grid>
+
+                                <Grid item>
+                                    <TextField
+                                        id="date"
+                                        variant='outlined'
+                                        label="Date of Birth"
+                                        type="date"
+                                        fullWidth
+                                        helperText=' '
+                                        value={name.dob}
+                                        required
+                                        onChange={(e) => setname({ ...name, dob: e.target.value })}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+                                </Grid>
+
+                                <Grid item>
+                                    <TextField
+                                        // className={clsx(((validateError.mcheckError || validateError.mhelperNotValid) && classes.errborder), ((!validateError.mcheckError && !validateError.mhelperNotValid) && classes.helperMobile))}
+                                        label='Mobile Number'
+                                        variant='outlined'
+                                        type='text'
+                                        fullWidth
+                                        error={(validateError.mcheckError || validateError.mhelperNotValid)}
+                                        helperText={(validateError.mcheckError && 'You must enter a value') || (validateError.mhelperNotValid && 'Please enter a valid mobile number') || (' ')}
+                                        value={name.mobile}
+                                        onInput={(e) => { setname({ ...name, mobile: e.target.value }) }}
+                                        onBlur={blurMobileValidator}
+                                        inputProps={{ maxLength: 10 }}
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment>
+                                                    <CallIcon />
+                                                </InputAdornment>
+                                            ),
+
+                                        }}
+                                    />
+                                </Grid>
+
+                                <Grid item>
+                                    <TextField
+                                        // className={(validateError.echeckError || validateError.ehelperNotValid) && classes.errborder}
+                                        label='Email Address'
+                                        variant='outlined'
+                                        type='email'
+                                        fullWidth
+                                        error={(validateError.echeckError || validateError.ehelperNotValid)}
+                                        helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Example abc@gmail.com') || ' '}
+                                        value={name.email}
+                                        onChange={e => setname({ ...name, email: e.target.value })}
+                                        onBlur={blurEmailValidator}
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment>
+                                                    <EmailIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
+                                    />
+                                </Grid>
+                                {/* setname({ ...name, image: e.target.value }); */}
+                                <Grid item>
+                                    <input type='file' style={{ fontFamily: 'Arial' }} onChange={(e) => {
+                                        fileUpload(e).then((data) => {
+                                            console.log(data)
+                                            setname({ ...name, b64image: data.base64 })
+                                        })
+                                    }} accept='image/*' required/>
+                                </Grid>
                             </Grid>
-
+                        </Box>
+                        <Divider orientation='horizontal' style={{ marginBottom: '3%' }} />
+                        <Grid container spacing={1}>
                             <Grid item>
-                                <TextField
-                                    id="date"
-                                    variant='outlined'
-                                    label="Date of Birth"
-                                    type="date"
-                                    fullWidth
-                                    helperText=' '
-                                    value={name.dob}
-                                    onChange={(e) => setname({ ...name, dob: e.target.value })}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
+                                <Box borderRadius={5} boxShadow={2}>
+                                    <Button type='submit' variant='outlined' style={{ outline: 0, textTransform: 'none' }} startIcon={
+                                        uloading ? <CircularProgress size='1rem' /> : <SaveIcon />
+                                    }>Save</Button>
+                                </Box>
                             </Grid>
-
                             <Grid item>
-                                <TextField
-                                    // className={clsx(((validateError.mcheckError || validateError.mhelperNotValid) && classes.errborder), ((!validateError.mcheckError && !validateError.mhelperNotValid) && classes.helperMobile))}
-                                    label='Mobile Number'
-                                    variant='outlined'
-                                    type='text'
-                                    fullWidth
-                                    error={(validateError.mcheckError || validateError.mhelperNotValid)}
-                                    helperText={(validateError.mcheckError && 'You must enter a value') || (validateError.mhelperNotValid && 'Please enter a valid mobile number') || (' ')}
-                                    value={name.mobile}
-                                    onInput={(e) => { setname({ ...name, mobile: e.target.value }) }}
-                                    onBlur={blurMobileValidator}
-                                    inputProps={{ maxLength: 10 }}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment>
-                                                <CallIcon />
-                                            </InputAdornment>
-                                        ),
-
-                                    }}
-                                />
-                            </Grid>
-
-                            <Grid item>
-                                <TextField
-                                    // className={(validateError.echeckError || validateError.ehelperNotValid) && classes.errborder}
-                                    label='Email Address'
-                                    variant='outlined'
-                                    type='email'
-                                    fullWidth
-                                    error={(validateError.echeckError || validateError.ehelperNotValid)}
-                                    helperText={(validateError.echeckError && 'You must enter a value') || (validateError.ehelperNotValid && 'Example abc@gmail.com') || ' '}
-                                    value={name.email}
-                                    onChange={e => setname({ ...name, email: e.target.value })}
-                                    onBlur={blurEmailValidator}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment>
-                                                <EmailIcon />
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
-                            </Grid>
-                            {/* setname({ ...name, image: e.target.value }); */}
-                            <Grid item>
-                                <input type='file' style={{ fontFamily: 'Arial' }} onChange={(e) => {
-
-                                    fileUpload(e).then((data) => {
-                                        console.log(data)
-                                        setname({ ...name, b64image: data.base64 })
-                                    })
-                                }} accept='image/*' />
+                                <Box borderRadius={5} boxShadow={2}>
+                                    <Button onClick={props.setToP} variant='outlined' style={{ outline: 0, textTransform: 'none' }} startIcon={<CloseIcon />} >Cancel</Button>
+                                </Box>
                             </Grid>
                         </Grid>
-                    </Box>
-                    <Divider orientation='horizontal' style={{ marginBottom: '3%' }} />
-                    <Grid container spacing={1}>
-                        <Grid item>
-                            <Box borderRadius={5} boxShadow={2}>
-                                <Button variant='outlined' style={{ outline: 0, textTransform: 'none' }} onClick={handleSubmit} startIcon={
-                                uloading ? <CircularProgress size='1rem' /> : <SaveIcon />
-                                }>Save</Button>
-                            </Box>
-                        </Grid>
-                        <Grid item>
-                            <Box borderRadius={5} boxShadow={2}>
-                                <Button onClick={props.setToP} variant='outlined' style={{ outline: 0, textTransform: 'none' }} startIcon={<CloseIcon />} >Cancel</Button>
-                            </Box>
-                        </Grid>
-                    </Grid>
+                    </form>
                 </Card.Body>
             </Card>
             <Snackbar open={positive} autoHideDuration={4000} onClose={handleClose} message='Saved successfully' />

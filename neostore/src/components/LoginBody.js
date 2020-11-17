@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { fetchcart, fetchcustaddress, postLogin } from '../redux';
+import { fetchcart, fetchcustaddress, logintrue, postLogin } from '../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 //It styles the Material Components
@@ -132,10 +132,11 @@ function LoginBody(props) {
 
     useEffect(() => {
         if (positive == true) {
-            setopen({ show: false, message: '' })
+            setopen({ show: true, message: 'Login Successful' })
             localStorage.setItem('token', loginsuccess.token)
             dispatch(fetchcart())
             // dispatch(fetchcustaddress())//Makes the customer address api call
+            dispatch(logintrue())
             props.setisLogedin(true)
         } else if (positive == false) {
             setopen({ show: true, message: loginfail })

@@ -3,6 +3,9 @@ import {
     FETCH_PRODUCTS_REQUEST,
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
+    FETCH_PRODUCTS_REQUEST_HEADER,
+    FETCH_PRODUCTS_SUCCESS_HEADER,
+    FETCH_PRODUCTS_FAILURE_HEADER,
     FETCH_CATEGORY_REQUEST,
     FETCH_CATEGORY_FAILURE,
     FETCH_CATEGORY_SUCCESS,
@@ -67,6 +70,46 @@ export const fetchproductssuccess = (data) => {
 export const fetchproductsfailure = (error) => {
     return {
         type: FETCH_PRODUCTS_FAILURE,
+        payload: error
+    }
+}
+
+
+
+/**
+ * @description This function gets the product as per parameter and if  nothing is passed then 
+ * it gets all the products
+ */
+
+export const fetchCommonProductsheader = () => {
+    return (dispatch) => {
+        dispatch(fetchproductsrequestheader())
+        axios.get('http://180.149.241.208:3022/commonproducts').then((response) => {
+                dispatch(fetchproductssuccessheader(response.data))
+                // console.log(response.data)
+            }).catch((error) => {
+                // console.log(error.response)
+                dispatch(fetchproductsfailureheader(error.response))
+            })
+    }
+}
+
+export const fetchproductsrequestheader = () => {
+    return {
+        type: FETCH_PRODUCTS_REQUEST_HEADER
+    }
+}
+
+export const fetchproductssuccessheader = (data) => {
+    return {
+        type: FETCH_PRODUCTS_SUCCESS_HEADER,
+        payload: data
+    }
+}
+
+export const fetchproductsfailureheader = (error) => {
+    return {
+        type: FETCH_PRODUCTS_FAILURE_HEADER,
         payload: error
     }
 }
@@ -162,7 +205,8 @@ export const fetchById = (id) => {
             .then((response) => {
                 dispatch(fetchbyidsuccess(response.data))
                 // console.log(response.data)
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 // console.log(error.response)
                 dispatch(fetchbyidfailure(error.response))
             })

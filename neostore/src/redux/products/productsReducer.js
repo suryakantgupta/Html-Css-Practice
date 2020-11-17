@@ -2,6 +2,9 @@ import {
     FETCH_PRODUCTS_REQUEST,
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
+    FETCH_PRODUCTS_REQUEST_HEADER,
+    FETCH_PRODUCTS_SUCCESS_HEADER,
+    FETCH_PRODUCTS_FAILURE_HEADER,
     FETCH_CATEGORY_REQUEST,
     FETCH_CATEGORY_FAILURE,
     FETCH_CATEGORY_SUCCESS,
@@ -18,6 +21,8 @@ import {
 const initialProductState = {
     loading: true,
     products: '',
+    hproduct: '',
+    hloading: true,
     error: ''
 }
 
@@ -40,7 +45,7 @@ const initialColorState = {
 }
 
 const initialCardState = {
-    category:true
+    category: true
 }
 
 
@@ -53,14 +58,35 @@ export const productReducer = (state = initialProductState, action) => {
             }
         case FETCH_PRODUCTS_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 products: action.payload,
                 error: ''
             }
         case FETCH_PRODUCTS_FAILURE:
             return {
+                ...state,
                 loading: false,
                 products: '',
+                error: action.payload
+            }
+        case FETCH_PRODUCTS_REQUEST_HEADER:
+            return {
+                ...state,
+                hloading: true
+            }
+        case FETCH_PRODUCTS_SUCCESS_HEADER:
+            return {
+                ...state,
+                hloading: false,
+                hproduct: action.payload,
+                error: ''
+            }
+        case FETCH_PRODUCTS_FAILURE_HEADER:
+            return {
+                ...state,
+                hloading: false,
+                hproduct: '',
                 error: action.payload
             }
 
@@ -161,7 +187,7 @@ export const cardCategoryReducer = (state = initialCardState, action) => {
             return {
                 category: action.payload
             }
-            
+
         default:
             return state
     }

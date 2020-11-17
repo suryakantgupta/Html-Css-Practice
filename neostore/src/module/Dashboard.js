@@ -1,10 +1,10 @@
-import { Box, Button, Grid, Typography } from '@material-ui/core'
-import React, { useEffect } from 'react'
+import { Box, Button, Grid, Snackbar, Typography } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ProductCarousel from '../components/molecules/ProductCarousel'
-import { connect, useDispatch } from 'react-redux'
-import { fetchcart, fetchDashboardCardProducts, fetchDashboardProducts } from '../redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { fetchcart, fetchDashboardCardProducts, fetchDashboardProducts, loginfalse } from '../redux'
 import { Loading } from '../components/Loading'
 import ProductCard from '../components/molecules/ProductCard'
 import Authentication from './Authentication'
@@ -15,13 +15,14 @@ function Dashboard(props) {
 
 
 const dispatch = useDispatch()
-
+const show = useSelector(state => state.login.show)
     useEffect(() => {
         props.fetchDashboardProducts()
         props.fetchDashboardCardProducts()
     }, [])
 
     const history = useHistory()
+    // const [open, setopen] = useState({ show: false, message: '' })
 
 
     return (
@@ -47,6 +48,7 @@ const dispatch = useDispatch()
                     </div>
                 }
                 </Box>
+                 <Snackbar open={show} autoHideDuration={3000} onClose={() => dispatch(loginfalse())} message={'Login Successful'} />
             <Footer />
         </div>
     )

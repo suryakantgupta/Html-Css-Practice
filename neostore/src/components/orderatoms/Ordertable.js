@@ -18,12 +18,16 @@ function Ordertable() {
     const handleplus = (product) => {
         if (product.quantity < 10) {
             dispatch(pluscart(product.product_id.product_id))
+        }else{
+            alert('Maximum limit reached')
         }
     }
 
     const handleminus = (product) => {
         if (product.quantity > 1) {
             dispatch(minuscart(product.product_id.product_id))
+        }else{
+            alert('Minimum limit reached')
         }
     }
     // console.log(addcart)
@@ -53,7 +57,7 @@ function Ordertable() {
                                         <Grid item>
                                             <Typography>{product.product_id.product_name}</Typography>
                                             <Typography>by-<small>{product.product_id.product_producer}</small></Typography>
-                                            <Typography>Status:{product.product_id.product_stock > 0 ? 'In Stock' : 'Out of Stock'}</Typography>
+                                            <Typography>Status:{product.product_id.product_stock > 0 ? <span style={{color:'green'}}>In Stock</span> : 'Out of Stock'}</Typography>
                                         </Grid>
                                     </Grid>
                                 </TableCell>
@@ -81,7 +85,14 @@ function Ordertable() {
                                 </TableCell>
                                 <TableCell>{product.product_id.product_cost * product.quantity}</TableCell>
                                 <TableCell>
-                                    <IconButton onClick={() => dispatch(deletecart(product.product_id.product_id))} style={{ outline: 'none' }}>
+                                    <IconButton onClick={() =>{
+                                                var r = window.confirm('Product will be removed from cart')
+                                                if(r==true){
+                                                    setTimeout(function () { dispatch(deletecart(product.product_id.product_id)) }, 2000)
+                                                }else{
+                                        
+                                                }}}
+                                                 style={{ outline: 'none' }}>
                                         <DeleteOutlineIcon style={{ color: '#af1616' }} />
                                     </IconButton>
                                 </TableCell>

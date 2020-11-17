@@ -11,7 +11,9 @@ import {
     USER_LOGOUT_SUCCESS,
     USER_CHECKOUT_SUCCESS,
     USER_CHECKOUT_REQUEST,
-    USER_CHECKOUT_COMPLETE
+    USER_CHECKOUT_COMPLETE,
+    LOGIN_HIDE,
+    LOGIN_SHOW
 } from './userTypes'
 
 export const postNewRegister = (data) => {
@@ -99,6 +101,19 @@ export const userLoginFailure = (error, bool) => {
         type: USER_LOGIN_FAILURE,
         payload: error,
         positive: bool
+    }
+}
+
+export const logintrue = ()=>{
+    return{
+        type:LOGIN_SHOW,
+        payload:true
+    }
+}
+export const loginfalse = ()=>{
+    return{
+        type:LOGIN_SHOW,
+        payload:false
     }
 }
 

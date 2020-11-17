@@ -35,7 +35,12 @@ function Address(props) {
      * it call the api of get address of customer after calling the delete api
      */
     const handleClick = () => {
-        setTimeout(function () { dispatch(fetchcustaddress()) }, 2000)
+        var r = window.confirm('Address will be deleted')
+        if(r==true){
+            setTimeout(function () { dispatch(fetchcustaddress()) }, 2000)
+        }else{
+
+        }
     }
 
 
