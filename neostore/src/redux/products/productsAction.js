@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { BASE_URL } from '../../config'
 import {
     FETCH_PRODUCTS_REQUEST,
     FETCH_PRODUCTS_SUCCESS,
@@ -33,7 +34,7 @@ import {
 export const fetchCommonProducts = (id = '', category_id = '', color_id = '', sortBy = '', name = '', sortIn = '',pageNo,perPage) => {
     return (dispatch) => {
         dispatch(fetchproductsrequest())
-        axios.get('http://180.149.241.208:3022/commonproducts', {
+        axios.get(`${BASE_URL}/commonproducts`, {
             params: {
                 id,
                 category_id,

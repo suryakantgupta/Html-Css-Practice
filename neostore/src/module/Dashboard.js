@@ -31,7 +31,7 @@ const show = useSelector(state => state.login.show)
             render={(isLogedin,setisLogedin)=>(<Header isLogedin={isLogedin} setisLogedin={setisLogedin} />)}
             />
             {props.data.loading ? <Loading /> : <ProductCarousel />}
-            <div style={{ display: 'grid', placeItems: 'center',marginBottom:'4%' }}>
+            <div style={{ display: 'grid', placeItems: 'center',marginBottom:'4%',marginTop:'10%' }}>
                 <Typography>Popular Products</Typography>
                 <Button onClick={()=>history.push('/commonproducts')} style={{ outline: "none", textTransform: "none" }}>View all</Button>
             </div>

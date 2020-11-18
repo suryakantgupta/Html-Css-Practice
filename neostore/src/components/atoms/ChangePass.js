@@ -1,6 +1,6 @@
 import { CircularProgress, Grid, IconButton, InputAdornment, Snackbar, TextField, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
-import { Button, Card, Modal, ModalBody } from 'react-bootstrap'
+import { Button, Card, Modal, ModalBody, ModalFooter } from 'react-bootstrap'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import axios from 'axios'
@@ -243,9 +243,18 @@ const [loading, setloading] = useState(false)
                     </form>
                 </Card.Body>
             </Card>
-            <Snackbar open={open} autoHideDuration={4000} onClose={handleonClose} message={message.snack} />
-            <Modal show={mopen} onHide={handlemonClose}>
+            {/* <Snackbar open={open} autoHideDuration={4000} onClose={handleonClose} message={message.snack} /> */}
+            <Modal show={mopen}>
                 <ModalBody>{message.snack}</ModalBody>
+                <ModalFooter>
+                    <Button onClick={handlemonClose}>Close</Button>
+                </ModalFooter>
+            </Modal>
+            <Modal show={open} onHide={handleonClose}>
+                <ModalBody>{message.snack}</ModalBody>
+                <ModalFooter>
+                    <Button onClick={handleonClose}>Close</Button>
+                </ModalFooter>
             </Modal>
 
         </div>

@@ -10,7 +10,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCustProfile } from '../../redux';
 import { useHistory } from 'react-router-dom';
-// const imageToBase64 = require('image-to-base64');
+import { BASE_URL } from '../../config';
+const imageToBase64 = require('image-to-base64');
 const fileUpload = require('fuctbase64');
 
 const useStyles = makeStyles((theme) => ({
@@ -37,13 +38,15 @@ const useStyles = makeStyles((theme) => ({
 function EditProfile(props) {
 
     const customer = useSelector(state => state.customer.customer)
-    const [name, setname] = useState({ firstName: customer.first_name, lastName: customer.last_name, email: customer.email, mobile: customer.phone_no, gender: customer.gender, dob: customer.dob, b64image: '' })
+    const [temp, settemp] = useState()
+    const [name, setname] = useState({ firstName: customer.first_name, lastName: customer.last_name, email: customer.email, mobile: customer.phone_no, gender: customer.gender, dob: customer.dob, b64image: ''})
     const [validateError, setError] = useState({ fhelperNotValid: false, fcheckError: false, lhelperNotValid: false, lcheckError: false, ehelperNotValid: false, echeckError: false, phelperNotValid: false, pcheckError: false, chelperNotValid: false, ccheckError: false, mhelperNotValid: false, mcheckError: false })
     const dispatch = useDispatch()
     const uloading = useSelector(state => state.updatecustomer.loading)
     const classes = useStyles()
     const positive = useSelector(state => state.updatecustomer.positive)
 
+    console.log(customer)
     /**
  * @description This function validates the First name Provided by the user
  * is all alphabet it will give error if anything otherthan alphabets is entered
@@ -311,7 +314,7 @@ function EditProfile(props) {
                                             console.log(data)
                                             setname({ ...name, b64image: data.base64 })
                                         })
-                                    }} accept='image/*' required/>
+                                    }} accept='image/*'/>
                                 </Grid>
                             </Grid>
                         </Box>
