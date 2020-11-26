@@ -1,3 +1,0 @@
-This is an HTML practice file
-    some data
-    somedata
