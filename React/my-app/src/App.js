@@ -11,12 +11,18 @@ import NameList from './components/NameList';
 import Form from './components/Form';
 import PureComp from './components/PureComp';
 import PArentComp from './components/PArentComp';
+import ReduxSagaTest from './components/ReduxSagaTest';
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
+
 
 function App() {
   return (
     <div className="App">
-
-      <PArentComp />
+      <Provider store={store}>
+        <ReduxSagaTest />
+      </Provider>
+      {/* <PArentComp /> */}
       {/* <Form /> */}
       {/* <NameList /> */}
       {/* <ParentComponent /> */}
