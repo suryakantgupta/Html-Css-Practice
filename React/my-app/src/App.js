@@ -14,14 +14,16 @@ import PArentComp from './components/PArentComp';
 import ReduxSagaTest from './components/ReduxSagaTest';
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
+import FacebookTest from './components/FacebookTest';
 
 
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
+      <FacebookTest />
+      {/* <Provider store={store}>
         <ReduxSagaTest />
-      </Provider>
+      </Provider> */}
       {/* <PArentComp /> */}
       {/* <Form /> */}
       {/* <NameList /> */}
